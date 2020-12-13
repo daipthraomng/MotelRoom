@@ -3,27 +3,27 @@
 }
 @model List<Motel>;
 
-<div class="text-center">
+<div class="container">
     <h3>Cho thuê nhà trọ, phòng trọ tại Việt Nam</h3>
     @foreach(var motel in Model)
     {
-    <div class ="card m-2">
+<div class="card m-2">
+    <a class="card-block stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="Detail" asp-route-id="@motel.MotelID">
         <div class="row">
             <div class="product-image" style="background-color: red">avatar location</div>
             <div class="col">
                 <div class="product-title">
-                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@motel.MotelID">
-                        @motel.MotelTitle
-                    </a>
+                    @motel.MotelTitle
                 </div>
-                <div class="d-flex justify-content-around">
-                    <div class="product-price">@motel.MotelPrice</div>
+                <div class="d-flex">
+                    <div class="mr-3 product-price font-weight-bold">@motel.MotelPrice/tháng</div>
                     <div class="product-location">@motel.MotelLocation</div>
                 </div>
-                <div class="product-content">@motel.MotelContent</div>
-                <div class="product-update-time">@motel.MotelUpdateTime</div>
+                <div class="product-content text-muted">@motel.MotelContent</div>
+                <div class="product-update-time text-muted">@motel.MotelUpdateTime</div>
             </div>
         </div>
-    </div>
+    </a>
+</div>
     }
 </div>

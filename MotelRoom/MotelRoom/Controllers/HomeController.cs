@@ -30,7 +30,17 @@ namespace MotelRoom.Controllers
             return View(listMotels);
         }
 
-        public IActionResult Privacy()
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        public IActionResult PostNews()
         {
             return View();
         }
