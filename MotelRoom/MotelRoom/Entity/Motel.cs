@@ -13,7 +13,7 @@ namespace MotelRoom.Models
         public String MotelPrice { get; set; }
         public String MotelLocation { get; set; }
         public String MotelContent { get; set; }
-        public String MotelUpdateTime { get; set; } 
+        public String MotelUpdateTime { get; set; }
 
     }
 }

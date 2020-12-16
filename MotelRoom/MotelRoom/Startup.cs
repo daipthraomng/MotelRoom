@@ -18,6 +18,7 @@ namespace MotelRoom
         }
 
         public IConfiguration Configuration { get; }
+        public static string ConnectionString { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -46,8 +47,9 @@ namespace MotelRoom
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=RoomInfo}/{id?}");
             });
+            ConnectionString = Configuration["ConnectionStrings:MySqlConnection"];
         }
     }
 }

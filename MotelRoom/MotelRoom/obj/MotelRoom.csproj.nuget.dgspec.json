@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\asp.net core demo\\MotelRoom\\MotelRoom\\MotelRoom\\MotelRoom.csproj": {}
+    "F:\\HocTap\\WEB\\BTL\\MotelRoom\\MotelRoom\\MotelRoom\\MotelRoom.csproj": {}
   },
   "projects": {
-    "D:\\asp.net core demo\\MotelRoom\\MotelRoom\\MotelRoom\\MotelRoom.csproj": {
+    "F:\\HocTap\\WEB\\BTL\\MotelRoom\\MotelRoom\\MotelRoom\\MotelRoom.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\asp.net core demo\\MotelRoom\\MotelRoom\\MotelRoom\\MotelRoom.csproj",
+        "projectUniqueName": "F:\\HocTap\\WEB\\BTL\\MotelRoom\\MotelRoom\\MotelRoom\\MotelRoom.csproj",
         "projectName": "MotelRoom",
-        "projectPath": "D:\\asp.net core demo\\MotelRoom\\MotelRoom\\MotelRoom\\MotelRoom.csproj",
-        "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
-        "outputPath": "D:\\asp.net core demo\\MotelRoom\\MotelRoom\\MotelRoom\\obj\\",
+        "projectPath": "F:\\HocTap\\WEB\\BTL\\MotelRoom\\MotelRoom\\MotelRoom\\MotelRoom.csproj",
+        "packagesPath": "C:\\Users\\N3M\\.nuget\\packages\\",
+        "outputPath": "F:\\HocTap\\WEB\\BTL\\MotelRoom\\MotelRoom\\MotelRoom\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\N3M\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +43,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
@@ -55,6 +62,16 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.10, 3.1.10]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -63,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

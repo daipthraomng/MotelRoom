@@ -13,6 +13,7 @@ namespace MotelRoom.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private List<Motel> listMotels = new List<Motel>();
+        private RoomInfoModel roomInfoModel;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -23,11 +24,18 @@ namespace MotelRoom.Controllers
                new Motel() { MotelID = 102, MotelAvatarImg = "James", MotelTitle = "Vip2", MotelPrice = "222USD", MotelLocation = "XuanThuy", MotelContent = "PhuHopOffice", MotelUpdateTime = "1-1-2020" },
                new Motel() { MotelID = 103, MotelAvatarImg = "James", MotelTitle = "Vip3", MotelPrice = "222USD", MotelLocation = "CauGiay", MotelContent = "PhuHopOffice", MotelUpdateTime = "1-1-2020" }
             };
+
+            roomInfoModel = new RoomInfoModel();
         }
 
         public IActionResult Index()
         {
             return View(listMotels);
+        }
+        public IActionResult RoomInfo()
+        {
+            roomInfoModel.GetRoomInfo(1);
+            return View(roomInfoModel);
         }
 
         public IActionResult SignIn()

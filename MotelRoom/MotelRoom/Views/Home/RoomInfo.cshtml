@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Room Info";
+}
+
+@model RoomInfoModel;
+
+@foreach (var item in Model.objListRoom)
+{
+    <p>@item.idRoom</p>
+    <p>@item.price</p>
+    <p>@item.area</p>
+}
