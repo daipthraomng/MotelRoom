@@ -37,7 +37,12 @@ namespace MotelRoom.Controllers
             roomInfoModel.GetRoomInfo(1);
             return View(roomInfoModel);
         }
-
+        public IActionResult ImageRoom()
+        {
+            var ImageRoom = new ImageRoomModel();
+            ImageRoom.GetImageRoom(1);
+            return View(ImageRoom);
+        }
         public IActionResult SignIn()
         {
             return View();

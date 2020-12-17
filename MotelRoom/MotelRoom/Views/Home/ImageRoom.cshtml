@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Image";
+}
+
+@model ImageRoomModel;
+<h1>Đây là ảnh phòng trọ</h1>
+@foreach (var item in Model.listObjImageRoom)
+{
+    <p>@item.idImage</p>
+    <p>@item.idRoom</p>
+    string imageBase64Data = Convert.ToBase64String(@item.image);
+    string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+    <img src="@imageDataURL" />
+}
+
