@@ -53,7 +53,27 @@ namespace MotelRoom.Controllers
             return View();
         }
 
+        public IActionResult RegisterForHost()
+        {
+            return View();
+        }
+
+        public IActionResult HostScreen()
+        {
+            return View();
+        }
+
         public IActionResult PostNews()
+        {
+            return View();
+        }
+
+        public IActionResult PendingMotel()
+        {
+            return View();
+        }
+
+        public IActionResult CheckedMotel()
         {
             return View();
         }
