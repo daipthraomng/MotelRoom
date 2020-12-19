@@ -78,6 +78,11 @@ namespace MotelRoom.Controllers
             return View();
         }
 
+        public IActionResult ClientScreen()
+        {
+            return View(listMotels);
+        }
+
         public IActionResult Detail(int ID)
         {
             var motelDetails = listMotels.FirstOrDefault(std => std.MotelID == ID);

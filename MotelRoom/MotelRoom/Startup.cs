@@ -47,7 +47,7 @@ namespace MotelRoom
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=HostScreen}/{id?}");
+                    pattern: "{controller=Home}/{action=ClientScreen}/{id?}");
             });
             ConnectionString = Configuration["ConnectionStrings:MySqlConnection"];
         }

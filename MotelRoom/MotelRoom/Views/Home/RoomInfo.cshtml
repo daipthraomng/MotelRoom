@@ -1,12 +1,271 @@
 ﻿@{
     ViewData["Title"] = "Room Info";
+    Layout = "_Layout2";
 }
 
-@model RoomInfoModel;
+<head>
+    <!-- Font Awesome Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+        .fa-star {
+            font-size: 15px;
+        }
+        /*ẩn input radio - vì chúng ta đã có label là GUI*/
+        #rating > input {
+            display: none;
+        }
+        /*1 ngôi sao*/
+        #rating > label:before {
+            margin: 1px;
+            font-size: 15px;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+        /*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
+        #rating > label {
+            color: #ddd;
+            float: right;
+        }
+        /*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+        #rating > input:checked ~ label,
+        #rating:not(:checked) > label:hover,
+        #rating:not(:checked) > label:hover ~ label {
+            color: #FFD700;
+        }
+            /* Hover vào các sao phía trước ngôi sao đã chọn*/
+            #rating > input:checked + label:hover,
+            #rating > input:checked ~ label:hover,
+            #rating > label:hover ~ input:checked ~ label,
+            #rating > input:checked ~ label:hover ~ label {
+                color: #FFED85;
+            }
+    </style>
+</head>
 
-@foreach (var item in Model.objListRoom)
-{
-    <p>@item.idRoom</p>
-    <p>@item.price</p>
-    <p>@item.area</p>
-}
+
+<script>
+    function hitFavoriteIcon(x) {
+        if (x.style.color == "red") {
+            x.style.color = "black";
+        } else {
+            x.style.color = "red";
+        }
+    }
+</script>
+
+<div class="card-body">
+    <h4 class="float-left">Chi tiết nhà trọ</h4>
+    <p class="float-right" id="favorite">
+        Thêm vào yêu thích:
+        <i class="fa fa-heart" onclick="hitFavoriteIcon(this)"></i>
+    </p>
+</div>
+
+<div class="card-body">
+    <h5>Trạng thái</h5>
+    <select disabled>
+        <option checked>Đã được thuê</option>
+        <option>Chưa được thuê</option>
+    </select>
+</div>
+<div class="card-body">
+    <h5>Thống kê trạng thái</h5>
+    <p>Số lượt xem: 1800</p>
+    <p>Số lượt ưa thích: 29</p>
+    <p>Truy cập nhiều nhất vào: 12/12/2020</p>
+</div>
+
+<div class="card m-2">
+    <div class="card-header"><h5>Thông tin</h5></div>
+    <div class="card-body">
+        <form>
+            <div class="form-group"> <label for="address">Địa chỉ</label> <input type="text" class="form-control" id="address" value="10 Duong Quang Ham" readonly></div>
+            <div class="form-group"> <label for="addition">Thông tin bổ sung</label> <input type="text" class="form-control" id="addition" value="Gần DHQGHN/GTVT" readonly></div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="motel-type">Kiểu phòng</label>
+                    <select class="form-control" id="motel-type" disabled>
+                        <option selected>Phòng trọ</option>
+                        <option>Chung cư mini</option>
+                        <option>Nhà nguyên căn</option>
+                        <option>Chung cư nguyên căn</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="quantity">Số lượng</label>
+                    <input class="form-control" id="quantity" value="10" readonly />
+                </div>
+                <div class="form-group col">
+                    <label for="price">Giá phòng</label>
+                    <input class="form-control" id="price" value="100 USD" readonly />
+                </div>
+                <div class="form-group col">
+                    <label for="area">Diện tích</label>
+                    <input class="form-control" id="area" value="20m2" readonly />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="bathroom">Phòng tắm</label>
+                    <select class="form-control" id="bathroom" disabled>
+                        <option selected>Khép kín</option>
+                        <option>Chung chủ</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="heater">Nóng lạnh</label>
+                    <select class="form-control" id="heater" disabled>
+                        <option selected>Có nóng lạnh</option>
+                        <option>Không có nóng lạnh</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="air-conditioner">Điều hòa</label>
+                    <select class="form-control" id="air-conditioner" disabled>
+                        <option selected>Có</option>
+                        <option>Không</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="balcony">Ban công</label>
+                    <select class="form-control" id="balcony" disabled>
+                        <option selected>Có</option>
+                        <option>Không</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="electic-water">Điện nước</label>
+                    <select class="form-control" id="electic-water" disabled>
+                        <option>Giá dân</option>
+                        <option selected>Giá thuê</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="electic-water">Giá điện</label>
+                    <input type="text" class="form-control" id="electic-water" value="4000D" readonly />
+                </div>
+                <div class="form-group col">
+                    <label for="electic-water">Giá nước</label>
+                    <input type="text" class="form-control" id="electic-water" value="30000D" readonly />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="utilities">Tiện ích khác</label>
+                <input type="text" class="form-control" id="utilities" value="Tủ lạnh" readonly />
+            </div>
+            <div class="form-group">
+                <p>Ảnh thực tế:  </p>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="host-name">Họ và tên chủ nhà</label>
+                    <input type="text" id="host-name" class="form-control" value="Do Quang Anh" readonly>
+                </div>
+                <div class="form-group col">
+                    <label for="host-name">Số điện thoại</label>
+                    <input type="text" id="host-name" class="form-control" value="123" readonly>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="float-left">
+            Đánh giá
+            <span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+            </span>
+
+        </h5>
+        <div class="float-right">
+            <span style="margin-right:10px; cursor:pointer" data-toggle="modal" data-target="#report">Report nhà trọ</span>
+            <span style="cursor:pointer" data-toggle="modal" data-target="#review">Viết đánh giá của bạn</span>
+        </div>
+    </div>
+    <div class="card-body" style="overflow-y:scroll; max-height: 400px">
+        @for (int i = 0; i < 5; i++)
+        {
+            <div class="card m-2">
+                <div class="card-header">
+                    <h6>Do Quang Anh says: </h6>
+                </div>
+                <div class="card-body">
+                    This is so goood!!
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+
+<!-- Danh gia va report nha tro -->
+<div class="modal fade" id="review" tabindex="-1" role="dialog" aria-labelledby="reviewLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title float-left" id="reviewLabel">Đánh giá</h5>
+                <div id="rating" class="float-right">
+                    <input type="radio" id="star5" name="rating" value="5" />
+                    <label class="full" for="star5" title="Awesome - 5 stars"></label>
+
+                    <input type="radio" id="star4" name="rating" value="4" />
+                    <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+
+                    <input type="radio" id="star3" name="rating" value="3" />
+                    <label class="full" for="star3" title="Meh - 3 stars"></label>
+
+                    <input type="radio" id="star2" name="rating" value="2" />
+                    <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+
+                    <input type="radio" id="star1" name="rating" value="1" />
+                    <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Gửi</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportLabel">Report</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Gửi</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
