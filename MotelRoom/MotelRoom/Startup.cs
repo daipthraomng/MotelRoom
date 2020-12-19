@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -26,9 +26,11 @@ namespace MotelRoom
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddMvc().AddRazorPagesOptions(options => {
-                options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            // Đoạn này tạm thời để comment để ko bắt nhập tài khoản mà vẫn vô được trang
+            // Để truy cập login thì qua link: http://localhost:<number>/identity/account/login
+            //services.AddMvc().AddRazorPagesOptions(options => {
+            //    options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
+            //}).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,10 +56,10 @@ namespace MotelRoom
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=ClientScreen}/{id?}");
+                    pattern: "{controller=Home}/{action=PostNews}/{id?}");
                 endpoints.MapRazorPages();
             });
-            //ConnectionString = Configuration["ConnectionStrings:MySqlConnection"];
+            ConnectionString = Configuration["ConnectionStrings:MySqlConnection"];
         }
     }
 }

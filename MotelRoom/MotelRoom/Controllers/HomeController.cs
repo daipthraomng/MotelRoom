@@ -65,7 +65,9 @@ namespace MotelRoom.Controllers
 
         public IActionResult PostNews()
         {
-            return View();
+            var addressModel = new AddressModel();
+            addressModel.GetListProvince();
+            return View(addressModel);
         }
 
         public IActionResult PendingMotel()
