@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Screen For Admin";
+    Layout = "_Layout3";
+}
+<h4>Màn hình cho nhà trọ bị từ chối</h4>
+<button class="btn-danger">Khôi phục</button>
+<div class="card">
+    <div class="card-header"><h5>Thông tin</h5></div>
+    <div class="card-body">
+        <form>
+            <div class="form-group"> <label for="address">Địa chỉ</label> <input type="text" class="form-control" id="address" value="10 Duong Quang Ham" readonly></div>
+            <div class="form-group"> <label for="addition">Thông tin bổ sung</label> <input type="text" class="form-control" id="addition" value="Gần DHQGHN/GTVT" readonly></div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="motel-type">Kiểu phòng</label>
+                    <select class="form-control" id="motel-type" disabled>
+                        <option selected>Phòng trọ</option>
+                        <option>Chung cư mini</option>
+                        <option>Nhà nguyên căn</option>
+                        <option>Chung cư nguyên căn</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="quantity">Số lượng</label>
+                    <input class="form-control" id="quantity" value="10" readonly />
+                </div>
+                <div class="form-group col">
+                    <label for="price">Giá phòng</label>
+                    <input class="form-control" id="price" value="100 USD" readonly />
+                </div>
+                <div class="form-group col">
+                    <label for="area">Diện tích</label>
+                    <input class="form-control" id="area" value="20m2" readonly />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="bathroom">Phòng tắm</label>
+                    <select class="form-control" id="bathroom" disabled>
+                        <option selected>Khép kín</option>
+                        <option>Chung chủ</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="heater">Nóng lạnh</label>
+                    <select class="form-control" id="heater" disabled>
+                        <option selected>Có nóng lạnh</option>
+                        <option>Không có nóng lạnh</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="air-conditioner">Điều hòa</label>
+                    <select class="form-control" id="air-conditioner" disabled>
+                        <option selected>Có</option>
+                        <option>Không</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="balcony">Ban công</label>
+                    <select class="form-control" id="balcony" disabled>
+                        <option selected>Có</option>
+                        <option>Không</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="electic-water">Điện nước</label>
+                    <select class="form-control" id="electic-water" disabled>
+                        <option>Giá dân</option>
+                        <option selected>Giá thuê</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="electic-water">Giá điện</label>
+                    <input type="text" class="form-control" id="electic-water" value="4000D" readonly />
+                </div>
+                <div class="form-group col">
+                    <label for="electic-water">Giá nước</label>
+                    <input type="text" class="form-control" id="electic-water" value="30000D" readonly />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="utilities">Tiện ích khác</label>
+                <input type="text" class="form-control" id="utilities" value="Tủ lạnh" readonly />
+            </div>
+            <div class="form-group">
+                <p>Ảnh thực tế:  </p>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="host-name">Họ và tên chủ nhà</label>
+                    <input type="text" id="host-name" class="form-control" value="Do Quang Anh" readonly>
+                </div>
+                <div class="form-group col">
+                    <label for="host-name">Số điện thoại</label>
+                    <input type="text" id="host-name" class="form-control" value="123" readonly>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MotelRoom.Models;
 using System;
@@ -10,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace MotelRoom.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -67,9 +65,7 @@ namespace MotelRoom.Controllers
 
         public IActionResult PostNews()
         {
-            var addressModel = new AddressModel();
-            addressModel.GetListProvince();
-            return View(addressModel);
+            return View();
         }
 
         public IActionResult PendingMotel()
@@ -85,6 +81,25 @@ namespace MotelRoom.Controllers
         public IActionResult ClientScreen()
         {
             return View(listMotels);
+        }
+
+        public IActionResult AdminScreen()
+        {
+            return View();
+        }
+
+        public IActionResult AdminCheckedMotel()
+        {
+            return View();
+        }
+
+        public IActionResult AdminPendingMotel()
+        {
+            return View();
+        }
+        public IActionResult AdminRejectedMotel()
+        {
+            return View();
         }
 
         public IActionResult Detail(int ID)

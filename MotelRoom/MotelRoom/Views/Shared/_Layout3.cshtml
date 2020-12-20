@@ -7,19 +7,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
-        .open-button {
-            background-color: #555;
-            color: white;
-            padding: 16px 20px;
-            border: none;
-            cursor: pointer;
-            opacity: 0.8;
-            position: fixed;
-            bottom: 23px;
-            right: 28px;
-            width: 280px;
-        }
-
         /* The popup chat - hidden by default */
         .chat-popup {
             display: none;
@@ -88,9 +75,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="PostNews">Đăng tin</a>
-                        </li>
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                                 Tài khoản <b class="caret"></b>
@@ -115,7 +99,6 @@
                         </li>
                     </ul>
                 </div>
-                <partial name="_LoginPartial.cshtml" />
             </div>
         </nav>
     </header>
@@ -129,20 +112,19 @@
             &copy; 2020 - MotelRoom
         </div>
     </footer>
-    <button class="open-button" onclick="openForm()">Chat</button>
 
     <div class="chat-popup" id="myForm">
         <form class="form-container">
             <h5>Chat</h5>
             <div class="container" style="overflow-y:scroll; max-height: 100px">
-                @for(int i=0;i<4;i++)
+                @for (int i = 0; i < 4; i++)
                 {
                     <p>msg1</p>
                 }
             </div>
             <textarea placeholder="Type message.." name="msg"></textarea>
 
-            <div style="display:flex" >
+            <div style="display:flex">
                 <button type="submit" class="btn">Send</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </div>

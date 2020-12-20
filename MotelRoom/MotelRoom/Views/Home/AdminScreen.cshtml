@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Screen For Admin";
+    Layout = "_Layout3";
+}
+<h3>Màn hình của admin</h3>
+<div class="row">
+    <div class="card col">
+        <div class="card-header">
+            <h5>Danh sách chủ trọ đăng ký</h5>
+        </div>
+        <div class="card-body" style="max-height:200px; overflow-y:scroll">
+            @for (int i = 0; i < 10; i++)
+            {
+                <div>
+                    <span style="cursor:pointer" data-toggle="modal" data-target="#pendingHost">Host1</span>
+                    <span style="cursor:pointer" onclick="openForm()">Chat</span>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="card col">
+        <div class="card-header">
+            <h5>Danh sách chủ trọ đã được phê duyệt</h5>
+        </div>
+        <div class="card-body" style="max-height:200px; overflow-y:scroll">
+            @for (int i = 0; i < 4; i++)
+            {
+                <div>
+                    <span style="cursor:pointer" data-toggle="modal" data-target="#checkedHost">Host1</span>
+                    <span style="cursor:pointer" onclick="openForm()">Chat</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<h4>Các bài đăng đang chờ duyệt</h4>
+<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
+    @for (int i = 0; i < 5; i++)
+    {
+        <div class="col-4">
+            <a asp-controller="Home" asp-action="AdminPendingMotel"><div class="card">Motel1</div></a>
+        </div>
+    }
+</div>
+<h4>Các bài đăng đã được duyệt</h4>
+<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
+    @for (int i = 0; i < 5; i++)
+    {
+        <div class="col-4">
+            <a asp-controller="Home" asp-action="AdminCheckedMotel"><div class="card">Motel1</div></a>
+        </div>
+    }
+</div>
+
+<h4>Các bài đăng không được duyệt</h4>
+<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
+
+    @for (int i = 0; i < 5; i++)
+    {
+        <div class="col-4">
+            <a asp-controller="Home" asp-action="AdminRejectedMotel"><div class="card">Motel1</div></a>
+        </div>
+    }
+</div>
+
+
+<div class="card-body">
+    <h4>Thống kê</h4>
+    <div>Số lượt xem: 1800</div>
+    <div>Số lượt ưa thích: 29</div>
+    <div>Truy cập nhiều nhất vào: 12/12/2020</div>
+</div>
+
+
+<!-- Xem thong tin cac host dang duoc duyet va da duoc duyet-->
+
+<div class="modal fade" id="pendingHost" tabindex="-1" role="dialog" aria-labelledby="pendingHostLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pendingHostLabel">Thông tin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"> <label for="name">Tên</label> <input type="text" class="form-control" id="name" placeholder="Do Quang Anh" readonly> </div>
+                <div class="form-group"> <label for="cmnd">CMND</label> <input type="text" class="form-control" id="cmnd" placeholder="0123" readonly> </div>
+                <div class="form-group"> <label for="address">Địa chỉ</label> <input type="text" class="form-control" id="address" placeholder="Ha Noi" readonly> </div>
+                <div class="form-group"> <label for="phone">Điện thoại</label> <input type="number" class="form-control" id="phone" placeholder="123" readonly> </div>
+                <div class="form-group"> <label for="email">Email</label> <input type="email" class="form-control" id="email" placeholder="anhdq@gmail.com" readonly> </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Phê duyệt</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="checkedHost" tabindex="-1" role="dialog" aria-labelledby="checkedHostLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="checkedHostLabel">Thông tin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"> <label for="name">Tên</label> <input type="text" class="form-control" id="name" placeholder="Do Quang Anh" readonly> </div>
+                <div class="form-group"> <label for="cmnd">CMND</label> <input type="text" class="form-control" id="cmnd" placeholder="0123" readonly> </div>
+                <div class="form-group"> <label for="address">Địa chỉ</label> <input type="text" class="form-control" id="address" placeholder="Ha Noi" readonly> </div>
+                <div class="form-group"> <label for="phone">Điện thoại</label> <input type="number" class="form-control" id="phone" placeholder="123" readonly> </div>
+                <div class="form-group"> <label for="email">Email</label> <input type="email" class="form-control" id="email" placeholder="anhdq@gmail.com" readonly> </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
