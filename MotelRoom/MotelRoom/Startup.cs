@@ -28,7 +28,8 @@ namespace MotelRoom
             services.AddRazorPages();
             // Đoạn này tạm thời để comment để ko bắt nhập tài khoản mà vẫn vô được trang
             // Để truy cập login thì qua link: http://localhost:<number>/identity/account/login
-            //services.AddMvc().AddRazorPagesOptions(options => {
+            //services.AddMvc().AddRazorPagesOptions(options =>
+            //{
             //    options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
             //}).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }

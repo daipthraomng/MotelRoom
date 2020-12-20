@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MotelRoom.Areas.Identity.Data;
 
+// file manages all of the code related to the entity framework 
 namespace MotelRoom.Data
 {
-    public class AuthDbContext : IdentityDbContext<AppUser>
+    public class AuthDbContext : IdentityDbContext<AppUser> //identityDbContext is injected inside this identityHostingStartup.cs
     {
         public AuthDbContext(DbContextOptions<AuthDbContext> options)
             : base(options)

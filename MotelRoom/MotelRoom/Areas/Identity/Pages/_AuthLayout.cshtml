@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card login-logout-tab">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href='/Identity/Account/Login'>Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href='/Identity/Account/Register'>Sign Up</a>
+                    </li>
+                </ul>
+                @*<a class="nav nav-tabs card-header-tabs nav-item nav-link" href='/Identity/Account/Login'>Đăng Nhập</a>*@
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+
+    @*to highlight a tab is being choosed (register or sign in)*@
+<script>
+    $(function () {
+        var current = location.pathName;
+        $('.nav-tabs li a').each(function () {
+            var $this = $(this);
+            if (current.indexOf($this.attr('href')) !== -1) {
+                $this.addClass('active');
+            }
+        })
+    })
+</script>
+
+}

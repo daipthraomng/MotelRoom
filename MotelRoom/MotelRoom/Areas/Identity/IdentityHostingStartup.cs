@@ -13,14 +13,22 @@ namespace MotelRoom.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
+        
         public void Configure(IWebHostBuilder builder)
         {
+            // injection for DbContext
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<AuthDbContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("AuthDbContextConnection")));
-
-                services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                // injection for identity default user authentication schema is selected by calling this function(AddDefaultIdentity)
+                services.AddDefaultIdentity<AppUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;// false (don't need to confirm email when register)
+                    options.Password.RequireLowercase = false; // false (passwork needn't has a lowercase)
+                    options.Password.RequireUppercase = false; // false (passwork needn't has a uppercase)
+                    options.Password.RequireNonAlphanumeric = false; // false (passwork needn't has a ky tu dac biet)
+                })
                     .AddEntityFrameworkStores<AuthDbContext>();
             });
         }
