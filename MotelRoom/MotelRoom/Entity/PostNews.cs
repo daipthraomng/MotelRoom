@@ -8,6 +8,7 @@ namespace MotelRoom.Entity
 {
     public class PostNews
     {
+        // all property are string to get data from input
         public string idProvince { get; set; }
         public string idDistrict { get; set; }
         public string idWard { get; set; }

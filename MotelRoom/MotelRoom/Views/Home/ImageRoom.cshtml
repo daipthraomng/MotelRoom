@@ -1,15 +1,87 @@
-﻿@{
-    ViewData["Title"] = "Image";
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
 }
+<form method="post" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="ImageRoom">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>File: </label>
+                    </div>
+                    <div class="col-md-10">
+                        <input id="txtFile" name="files" type="file" multiple value="Upload file" style="width: 100%;" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img id="imgViewer" width="200px" height="200px" />
+            </div>
+        </div>
+    </div>
+    <div class="text-center panel-body">
+        <button id="btnSave" class="btn btn-sm btn-primary">Save</button>
+        <button id="btnRead" class="btn btn-sm btn-danger">Read</button>
+    </div>
+</form>
 
-@model ImageRoomModel;
-<h1>Đây là ảnh phòng trọ</h1>
-@foreach (var item in Model.listObjImageRoom)
-{
-    <p>@item.idImage</p>
-    <p>@item.idRoom</p>
-    string imageBase64Data = Convert.ToBase64String(@item.image);
-    string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
-    <img src="@imageDataURL" />
-}
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+    });
+    $("#txtFile").change(function (event) {
+        var files = event.target.files;
+        $("#imgViewer").attr("src", window.URL.createObjectURL(files[0]))
+    })
+    $("#btnSave").click(function () {
+        var files = $("#txtFile").prop("files");
+        var formData = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            formData.append("file", files[i])
+        }
+        //var oStudent = {
+        //    Name: $("#txtName").val(),
+        //    Roll: $("#txtRoll").val(),
+        //};
+        //formData.append("Student", JSON.stringify(oStudent));
+        debugger;   
+        $.ajax({
+            type: "POST",
+            url: "/Home/PostSaveImageRoom",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                debugger;
+                ResetFields();
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        })
+        debugger;
+    });
+    $("#btnRead").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetSavedStudent",
+            contentType: "text/plain",
+            success: function (data) {
+                debugger;
+                $("#txtName").val(data.Name);
+                $("#txtRoll").val(data.Roll);
+                $("#imgViewer").attr("src", "data:image/jpg;base64," + data.Photo + "");
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        })
+    });
+    function ResetFields() {
+        $("#imgViewer").attr("src", "");
+    }
+</script>

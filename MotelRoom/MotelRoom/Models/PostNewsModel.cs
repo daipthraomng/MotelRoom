@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using MotelRoom.Controllers;
 using MotelRoom.Entity;
 using System;
 using System.Collections.Generic;
@@ -53,28 +54,11 @@ namespace MotelRoom.Models
                 return "false get";
             }
         }
-        /* 
-            * int price,decimal area, string typeRoom, int roomNo, string homeNo, 
-           // int idProvince, int idDistrict, int idWard ,int idStreet, string publicPlaceAround
-           //, string bathroom
-           //, string heater
-           //, string kitchen
-           //, string airCondition
-           //, string balcony
-           //, int electricityPrice
-           //, int waterPrice
-           //, string otherUtility
-           //, string description
-           //, string nameBoss
-           //, string phoneBoss
-           //, int timeDisplay
-           //, string unitTime
-           */
+
         public void PostPostNews(PostNews objPostNews)
            
         {
             var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
-
             using (var objConnect = connect)
             {
                 var objCmd = new SqlCommand
@@ -86,8 +70,8 @@ namespace MotelRoom.Models
 
                 try
                 {
-                    //objCmd.Parameters.Add("@roomID", SqlDbType.Int, 0, "roomID");
-                    //objCmd.Parameters["@roomID"].Direction = ParameterDirection.Output;
+                    objCmd.Parameters.Add("@idRoom", SqlDbType.Int, 0, "idRoom");
+                    objCmd.Parameters["@idRoom"].Direction = ParameterDirection.Output;
                     objCmd.Parameters.AddWithValue("@price", SqlDbType.Int).Value = Int32.Parse(objPostNews.price);
                     objCmd.Parameters.AddWithValue("@area", SqlDbType.Int).Value = Int32.Parse(objPostNews.area);
                     objCmd.Parameters.AddWithValue("@typeRoom", SqlDbType.NVarChar).Value = objPostNews.typeRoom;
@@ -114,6 +98,7 @@ namespace MotelRoom.Models
                     // Open connection
                     objConnect.Open();
                     objCmd.ExecuteNonQuery();
+                    HomeController.idRoom = Convert.ToInt32(objCmd.Parameters["@idRoom"].Value);
                 }
                 catch (Exception ex)
                 {

@@ -1,8 +1,12 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MotelRoom.Context;
+using MotelRoom.IService;
+using MotelRoom.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +28,23 @@ namespace MotelRoom
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
+            // Đoạn này tạm thời để comment để ko bắt nhập tài khoản mà vẫn vô được trang
+            // Để truy cập login thì qua link: http://localhost:<number>/identity/account/login
+            //services.AddMvc().AddRazorPagesOptions(options =>
+            //{
+            //    options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
+            //}).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            // relate to load and insert image to server
+            services.AddDbContext<DatabaseContext>(o => o.UseSqlServer(Configuration.GetConnectionString("MySqlConnection")));
+            services.AddScoped<IImageRoomService, ImageRoomService>();
+            services.AddControllersWithViews()
+                .AddJsonOptions(o =>
+                {
+                    o.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    o.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +60,8 @@ namespace MotelRoom
             }
             app.UseStaticFiles();
 
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -48,6 +71,7 @@ namespace MotelRoom
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=PostNews}/{id?}");
+                endpoints.MapRazorPages();
             });
             ConnectionString = Configuration["ConnectionStrings:MySqlConnection"];
         }
