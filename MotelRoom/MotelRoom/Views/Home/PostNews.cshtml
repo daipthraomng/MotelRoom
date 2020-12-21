@@ -1,162 +1,231 @@
-﻿@model AddressModel;
+﻿@*@model AddressModel;*@
 @{
-    ViewData["Title"] = "Post Motel Information";
-    Layout = "_Layout1";
+    //ViewData["Title"] = "Post Motel Information";
+    //Layout = "_Layout1";
 }
-<h1>@ViewData["Title"]</h1>
+@*<h1>@ViewData["Title"]</h1>*@
 
 <div class="card m-3">
     <h5 class="card-header">
         Đăng Bài
     </h5>
     <div class="card-body">
-        <form action="/" method="post">
+        <div class="form-group">
+            <p>Địa chỉ</p>
+            @*TODO: chuyển sang dạng select với dữ liệu sql province, district, ward, street*@
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="province">Tỉnh/Thành phố</label>
+                    <input type="text" class="form-control" id="province" placeholder="Địa chỉ">
+                    @*<select id="province" onchange="">
+                        <option>-- Bấm chọn --</option>
+                        @foreach (var item in Model.listProvince)
+                        {
+                            <option value="@item.idProvince">@item.name</option>
+                        }
+                    </select>*@
+                </div>
+                <div class="form-group col">
+                    <label for="district">Huyện/Quận</label>
+                    <input type="text" class="form-control" id="district" placeholder="Địa chỉ">
+                </div>
+                <div class="form-group col">
+                    <label for="ward">Xã/Phường/Thị Trấn</label>
+                    <input type="text" class="form-control" id="ward" placeholder="Địa chỉ">
+                </div>
+                <div class="form-group col">
+                    <label for="street">Đường</label>
+                    <input type="text" class="form-control" id="street" placeholder="Địa chỉ">
+                </div>
+                <div class="form-group col">
+                    <label for="homeNo">Số nhà</label>
+                    <input type="text" class="form-control" id="homeNo" placeholder="Địa chỉ">
+                </div>
+            </div>
             <div class="form-group">
-                <p>Địa chỉ</p>
-                @*TODO: chuyển sang dạng select với dữ liệu sql province, district, ward, street*@
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="province">Tỉnh/Thành phố</label>
-                        <select id="province" onchange="">
-                            <option>-- Bấm chọn --</option>
-                            @foreach (var item in Model.listProvince)
-                            {
-                                <option value="@item.idProvince">@item.name</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group col">
-                        <label for="district">Huyện/Quận</label>
-                        <input type="text" class="form-control" id="district" placeholder="Địa chỉ">
-                    </div>
-                    <div class="form-group col">
-                        <label for="ward">Xã/Phường/Thị Trấn</label>
-                        <input type="text" class="form-control" id="ward" placeholder="Địa chỉ">
-                    </div>
-                    <div class="form-group col">
-                        <label for="street">Đường</label>
-                        <input type="text" class="form-control" id="street" placeholder="Địa chỉ">
-                    </div>
-                    <div class="form-group col">
-                        <label for="homeNo">Số nhà</label>
-                        <input type="text" class="form-control" id="homeNo" placeholder="Địa chỉ">
-                    </div>
-                </div>
-                <div class="form-group"> <label for="addition">Thông tin bổ sung</label> <input type="text" class="form-control" id="addition" placeholder="Gần trường học/bệnh viện/..."></div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="motel-type">Kiểu phòng</label>
-                        <select class="form-control" id="motel-type">
-                            <option selected>Phòng trọ</option>
-                            <option>Chung cư mini</option>
-                            <option>Nhà nguyên căn</option>
-                            <option>Chung cư nguyên căn</option>
-                        </select>
-                    </div>
-                    <div class="form-group col">
-                        <label for="quantity">Số lượng</label>
-                        <input class="form-control" id="quantity" />
-                    </div>
-                    <div class="form-group col">
-                        <label for="area">Diện tích (m2)</label>
-                        <input class="form-control" id="area" />
-                    </div>
-                    <div class="form-group col">
-                        <label for="price">Giá phòng (đồng)</label>
-                        <input class="form-control" id="price" />
-                    </div>
-                    <div class="form-group col">
-                        <label for="time-pay">Trả theo</label>
-                        <select class="form-control" id="time-pay">
-                            <option selected>1 tháng</option>
-                            <option>3 tháng</option>
-                            <option>6 tháng</option>
-                            <option>1 năm</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="bathroom">Phòng tắm</label>
-                        <select class="form-control" id="bathroom">
-                            <option selected>Khép kín</option>
-                            <option>Chung chủ</option>
-                        </select>
-                    </div>
-                    <div class="form-group col">
-                        <label for="heater">Nóng lạnh</label>
-                        <select class="form-control" id="heater">
-                            <option selected>Có nóng lạnh</option>
-                            <option>Không có nóng lạnh</option>
-                        </select>
-                    </div>
-                    <div class="form-group col">
-                        <label for="kitchen">Phòng bếp</label>
-                        <select class="form-control" id="bathroom">
-                            <option selected>Khu bếp riêng</option>
-                            <option>Khu bếp chung</option>
-                            <option>Không nấu ăn</option>
-                        </select>
-                    </div>
-                    <div class="form-group col">
-                        <label for="air-conditioner">Điều hòa</label>
-                        <select class="form-control" id="air-conditioner">
-                            <option selected>Có</option>
-                            <option>Không</option>
-                        </select>
-                    </div>
-                    <div class="form-group col">
-                        <label for="balcony">Ban công</label>
-                        <select class="form-control" id="balcony">
-                            <option selected>Có</option>
-                            <option>Không</option>
-                        </select>
-                    </div>
-                    <div class="form-group col">
-                        <label for="electic-water">Điện nước</label>
-                        <select class="form-control" id="electic-water">
-                            <option selected>Giá dân</option>
-                            <option>Giá thuê</option>
-                        </select>
-                    </div>
-                    <div class="form-group col">
-                        <label for="electic-water">Giá điện (kW/h)</label>
-                        <input type="text" class="form-control" id="electic-water" placeholder="Giá điện" />
-                    </div>
-                    <div class="form-group col">
-                        <label for="electic-water">Giá nước (m3)</label>
-                        <input type="text" class="form-control" id="electic-water" placeholder="Giá nước" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="utilities">Tiện ích khác</label>
-                    <input type="text" class="form-control" id="utilities" placeholder="Tủ lạnh/Máy giặt/Giường tủ" />
-                </div>
-                <div class="form-group">
-                    <label for="image">Chọn ít nhất 3 ảnh: </label>
-                    <input type="file" id="image" name="Image" multiple>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="host-name">Họ và tên</label>
-                        <input type="text" id="host-name" class="form-control" placeholder="Họ và tên">
-                    </div>
-                    <div class="form-group col">
-                        <label for="host-name">Số điện thoại</label>
-                        <input type="text" id="host-name" class="form-control" placeholder="Số điện thoại">
-                    </div>
-                </div>
-                <div class="time-post" style="display: flex;">
-                    <p>Thời gian hiển thị (tính từ thời điểm được duyệt bài)</p><input type="number" id="time-display" name="quantity" min="1" max="11">
-                    <select class="l" id="unit-time">
-                        <option selected>Tuần</option>
-                        <option>Tháng</option>
-                        <option>Năm</option>
+                <label for="publicPlaceAround">Gần địa điểm công cộng</label>
+                <input type="text" class="form-control" id="publicPlaceAround" placeholder="Gần trường học/bệnh viện/...">
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="typeRoom">Kiểu phòng</label>
+                    <select class="form-control" id="typeRoom">
+                        <option selected>Phòng trọ</option>
+                        <option>Chung cư mini</option>
+                        <option>Nhà nguyên căn</option>
+                        <option>Chung cư nguyên căn</option>
                     </select>
                 </div>
+                <div class="form-group col">
+                    <label for="roomNo">Số lượng</label>
+                    <input type="number" class="form-control" id="roomNo" name="roomNo" min="1" value="1">
+                </div>
+                <div class="form-group col">
+                    <label for="area">Diện tích (m2)</label>
+                    <input type="number" class="form-control" id="area" name="area" />
+                </div>
+                <div class="form-group col">
+                    <label for="price">Giá phòng (đồng)</label>
+                    <input type="number" class="form-control" id="price" name="area" min="1" value="1" />
+                </div>
+                <div class="form-group col">
+                    <label for="time-pay">Trả theo</label>
+                    <select class="form-control" id="time-pay">
+                        <option selected>1 tháng</option>
+                        <option>3 tháng</option>
+                        <option>6 tháng</option>
+                        <option>1 năm</option>
+                    </select>
+                </div>
+            </div>
 
-                <button type="submit" class="btn btn-primary">Đăng bài</button>
-        </form>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="bathroom">Phòng tắm</label>
+                    <select class="form-control" id="bathroom">
+                        <option selected>Khép kín</option>
+                        <option>Chung chủ</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="heater">Nóng lạnh</label>
+                    <select class="form-control" id="heater">
+                        <option selected>Có nóng lạnh</option>
+                        <option>Không có nóng lạnh</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="kitchen">Phòng bếp</label>
+                    <select class="form-control" id="kitchen">
+                        <option selected>Khu bếp riêng</option>
+                        <option>Khu bếp chung</option>
+                        <option>Không nấu ăn</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="airCondition">Điều hòa</label>
+                    <select class="form-control" id="airCondition">
+                        <option selected>Có</option>
+                        <option>Không</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="balcony">Ban công</label>
+                    <select class="form-control" id="balcony">
+                        <option selected>Có</option>
+                        <option>Không</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="">Điện nước</label>
+                    <select class="form-control" id="">
+                        <option selected>Giá dân</option>
+                        <option>Giá thuê</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="electricityPrice">Giá điện (kW/h)</label>
+                    <input type="text" class="form-control" id="electricityPrice" placeholder="Giá điện" />
+                </div>
+                <div class="form-group col">
+                    <label for="waterPrice">Giá nước (m3)</label>
+                    <input type="text" class="form-control" id="waterPrice" placeholder="Giá nước" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="otherUtility">Tiện ích khác</label>
+                <input type="text" class="form-control" id="otherUtility" placeholder="Tủ lạnh/Máy giặt/Giường tủ" />
+            </div>
+            <div class="form-group">
+                <label for="image">Chọn ít nhất 3 ảnh: </label>
+                <input type="file" id="image" name="Image" multiple>
+            </div>
+            <div class="form-group">
+                <label for="description">Thông tin bổ sung</label>
+                <input type="text" class="form-control" id="description" placeholder="" />
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="nameBoss">Họ và tên</label>
+                    <input type="text" id="nameBoss" class="form-control" placeholder="Họ và tên">
+                </div>
+                <div class="form-group col">
+                    <label for="phoneBoss">Số điện thoại</label>
+                    <input type="text" id="phoneBoss" class="form-control" placeholder="Số điện thoại">
+                </div>
+            </div>
+            <div class="time-post" style="display: flex;">
+                <p>Thời gian hiển thị (tính từ thời điểm được duyệt bài)</p>
+                <input type="number" id="timeDisplay" name="quantity" min="1" max="11">
+                <select class="l" id="unitTime">
+                    <option selected>Tuần</option>
+                    <option>Tháng</option>
+                    <option>Năm</option>
+                </select>
+            </div>
+            <div class="info-submit">
+                <button id="btnPostNews">Đăng bài</button>
+            </div>
+
+        </div>
     </div>
 </div>
+    
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var obj = new PostNewsJS();
+    })
+
+    class PostNewsJS {
+        constructor() {
+            this.initEvents();
+        }
+
+        initEvents() {
+            $('#btnPostNews').click(this.btnPostNewsOnClick.bind(this));
+        }
+       
+        btnPostNewsOnClick() {
+            var objPostNews = {}
+            objPostNews.idProvince = $('#province').val();
+            objPostNews.idDistrict = $('#district').val();
+            objPostNews.idWard = $('#ward').val();
+            objPostNews.idStreet = $('#street').val();
+            objPostNews.homeNo = $('#homeNo').val();
+            objPostNews.publicPlaceAround = $('#publicPlaceAround').val();
+            objPostNews.typeRoom = $('#typeRoom').val();
+            objPostNews.roomNo = $('#roomNo').val();
+            objPostNews.price = $('#price').val();
+            objPostNews.area = $('#area').val();
+            objPostNews.bathroom = $('#bathroom').val();
+            objPostNews.heater = $('#heater').val();
+            objPostNews.kitchen = $('#kitchen').val();
+            objPostNews.airCondition = $('#airCondition').val();
+            objPostNews.balcony = $('#balcony').val();
+            objPostNews.electricityPrice = $('#electricityPrice').val();
+            objPostNews.waterPrice = $('#waterPrice').val();
+            objPostNews.otherUtility = $('#otherUtility').val();
+            objPostNews.description = $('#description').val();
+            objPostNews.nameBoss = $('#nameBoss').val();
+            objPostNews.phoneBoss = $('#phoneBoss').val();
+            objPostNews.timeDisplay = $('#timeDisplay').val();
+            objPostNews.unitTime = $('#unitTime').val();
+            var content = JSON.stringify(objPostNews); // chuyen doi tuong sang json
+            debugger;
+            
+            $.ajax({
+                url: "Home/PostNews",
+                method: "POST",
+                data: content, 
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function (res) {
+                debugger;
+            }).fail(function (res) {
+                debugger;
+            })
+            debugger;
+        }
+    }
+</script>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MotelRoom.Entity;
 using MotelRoom.Models;
 using System;
 using System.Collections.Generic;
@@ -65,9 +66,22 @@ namespace MotelRoom.Controllers
 
         public IActionResult PostNews()
         {
+            // Đừng xóa phần này nhé ^^
+            //var addressModel = new AddressModel();
+            //addressModel.GetListProvince();
+            //return View(addressModel);
+
             return View();
         }
-
+        [HttpPost]
+        public PostNews PostNews([FromBody] PostNews obj)
+        {
+            PostNewsModel pn = new PostNewsModel();
+            pn.PostPostNews(obj);
+            //ImageRoomModel objImageRoom = new ImageRoomModel();
+            //objImageRoom.PostImageRoom(1, "C:\\fakepath\\ghinhan mon.png");
+            return obj;
+        }
         public IActionResult PendingMotel()
         {
             return View();
