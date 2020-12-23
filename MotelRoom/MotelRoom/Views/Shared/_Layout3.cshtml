@@ -9,60 +9,25 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
-        /* The popup chat - hidden by default */
-        .chat-popup {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            right: 15px;
-            border: 3px solid #f1f1f1;
-            z-index: 9;
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
         }
 
-        /* Add styles to the form container */
-        .form-container {
-            min-width: 300px;
-            padding: 10px;
-            background-color: white;
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
         }
 
-            /* Full-width textarea */
-            .form-container textarea {
-                width: 100%;
-                padding: 15px;
-                margin: 5px 0 22px 0;
-                border: none;
-                background: #f1f1f1;
-                resize: none;
-                min-height: 20px;
-            }
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
 
-                /* When the textarea gets focus, do something */
-                .form-container textarea:focus {
-                    background-color: #ddd;
-                    outline: none;
-                }
-
-            /* Set a style for the submit/send button */
-            .form-container .btn {
-                background-color: #4CAF50;
-                color: white;
-                padding: 16px 20px;
-                border: none;
-                cursor: pointer;
-                margin-bottom: 10px;
-                opacity: 0.8;
-                flex: 1;
-            }
-
-            /* Add a red background color to the cancel button */
-            .form-container .cancel {
-                background-color: red;
-            }
-
-            /* Add some hover effects to buttons */
-            .form-container .btn:hover, .open-button:hover {
-                opacity: 1;
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
             }
     </style>
 </head>
@@ -96,32 +61,9 @@
         </div>
     </footer>
 
-    <div class="chat-popup" id="myForm">
-        <form class="form-container">
-            <h5>Chat</h5>
-            <div class="container" style="overflow-y:scroll; max-height: 100px">
-                @for (int i = 0; i < 4; i++)
-                {
-                    <p>msg1</p>
-                }
-            </div>
-            <textarea placeholder="Type message.." name="msg"></textarea>
-
-            <div style="display:flex">
-                <button type="submit" class="btn">Send</button>
-                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-            </div>
-        </form>
-    </div>
-    <script>
-        function openForm() {
-            document.getElementById("myForm").style.display = "block";
-        }
-
-        function closeForm() {
-            document.getElementById("myForm").style.display = "none";
-        }
-    </script>
+    @{
+        await Html.RenderPartialAsync("_ChatBoxPartial");
+    }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

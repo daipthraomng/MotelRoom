@@ -13,14 +13,13 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-               Thông báo
+               Thông báo <span class="badge badge-danger">5</span> @*Hiển thi số thông báo ở đây*@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="max-height:150px; overflow-y:scroll">
-                <a class="dropdown-item">Notification1</a>
-                <a class="dropdown-item">Notification1</a>
-                <a class="dropdown-item">Notification1</a>
-                <a class="dropdown-item">Notification1</a>
-                <a class="dropdown-item">Notification1</a>
+                @for (int i = 0; i < 5; i++) @*Khi nào có phần thông báo sửa ở đây*@
+                {
+                    <a class="dropdown-item">Notification1</a>
+                }
             </div>
         </li>
         <li class="nav-item">

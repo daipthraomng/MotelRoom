@@ -57,136 +57,71 @@
     }
 </script>
 
+<div id="image" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#image" data-slide-to="0" class="active"></li>
+        <li data-target="#image" data-slide-to="1"></li>
+        <li data-target="#image" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="~/css/post-single-1.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/css/post-single-1.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/css/post-single-1.jpg" alt="Third slide">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#image" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#image" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
 <div class="card-body">
-    <h4 class="float-left">Chi tiết nhà trọ</h4>
+    <h4><b>PHÒNG MK HOME RẺ, SẠCH ĐẸP, AN NINH NGAY CHỢ, CÔNG VIÊN, KHU TRUNG TÂM. GIÁ 3,3TR/TH</b></h4>
+    <div class="text-muted">159/9 Đường Bạch Đằng, Phường 2, Tân Bình, Hồ Chí Minh</div>
+</div>
+
+<div class="card-body m-2 border-top">
+    <div class="float-left">
+        <div class="text-muted">Mức giá: <span style="font-size: 17px"><b>3.3 triệu/tháng</b></span></div>
+    </div>
     <p class="float-right" id="favorite">
         Thêm vào yêu thích:
         <i class="fa fa-heart" onclick="hitFavoriteIcon(this)"></i>
     </p>
 </div>
 
-<div class="card-body">
-    <h5>Trạng thái</h5>
-    <select disabled>
-        <option checked>Đã được thuê</option>
-        <option>Chưa được thuê</option>
-    </select>
-</div>
-<div class="card-body">
-    <h5>Thống kê trạng thái</h5>
-    <p>Số lượt xem: 1800</p>
-    <p>Số lượt ưa thích: 29</p>
-    <p>Truy cập nhiều nhất vào: 12/12/2020</p>
+<div class="card-body m-2">
+    <span style="font-size: 17px"><b>Trạng thái: </b>Chưa được thuê</span>
 </div>
 
 <div class="card m-2">
-    <div class="card-header"><h5>Thông tin</h5></div>
+    <div class="card-header"><h5>Thông tin mô tả</h5></div>
     <div class="card-body">
-        <form>
-            <div class="form-group"> <label for="address">Địa chỉ</label> <input type="text" class="form-control" id="address" value="10 Duong Quang Ham" readonly></div>
-            <div class="form-group"> <label for="addition">Thông tin bổ sung</label> <input type="text" class="form-control" id="addition" value="Gần DHQGHN/GTVT" readonly></div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label for="motel-type">Kiểu phòng</label>
-                    <select class="form-control" id="motel-type" disabled>
-                        <option selected>Phòng trọ</option>
-                        <option>Chung cư mini</option>
-                        <option>Nhà nguyên căn</option>
-                        <option>Chung cư nguyên căn</option>
-                    </select>
-                </div>
-                <div class="form-group col">
-                    <label for="quantity">Số lượng</label>
-                    <input class="form-control" id="quantity" value="10" readonly />
-                </div>
-                <div class="form-group col">
-                    <label for="price">Giá phòng</label>
-                    <input class="form-control" id="price" value="100 USD" readonly />
-                </div>
-                <div class="form-group col">
-                    <label for="area">Diện tích</label>
-                    <input class="form-control" id="area" value="20m2" readonly />
-                </div>
-            </div>
+        <p>Thông tin bổ sung: Phòng ở an ninh, sạch thơm, đầy ánh sáng, thông thoáng gió tốt cho sức khỏe, lau dọn phòng miễn phí. Trợ giá, hỗ trợ giảm phí</p>
+        <p>Kiểu phòng: Phòng trọ</p>
+        <p>Phòng tắm: Khép kín</p>
+        <p>Nóng lạnh: Có</p>
+        <p>Điều hòa: Có</p>
+        <p>Ban công: Có</p>
+        <p>Điện nước: Giá thuê (Giá điện: 4000D, giá nước: 30000D)</p>
+        <p>Họ và tên chủ nhà: Đỗ Quang Anh - <span>SDT: 123</span></p>
 
-            <div class="form-row">
-                <div class="form-group col">
-                    <label for="bathroom">Phòng tắm</label>
-                    <select class="form-control" id="bathroom" disabled>
-                        <option selected>Khép kín</option>
-                        <option>Chung chủ</option>
-                    </select>
-                </div>
-                <div class="form-group col">
-                    <label for="heater">Nóng lạnh</label>
-                    <select class="form-control" id="heater" disabled>
-                        <option selected>Có nóng lạnh</option>
-                        <option>Không có nóng lạnh</option>
-                    </select>
-                </div>
-                <div class="form-group col">
-                    <label for="air-conditioner">Điều hòa</label>
-                    <select class="form-control" id="air-conditioner" disabled>
-                        <option selected>Có</option>
-                        <option>Không</option>
-                    </select>
-                </div>
-                <div class="form-group col">
-                    <label for="balcony">Ban công</label>
-                    <select class="form-control" id="balcony" disabled>
-                        <option selected>Có</option>
-                        <option>Không</option>
-                    </select>
-                </div>
-                <div class="form-group col">
-                    <label for="electic-water">Điện nước</label>
-                    <select class="form-control" id="electic-water" disabled>
-                        <option>Giá dân</option>
-                        <option selected>Giá thuê</option>
-                    </select>
-                </div>
-                <div class="form-group col">
-                    <label for="electic-water">Giá điện</label>
-                    <input type="text" class="form-control" id="electic-water" value="4000D" readonly />
-                </div>
-                <div class="form-group col">
-                    <label for="electic-water">Giá nước</label>
-                    <input type="text" class="form-control" id="electic-water" value="30000D" readonly />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="utilities">Tiện ích khác</label>
-                <input type="text" class="form-control" id="utilities" value="Tủ lạnh" readonly />
-            </div>
-            <div class="form-group">
-                <p>Ảnh thực tế:  </p>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label for="host-name">Họ và tên chủ nhà</label>
-                    <input type="text" id="host-name" class="form-control" value="Do Quang Anh" readonly>
-                </div>
-                <div class="form-group col">
-                    <label for="host-name">Số điện thoại</label>
-                    <input type="text" id="host-name" class="form-control" value="123" readonly>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 
-<div class="card">
+<div class="card m-2">
     <div class="card-header">
         <h5 class="float-left">
-            Đánh giá
-            <span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </span>
-
+            Đánh giá (6 đánh giá)
         </h5>
         <div class="float-right">
             <span style="margin-right:10px; cursor:pointer" data-toggle="modal" data-target="#report">Report nhà trọ</span>
@@ -198,7 +133,16 @@
         {
             <div class="card m-2">
                 <div class="card-header">
-                    <h6>Do Quang Anh says: </h6>
+                    <h6>
+                        Do Quang Anh says:             
+                        <span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </span>
+                    </h6>
                 </div>
                 <div class="card-body">
                     This is so goood!!
@@ -207,6 +151,13 @@
 
         }
     </div>
+</div>
+
+<div class="card-body">
+    <h5>Thống kê trạng thái</h5>
+    <p>Số lượt xem: 1800</p>
+    <p>Số lượt ưa thích: 29</p>
+    <p>Truy cập nhiều nhất vào: 12/12/2020</p>
 </div>
 
 
