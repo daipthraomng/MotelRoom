@@ -12,6 +12,7 @@ namespace MotelRoom.Models
     {
         public Room objRoom { get; set; }
         public List<Room> listRoom { get; set; }
+        public List<ImageRoom> listImageRoom { get; set; }
         public List<RoomSummaryInfo> listRoomSummary { get; set; }
         public RoomInfoModel() { 
             listRoom = new List<Room>();

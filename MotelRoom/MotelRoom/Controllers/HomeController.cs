@@ -25,9 +25,7 @@ namespace MotelRoom.Controllers
         public static int idRoom = 5;
         private readonly ILogger<HomeController> _logger;
         private List<Motel> listMotels = new List<Motel>();
-        private RoomInfoModel roomInfoModel;
         IImageRoomService _imageRoomService = null;
-        private AddressModel addressModel = new AddressModel();
         private readonly DatabaseContext _context;
 
         public HomeController(ILogger<HomeController> logger, IImageRoomService imageRoomService, DatabaseContext context)
@@ -40,7 +38,6 @@ namespace MotelRoom.Controllers
                new Motel() { MotelID = 103, MotelAvatarImg = "James", MotelTitle = "Vip3", MotelPrice = "222USD", MotelLocation = "CauGiay", MotelContent = "PhuHopOffice", MotelUpdateTime = "1-1-2020" }
             };
 
-            roomInfoModel = new RoomInfoModel();
             _imageRoomService = imageRoomService;
             _context = context;
         }
@@ -48,16 +45,22 @@ namespace MotelRoom.Controllers
         {
             var objListRoom = new RoomInfoModel();
             objListRoom.GetListRoomSummaryInfo();
-            foreach(var item in objListRoom.listRoomSummary)
+            foreach (var item in objListRoom.listRoomSummary)
             {
                 string imageBase64Data = Convert.ToBase64String(item.image);
-                item.srcImage= string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
             }
             return View(objListRoom);
         }
+
         public IActionResult RoomInfo(int idRoom)
         {
-            roomInfoModel.GetRoomInfo(idRoom);
+            var roomInfoModel = new RoomInfoModel();
+
+            //roomInfoModel.GetRoomInfo(idRoom);
+            var listRoom = _context.Rooms.ToList();
+            roomInfoModel.objRoom = listRoom.Where(x => x.idRoom == idRoom).ToList()[0];
+            roomInfoModel.listImageRoom = _context.ImageRooms.ToList().Where(x => x.idRoom == idRoom).ToList();
             return View(roomInfoModel);
         }
         public IActionResult ImageRoom()
@@ -69,7 +72,6 @@ namespace MotelRoom.Controllers
         [HttpPost("FileUpload")]
         public async Task<IActionResult> ImageRoom(List<IFormFile> files)
         {
-            Thread.Sleep(2000);
             var size = files.Sum(f => f.Length);
             var filePaths = new List<String>();
             foreach (var formFile in files)
@@ -85,7 +87,7 @@ namespace MotelRoom.Controllers
             }
             return View();
         }
-        
+
         public IActionResult SignIn()
         {
             return View();
@@ -108,7 +110,7 @@ namespace MotelRoom.Controllers
 
         public IActionResult PostNews()
         {
-            // Đừng xóa phần này nhé ^^
+            var addressModel = new AddressModel();
             addressModel.listProvince = _context.Provinces.ToList();
             addressModel.listDistrict = _context.Districts.ToList();
             addressModel.listWard = _context.Wards.ToList();
@@ -146,8 +148,8 @@ namespace MotelRoom.Controllers
             var selectedStreets = streets.Where(x => x.idDistrict == idDistrict).ToList();
             return Json(new SelectList(selectedStreets, "idStreet", "name"));
         }
-        [HttpPost("UploadImageRoom")]
-        public async Task<IActionResult> PostNews(List<IFormFile> files)
+        [HttpPost]
+        public async Task<IActionResult> HostScreen(List<IFormFile> files)
         {
             var size = files.Sum(f => f.Length);
             var filePaths = new List<String>();
