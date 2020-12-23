@@ -3,48 +3,62 @@
 
 @{
     ViewData["Title"] = "Log in";
-    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+    //Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
 }
-
-<div class="col-md-10 offset-md-1">
-    <section>
-        @*icon login*@
-        <div class="login-form-icon">
-            <i class="fas fa-user-circle fa-9x text-secondary"></i>
-        </div>
-        <form id="account" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.UserName"></label>
-                <input asp-for="Input.UserName" class="form-control" />
-                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card login-logout-tab">
+            <div class="card-header">
+                <a class="nav nav-tabs card-header-tabs nav-item nav-link" href='/Identity/Account/Login'>Đăng Nhập</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label asp-for="Input.RememberMe">
-                        <input asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                    </label>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-10 offset-md-1">
+                            <section>
+                                @*icon login*@
+                                <div class="login-form-icon">
+                                    <i class="fas fa-user-circle fa-9x text-secondary"></i>
+                                </div>
+                                <form id="account" method="post">
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.UserName"></label>
+                                        <input asp-for="Input.UserName" class="form-control" />
+                                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Password"></label>
+                                        <input asp-for="Input.Password" class="form-control" />
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label asp-for="Input.RememberMe">
+                                                <input asp-for="Input.RememberMe" />
+                                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <p>
+                                            <a id="forgot-password" asp-page="./ForgotPassword">Quên mật khẩu?</a>
+                                        </p>
+                                        <p>
+                                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Đăng ký tài khoản</a>
+                                        </p>
+                                    </div>
+                                </form>
+                            </section>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Log in</button>
-            </div>
-            <div class="form-group">
-                <p>
-                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                </p>
-                <p>
-                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                </p>
-            </div>
-        </form>
-    </section>
+        </div>
+    </div>
 </div>
 
 

@@ -43,14 +43,14 @@ namespace MotelRoom.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            //[Required]
+            //[Required (ErrorMessage = "Không để trống")]
             //[EmailAddress]
             //public string Email { get; set; }
-            [Required]
+            [Required(ErrorMessage = "Không để trống")]
             [DataType(DataType.Text)]
             public string UserName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Không để trống")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -78,7 +78,8 @@ namespace MotelRoom.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-
+            // Đã đăng nhập nên chuyển hướng về Index
+            if (_signInManager.IsSignedIn(User)) return Redirect("Index");
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout

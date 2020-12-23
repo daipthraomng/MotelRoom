@@ -28,7 +28,8 @@ namespace MotelRoom.Areas.Identity
                     options.Password.RequireLowercase = false; // false (passwork needn't has a lowercase)
                     options.Password.RequireUppercase = false; // false (passwork needn't has a uppercase)
                     options.Password.RequireNonAlphanumeric = false; // false (passwork needn't has a ky tu dac biet)
-                })
+                }).AddRoles<IdentityRole>() // dong nay de khai bao identity role to use in register.cshtml.cs
+                    
                     .AddEntityFrameworkStores<AuthDbContext>();
             });
         }
