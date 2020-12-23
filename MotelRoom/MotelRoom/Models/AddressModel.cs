@@ -10,6 +10,7 @@ namespace MotelRoom.Models
 {
     public class AddressModel:BaseModel
     {
+        public int ID { get; set; }
         public string homeNo { get; set; }
         public List<Province> listProvince { get; set; }
         public List<District> listDistrict { get; set; }

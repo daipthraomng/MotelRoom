@@ -1,4 +1,4 @@
-﻿@*@model AddressModel;*@
+﻿@model AddressModel;
 @{
     //ViewData["Title"] = "Post Motel Information";
     //Layout = "_Layout1";
@@ -17,26 +17,27 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="province">Tỉnh/Thành phố</label>
-                        <input type="text" value="1" class="form-control" id="province" placeholder="Địa chỉ">
-                        @*<select id="province" onchange="">
-                    <option>-- Bấm chọn --</option>
-                    @foreach (var item in Model.listProvince)
-                    {
-                        <option value="@item.idProvince">@item.name</option>
-                    }
-                </select>*@
+                        <select id="province" asp-for="ID" asp-items="@(new SelectList(Model.listProvince,"idProvince","name"))">
+                            <option>Select One</option>
+                        </select>
                     </div>
                     <div class="form-group col">
                         <label for="district">Huyện/Quận</label>
-                        <input type="text" value="1" class="form-control" id="district" placeholder="Địa chỉ">
+                        <select id="district" asp-for="ID" asp-items="@(new SelectList(Model.listDistrict,"idDistrict","name"))">
+                            <option>Select One</option>
+                        </select>
                     </div>
                     <div class="form-group col">
                         <label for="ward">Xã/Phường/Thị Trấn</label>
-                        <input type="text" value="1" class="form-control" id="ward" placeholder="Địa chỉ">
+                        <select id="ward" asp-for="ID" asp-items="@(new SelectList(Model.listWard,"idWard","name"))">
+                            <option>Select One</option>
+                        </select>
                     </div>
                     <div class="form-group col">
                         <label for="street">Đường</label>
-                        <input type="text" value="1" class="form-control" id="street" placeholder="Địa chỉ">
+                        <select id="street" asp-for="ID" asp-items="@(new SelectList(Model.listStreet,"idStreet","name"))">
+                            <option>Select One</option>
+                        </select>
                     </div>
                     <div class="form-group col">
                         <label for="homeNo">Số nhà</label>
@@ -183,6 +184,8 @@
 <script>
     $(document).ready(function () {
         var obj = new PostNewsJS();
+
+
     })
 
     class PostNewsJS {
@@ -192,8 +195,44 @@
 
         initEvents() {
             $('#btnPostNews').click(this.btnPostNewsOnClick.bind(this));
+            $('#province').change(this.provinceChange.bind(this));
+            $('#district').change(this.districtChange.bind(this));
         }
-       
+        provinceChange() {
+            var url = '/' + "Home/GetDistrictList";
+            $.getJSON(url, { idProvince: $('#province').val() }, function (data) {
+                var items = "<option value='0'>Select One</option>";
+                $('#district').empty();
+                debugger;
+                $.each(data, function (i, districtlist) {
+                    items += "<option value='" + districtlist.Value + "'>" + districtlist.Text + "</option>";
+                })
+                $('#district').html(items);
+                debugger;
+            });
+        }
+        districtChange() {
+            var urlWard = '/' + "Home/GetWardList";
+            var urlStreet = '/' + "Home/GetStreetList";
+            $.getJSON(urlWard, { idDistrict: $('#district').val() }, function (data) {
+                var items = '';
+                debugger;
+                $('#ward').empty();
+                $.each(data, function (i, wardList) {
+                    items += "<option value='" + wardList.Value + "'>" + wardList.Text + "</option>";
+                })
+                $('#ward').html(items);
+            });
+
+            $.getJSON(urlStreet, { idDistrict: $('#district').val() }, function (data) {
+                var items = '';
+                $('#street').empty();
+                $.each(data, function (i, streetList) {
+                    items += "<option value='" + streetList.Value + "'>" + streetList.Text + "</option>";
+                })
+                $('#street').html(items);
+            });
+        }
         btnPostNewsOnClick() {
             var objPostNews = {}
             objPostNews.idProvince = $('#province').val();
@@ -220,8 +259,7 @@
             objPostNews.timeDisplay = $('#timeDisplay').val();
             objPostNews.unitTime = $('#unitTime').val();
             var content = JSON.stringify(objPostNews); // chuyen doi tuong sang json
-            debugger;
-            
+
             $.ajax({
                 url: "Home/PostNews",
                 method: "POST",
@@ -233,7 +271,6 @@
             }).fail(function (res) {
                 debugger;
             })
-            debugger;
         }
     }
 </script>

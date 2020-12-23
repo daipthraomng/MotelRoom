@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using MotelRoom.Context;
 using MotelRoom.Entity;
+using MotelRoom.Entity.AddressEntity;
 using MotelRoom.IService;
 using MotelRoom.Models;
 using System;
@@ -24,8 +27,10 @@ namespace MotelRoom.Controllers
         private List<Motel> listMotels = new List<Motel>();
         private RoomInfoModel roomInfoModel;
         IImageRoomService _imageRoomService = null;
+        private AddressModel addressModel = new AddressModel();
+        private readonly DatabaseContext _context;
 
-        public HomeController(ILogger<HomeController> logger, IImageRoomService imageRoomService)
+        public HomeController(ILogger<HomeController> logger, IImageRoomService imageRoomService, DatabaseContext context)
         {
             _logger = logger;
             listMotels = new List<Motel>()
@@ -37,8 +42,8 @@ namespace MotelRoom.Controllers
 
             roomInfoModel = new RoomInfoModel();
             _imageRoomService = imageRoomService;
+            _context = context;
         }
-
         public IActionResult Index()
         {
             return View(listMotels);
@@ -97,20 +102,42 @@ namespace MotelRoom.Controllers
         public IActionResult PostNews()
         {
             // Đừng xóa phần này nhé ^^
-            //var addressModel = new AddressModel();
+            addressModel.listProvince = _context.Provinces.ToList();
+            addressModel.listDistrict = _context.Districts.ToList();
+            addressModel.listWard = _context.Wards.ToList();
+            addressModel.listStreet = _context.Streets.ToList();
             //addressModel.GetListProvince();
-            //return View(addressModel);
-
-            return View();
+            return View(addressModel);
         }
         [HttpPost]
         public PostNews PostNews([FromBody] PostNews obj)
         {
             PostNewsModel pn = new PostNewsModel();
             pn.PostPostNews(obj);
-            //ImageRoomModel objImageRoom = new ImageRoomModel();
-            //objImageRoom.PostImageRoom(1, "C:\\fakepath\\ghinhan mon.png");
             return obj;
+        }
+        [HttpGet]
+        public JsonResult GetDistrictList(int idProvince)
+        {
+            var districts = _context.Districts.ToList();
+            var selectedDistricts = districts.Where(x => x.idProvince == idProvince).ToList();
+            return Json(new SelectList(selectedDistricts, "idDistrict", "name"));
+
+        }
+        [HttpGet]
+        public JsonResult GetWardList(int idDistrict)
+        {
+            var wards = _context.Wards.ToList();
+            var selectedWards = wards.Where(x => x.idDistrict == idDistrict).ToList();
+            return Json(new SelectList(selectedWards, "idWard", "name"));
+
+        }
+        [HttpGet]
+        public JsonResult GetStreetList(int idDistrict)
+        {
+            var streets = _context.Streets.ToList();
+            var selectedStreets = streets.Where(x => x.idDistrict == idDistrict).ToList();
+            return Json(new SelectList(selectedStreets, "idStreet", "name"));
         }
         [HttpPost("UploadImageRoom")]
         public async Task<IActionResult> PostNews(List<IFormFile> files)
