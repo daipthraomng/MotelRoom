@@ -46,11 +46,18 @@ namespace MotelRoom.Controllers
         }
         public IActionResult Index()
         {
-            return View(listMotels);
+            var objListRoom = new RoomInfoModel();
+            objListRoom.GetListRoomSummaryInfo();
+            foreach(var item in objListRoom.listRoomSummary)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage= string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            return View(objListRoom);
         }
-        public IActionResult RoomInfo()
+        public IActionResult RoomInfo(int idRoom)
         {
-            roomInfoModel.GetRoomInfo(1);
+            roomInfoModel.GetRoomInfo(idRoom);
             return View(roomInfoModel);
         }
         public IActionResult ImageRoom()

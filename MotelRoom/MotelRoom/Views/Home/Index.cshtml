@@ -1,26 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model List<Motel>;
+@model RoomInfoModel;
 
 <div class="container">
     <h3>Cho thuê nhà trọ, phòng trọ tại Việt Nam</h3>
-    @foreach (var motel in Model)
+    @foreach (var item in Model.listRoomSummary)
     {
         <div class="card m-2">
             <a class="card-block stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="RoomInfo" asp-route-id="">
+                <img src="@item.srcImage" style="height:100px; width:100px" />
                 <div class="row">
                     <div class="product-image" style="background-color: red">avatar location</div>
                     <div class="col">
                         <div class="product-title">
-                            @motel.MotelTitle
+                            @item.title
                         </div>
                         <div class="d-flex">
-                            <div class="mr-3 product-price font-weight-bold">@motel.MotelPrice/tháng</div>
-                            <div class="product-location">@motel.MotelLocation</div>
+                            <div class="mr-3 product-price font-weight-bold">@item.price đồng/tháng</div>
+                            <div class="mr-3 product-area font-weight-bold">@item.area</div>
+                            <div class="product-location">@item.streetName,@item.wardName,@item.districtName,@item.provinceName</div>
                         </div>
-                        <div class="product-content text-muted">@motel.MotelContent</div>
-                        <div class="product-update-time text-muted">@motel.MotelUpdateTime</div>
+                        <div class="product-content text-muted">@item.description</div>
+                        <div class="product-update-time text-muted">@item.numberDayPosted</div>
                     </div>
                 </div>
             </a>
