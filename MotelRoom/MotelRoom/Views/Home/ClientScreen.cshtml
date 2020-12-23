@@ -2,7 +2,7 @@
     ViewData["Title"] = "Client Screen";
     Layout = "_Layout2";
 }
-@model List<Motel>;
+@model RoomInfoModel;
 
 <head>
     <style>
@@ -108,27 +108,28 @@
     <button class="btn btn-primary">Tìm kiếm</button>
 </form>
 
-    <div class="container">
-        <h3>Cho thuê nhà trọ, phòng trọ tại Việt Nam</h3>
-        @foreach (var motel in Model)
-        {
-            <div class="card m-2">
-                <a class="card-block stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="RoomInfo" asp-route-id="">
-                    <div class="row">
-                        <div class="product-image" style="background-color: red">avatar location</div>
-                        <div class="col">
-                            <div class="product-title">
-                                @motel.MotelTitle
-                            </div>
-                            <div class="d-flex">
-                                <div class="mr-3 product-price font-weight-bold">@motel.MotelPrice/tháng</div>
-                                <div class="product-location">@motel.MotelLocation</div>
-                            </div>
-                            <div class="product-content text-muted">@motel.MotelContent</div>
-                            <div class="product-update-time text-muted">@motel.MotelUpdateTime</div>
+<div class="container">
+    <h3>Cho thuê nhà trọ, phòng trọ tại Việt Nam</h3>
+    @foreach (var item in Model.listRoomSummary)
+    {
+        <div class="card m-2">
+            <a class="card-block stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="RoomInfo" asp-route-id="">
+                <div class="row">
+                    <div class="product-image"><img src="@item.srcImage" style="height:110px; width:110px" /></div>
+                    <div class="col">
+                        <div class="product-title">
+                            <strong>@item.title</strong>
                         </div>
+                        <div class="d-flex">
+                            <div class="mr-3 product-price font-weight-bold">@item.price đồng/tháng</div>
+                            <div class="mr-3 product-area">@item.area m2</div>
+                            <div class="product-location">@item.streetName,@item.wardName,@item.districtName,@item.provinceName</div>
+                        </div>
+                        <div class="product-content text-muted">@item.description</div>
+                        <div class="product-update-time text-muted">@item.numberDayPosted</div>
                     </div>
-                </a>
-            </div>
-        }
-    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

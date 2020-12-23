@@ -4,32 +4,48 @@
 }
 <h3>Màn hình của admin</h3>
 <div class="row">
-    <div class="card col">
-        <div class="card-header">
-            <h5>Danh sách chủ trọ đăng ký</h5>
-        </div>
-        <div class="card-body" style="max-height:200px; overflow-y:scroll">
-            @for (int i = 0; i < 10; i++)
-            {
-                <div>
-                    <span style="cursor:pointer" data-toggle="modal" data-target="#pendingHost">Host1</span>
-                    <span style="cursor:pointer" onclick="openForm()">Chat</span>
-                </div>
-            }
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Danh sách chủ trọ đăng ký</h5>
+            </div>
+            <div class="card-body" style="height:200px; overflow-y:scroll">
+                @for (int i = 0; i < 10; i++)
+                {
+                    <div class="border-bottom mb-2">
+                        <div style="cursor:pointer" data-toggle="modal" data-target="#pendingHost">
+                            HostName <span style="margin-left:10px"><small class="text-muted">Cầu Giấy, Hà Nội</small></span>
+                        </div>
+                        <div class="contact-infor">
+                            <span class="text-muted">0328965801</span>
+                            <span style="cursor:pointer; margin-left:10px; color:gray" class="fas fa-envelope" onclick="openForm()"></span>
+                        </div>
+
+                    </div>
+                }
+            </div>
         </div>
     </div>
-    <div class="card col">
-        <div class="card-header">
-            <h5>Danh sách chủ trọ đã được phê duyệt</h5>
-        </div>
-        <div class="card-body" style="max-height:200px; overflow-y:scroll">
-            @for (int i = 0; i < 4; i++)
-            {
-                <div>
-                    <span style="cursor:pointer" data-toggle="modal" data-target="#checkedHost">Host1</span>
-                    <span style="cursor:pointer" onclick="openForm()">Chat</span>
-                </div>
-            }
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Danh sách chủ trọ đã được phê duyệt</h5>
+            </div>
+            <div class="card-body" style="height:200px; overflow-y:scroll">
+                @for (int i = 0; i < 4; i++)
+                {
+                    <div class="border-bottom mb-2">
+                        <div style="cursor:pointer" data-toggle="modal" data-target="#checkedHost">
+                            HostName <span style="margin-left:10px"><small class="text-muted">Cầu Giấy, Hà Nội</small></span>
+                        </div>
+                        <div class="contact-infor">
+                            <span class="text-muted">0328965801</span>
+                            <span style="cursor:pointer; margin-left:10px; color:gray" class="fas fa-envelope" onclick="openForm()"></span>
+                        </div>
+
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>
@@ -42,7 +58,6 @@
             <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
                 @{
                     await Html.RenderPartialAsync("_HorizontalCard");
-                }
                 }
             </a>
         </div>

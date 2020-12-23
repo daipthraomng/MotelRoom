@@ -177,7 +177,14 @@ namespace MotelRoom.Controllers
 
         public IActionResult ClientScreen()
         {
-            return View(listMotels);
+            var objListRoom = new RoomInfoModel();
+            objListRoom.GetListRoomSummaryInfo();
+            foreach (var item in objListRoom.listRoomSummary)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            return View(objListRoom);
         }
 
         public IActionResult AdminScreen()

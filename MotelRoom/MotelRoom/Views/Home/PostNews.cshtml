@@ -17,25 +17,25 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="province">Tỉnh/Thành phố</label>
-                        <select id="province" asp-for="ID" asp-items="@(new SelectList(Model.listProvince,"idProvince","name"))">
+                        <select id="province" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listProvince,"idProvince","name"))">
                             <option>Select One</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="district">Huyện/Quận</label>
-                        <select id="district" asp-for="ID" asp-items="@(new SelectList(Model.listDistrict,"idDistrict","name"))">
+                        <select id="district" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listDistrict,"idDistrict","name"))">
                             <option>Select One</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="ward">Xã/Phường/Thị Trấn</label>
-                        <select id="ward" asp-for="ID" asp-items="@(new SelectList(Model.listWard,"idWard","name"))">
+                        <select id="ward" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listWard,"idWard","name"))">
                             <option>Select One</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="street">Đường</label>
-                        <select id="street" asp-for="ID" asp-items="@(new SelectList(Model.listStreet,"idStreet","name"))">
+                        <select id="street" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listStreet,"idStreet","name"))">
                             <option>Select One</option>
                         </select>
                     </div>
