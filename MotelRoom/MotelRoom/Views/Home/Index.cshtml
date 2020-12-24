@@ -4,10 +4,10 @@
 @model RoomInfoModel;
 
 <div class="container">
-    <h3>Cho thuê nhà trọ, phòng trọ tại Việt Nam</h3>
+    <h3 class="mt-4 mb-4">Cho thuê nhà trọ, phòng trọ tại Việt Nam</h3>
     @foreach (var item in Model.listRoomSummary)
     {
-        <div class="card m-2">
+        <div class="card m-3">
             <a class="card-block stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="RoomInfo" asp-route-idRoom="@item.idRoom">
                 <div class="row">
                     <div class="product-image"><img src="@item.srcImage" style="height:110px; width:110px" /></div>

@@ -33,6 +33,8 @@
                             <option>Select One</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col">
                         <label for="street">Đường</label>
                         <select id="street" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listStreet,"idStreet","name"))">
@@ -48,6 +50,7 @@
                     <label for="publicPlaceAround">Gần địa điểm công cộng</label>
                     <input type="text" value="1" class="form-control" id="publicPlaceAround" placeholder="Gần trường học/bệnh viện/...">
                 </div>
+
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="typeRoom">Kiểu phòng</label>
@@ -66,6 +69,9 @@
                         <label for="area">Diện tích (m2)</label>
                         <input type="number" class="form-control" id="area" name="area" value="1" />
                     </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group col">
                         <label for="price">Giá phòng (đồng)</label>
                         <input type="text" class="form-control" id="price" name="area" min="1" value="1" />
@@ -118,6 +124,8 @@
                             <option>Không</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col">
                         <label for="">Điện nước</label>
                         <select class="form-control" id="">
@@ -140,7 +148,7 @@
                 </div>
                 <div class="form-group">
                     <label for="image">Chọn ít nhất 3 ảnh: </label>
-                    <input type="file" id="image" name="files" multiple>
+                    <input type="file" id="image" name="files" class="form-control-file" multiple>
                 </div>
                 <div class="form-group">
                     <label for="description">Thông tin bổ sung</label>
@@ -157,11 +165,11 @@
                     </div>
                 </div>
                 <div class="time-post form-row mb-3">
-                    <div class="col-5">
-                        <label for="timeDisplay">Thời gian hiển thị (tính từ thời điểm được duyệt bài)</label>
+                    <div class="col">
+                        <label for="timeDisplay">Thời gian hiển thị</label>
                         <input type="number" id="timeDisplay" class="form-control" name="quantity" min="1" max="11" value="1">
-                    </div> 
-                    <div class="col-2">
+                    </div>
+                    <div class="col">
                         <label for="unitTime">Đơn vị</label>
                         <select class="form-control" id="unitTime">
                             <option selected>Tuần</option>

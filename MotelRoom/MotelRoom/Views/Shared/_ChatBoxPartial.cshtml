@@ -61,6 +61,15 @@
                 .form-container .btn:hover, .open-button:hover {
                     opacity: 1;
                 }
+        @@media screen and (max-width: 900px) {
+            .open-button {
+                width: 170px
+            }
+
+            .form-container {
+                min-width: 180px;
+            }
+        }
     </style>
 </head>
 
@@ -88,7 +97,7 @@
         </div>
 
         <div class="d-md-inline-flex">
-            <textarea placeholder="Type message.." name="msg"></textarea>
+            <textarea placeholder="Type message.." name="msg" class="form-control"></textarea>
             <button type="submit" class="btn">Send</button>
         </div>
     </form>
