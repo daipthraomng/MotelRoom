@@ -18,39 +18,36 @@
                     <div class="form-group col">
                         <label for="province">Tỉnh/Thành phố</label>
                         <select id="province" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listProvince,"idProvince","name"))">
-                            <option>Select One</option>
+                            <option value="1">Select One</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="district">Huyện/Quận</label>
                         <select id="district" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listDistrict,"idDistrict","name"))">
-                            <option>Select One</option>
+                            <option value="1">Select One</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="ward">Xã/Phường/Thị Trấn</label>
                         <select id="ward" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listWard,"idWard","name"))">
-                            <option>Select One</option>
+                            <option value="1">Select One</option>
                         </select>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col">
                         <label for="street">Đường</label>
                         <select id="street" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listStreet,"idStreet","name"))">
-                            <option>Select One</option>
+                            <option value="1">Select One</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="homeNo">Số nhà</label>
-                        <input type="text" value="1" class="form-control" id="homeNo" placeholder="Địa chỉ">
+                        <input type="text" value="10" class="form-control" id="homeNo" placeholder="Địa chỉ">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="publicPlaceAround">Gần địa điểm công cộng</label>
-                    <input type="text" value="1" class="form-control" id="publicPlaceAround" placeholder="Gần trường học/bệnh viện/...">
+                    <input type="text" value="Đại học quốc gia" class="form-control" id="publicPlaceAround" placeholder="Gần trường học/bệnh viện/...">
                 </div>
-
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="typeRoom">Kiểu phòng</label>
@@ -63,18 +60,15 @@
                     </div>
                     <div class="form-group col">
                         <label for="roomNo">Số lượng</label>
-                        <input type="number" class="form-control" id="roomNo" name="roomNo" min="1" value="1">
+                        <input type="number" class="form-control" id="roomNo" name="roomNo" min="1" value="2">
                     </div>
                     <div class="form-group col">
                         <label for="area">Diện tích (m2)</label>
-                        <input type="number" class="form-control" id="area" name="area" value="1" />
+                        <input type="number" class="form-control" id="area" name="area" value="25" />
                     </div>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group col">
                         <label for="price">Giá phòng (đồng)</label>
-                        <input type="text" class="form-control" id="price" name="area" min="1" value="1" />
+                        <input type="text" class="form-control" id="price" name="area" min="1" value="2500000" />
                     </div>
                     <div class="form-group col">
                         <label for="time-pay">Trả theo</label>
@@ -98,8 +92,8 @@
                     <div class="form-group col">
                         <label for="heater">Nóng lạnh</label>
                         <select class="form-control" id="heater">
-                            <option selected>Có nóng lạnh</option>
-                            <option>Không có nóng lạnh</option>
+                            <option selected>Có</option>
+                            <option>Không</option>
                         </select>
                     </div>
                     <div class="form-group col">
@@ -124,8 +118,6 @@
                             <option>Không</option>
                         </select>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col">
                         <label for="">Điện nước</label>
                         <select class="form-control" id="">
@@ -135,41 +127,41 @@
                     </div>
                     <div class="form-group col">
                         <label for="electricityPrice">Giá điện (kW/h)</label>
-                        <input type="text" value="1" class="form-control" id="electricityPrice" placeholder="Giá điện" />
+                        <input type="text" value="3000" class="form-control" id="electricityPrice" placeholder="Giá điện" />
                     </div>
                     <div class="form-group col">
                         <label for="waterPrice">Giá nước (m3)</label>
-                        <input type="text" value="1" class="form-control" id="waterPrice" placeholder="Giá nước" />
+                        <input type="text" value="2000" class="form-control" id="waterPrice" placeholder="Giá nước" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="otherUtility">Tiện ích khác</label>
-                    <input type="text" value="1" class="form-control" id="otherUtility" placeholder="Tủ lạnh/Máy giặt/Giường tủ" />
+                    <input type="text" value="Khong co tiện ích" class="form-control" id="otherUtility" placeholder="Tủ lạnh/Máy giặt/Giường tủ" />
                 </div>
                 <div class="form-group">
                     <label for="image">Chọn ít nhất 3 ảnh: </label>
-                    <input type="file" id="image" name="files" class="form-control-file" multiple>
+                    <input type="file" id="image" name="files" multiple>
                 </div>
                 <div class="form-group">
                     <label for="description">Thông tin bổ sung</label>
-                    <input type="text" value="1" class="form-control" id="description" placeholder="" />
+                    <input type="text" value="Không thông tin bổ sung" class="form-control" id="description" placeholder="" />
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="nameBoss">Họ và tên</label>
-                        <input type="text" value="1" id="nameBoss" class="form-control" placeholder="Họ và tên">
+                        <input type="text" value="Trọng Đại" id="nameBoss" class="form-control" placeholder="Họ và tên">
                     </div>
                     <div class="form-group col">
                         <label for="phoneBoss">Số điện thoại</label>
-                        <input type="text" value="1" id="phoneBoss" class="form-control" placeholder="Số điện thoại">
+                        <input type="text" value="0123254534" id="phoneBoss" class="form-control" placeholder="Số điện thoại">
                     </div>
                 </div>
                 <div class="time-post form-row mb-3">
-                    <div class="col">
-                        <label for="timeDisplay">Thời gian hiển thị</label>
+                    <div class="col-5">
+                        <label for="timeDisplay">Thời gian hiển thị (tính từ thời điểm được duyệt bài)</label>
                         <input type="number" id="timeDisplay" class="form-control" name="quantity" min="1" max="11" value="1">
                     </div>
-                    <div class="col">
+                    <div class="col-2">
                         <label for="unitTime">Đơn vị</label>
                         <select class="form-control" id="unitTime">
                             <option selected>Tuần</option>
@@ -187,7 +179,7 @@
         </form>
     </div>
 </div>
-    
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -211,12 +203,12 @@
             $.getJSON(url, { idProvince: $('#province').val() }, function (data) {
                 var items = "<option value='0'>Select One</option>";
                 $('#district').empty();
-                debugger;
+                //debugger;
                 $.each(data, function (i, districtlist) {
                     items += "<option value='" + districtlist.Value + "'>" + districtlist.Text + "</option>";
                 })
                 $('#district').html(items);
-                debugger;
+                //debugger;
             });
         }
         districtChange() {
@@ -224,7 +216,7 @@
             var urlStreet = '/' + "Home/GetStreetList";
             $.getJSON(urlWard, { idDistrict: $('#district').val() }, function (data) {
                 var items = '';
-                debugger;
+                //debugger;
                 $('#ward').empty();
                 $.each(data, function (i, wardList) {
                     items += "<option value='" + wardList.Value + "'>" + wardList.Text + "</option>";
@@ -267,9 +259,9 @@
             objPostNews.timeDisplay = $('#timeDisplay').val();
             objPostNews.unitTime = $('#unitTime').val();
             var content = JSON.stringify(objPostNews); // chuyen doi tuong sang json
-
+            debugger;
             $.ajax({
-                url: "Home/PostNews",
+                url: "Home/PostPostNews",
                 method: "POST",
                 data: content,
                 contentType: "application/json",

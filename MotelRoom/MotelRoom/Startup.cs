@@ -70,7 +70,7 @@ namespace MotelRoom
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=ClientScreen}/{id?}");
                 endpoints.MapRazorPages();
             });
             ConnectionString = Configuration["ConnectionStrings:MySqlConnection"];

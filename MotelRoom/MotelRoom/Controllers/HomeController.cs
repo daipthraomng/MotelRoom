@@ -112,14 +112,10 @@ namespace MotelRoom.Controllers
         {
             var addressModel = new AddressModel();
             addressModel.listProvince = _context.Provinces.ToList();
-            addressModel.listDistrict = _context.Districts.ToList();
-            addressModel.listWard = _context.Wards.ToList();
-            addressModel.listStreet = _context.Streets.ToList();
-            //addressModel.GetListProvince();
             return View(addressModel);
         }
         [HttpPost]
-        public PostNews PostNews([FromBody] PostNews obj)
+        public PostNews PostPostNews([FromBody] PostNews obj)
         {
             PostNewsModel pn = new PostNewsModel();
             pn.PostPostNews(obj);
@@ -179,8 +175,9 @@ namespace MotelRoom.Controllers
 
         public IActionResult ClientScreen()
         {
-            var objListRoom = new RoomInfoModel();
+            var objListRoom = new ClientScreenModel();
             objListRoom.GetListRoomSummaryInfo();
+            objListRoom.objAddress.listProvince = _context.Provinces.ToList();
             foreach (var item in objListRoom.listRoomSummary)
             {
                 string imageBase64Data = Convert.ToBase64String(item.image);
@@ -188,7 +185,26 @@ namespace MotelRoom.Controllers
             }
             return View(objListRoom);
         }
-
+        [HttpPost]
+        public IActionResult ClientScreen([FromBody] SearchRoom obj)
+        {
+            var objListRoom = new ClientScreenModel();
+            objListRoom.SearchListRoomSummary(obj);
+            objListRoom.objAddress.listProvince = _context.Provinces.ToList();
+            foreach (var item in objListRoom.listRoomSummary)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            return View(objListRoom);
+        }
+        //[HttpGet]
+        //public JsonResult ClientScreen([FromBody] SearchRoom obj)
+        //{
+        //    ClientScreenModel objSearchRoom = new ClientScreenModel();
+        //    objSearchRoom.SearchListRoomSummary(obj);
+        //    return obj;
+        //}
         public IActionResult AdminScreen()
         {
             return View();

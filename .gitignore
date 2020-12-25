@@ -1,6 +1,7 @@
 ﻿###################
 # compiled source #
 ###################
+*.json
 *.com
 *.class
 *.dll
