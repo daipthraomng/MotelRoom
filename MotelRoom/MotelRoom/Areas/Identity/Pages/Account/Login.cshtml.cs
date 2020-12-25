@@ -96,23 +96,22 @@ namespace MotelRoom.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    var user = await _userManager.FindByNameAsync(Input.UserName);
-                    var userRoles = await _userManager.GetRolesAsync(user);
-                    var role = userRoles[0];
-                    if(role == "Admin")
-                    {
-                        return RedirectToAction("AdminScreen", "Home");
-                    }
-                    else if (role == "Owner")
-                    {
-                        return RedirectToAction("HostScreen", "Home");
-                    }
-                    else
-                    {
-                        return RedirectToAction("ClientScreen", "Home");
-                    }
+                    //var user = await _userManager.FindByNameAsync(Input.UserName);
+                    //var userRoles = await _userManager.GetRolesAsync(user);
+                    //var role = userRoles[0];
+                    //if(role == "Admin")
+                    //{
+                    //    return RedirectToAction("AdminScreen", "Home");
+                    //}
+                    //else if (role == "Owner")
+                    //{
+                    //    return RedirectToAction("HostScreen", "Home");
+                    //}
+                    //else
+                    //{
+                    //    return RedirectToAction("ClientScreen", "Home");
+                    //}
                     //return LocalRedirect(returnUrl); 
-                    //return RedirectToAction("AdminScreen", "Home");
                 }
                 if (result.RequiresTwoFactor)
                 {

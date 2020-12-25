@@ -48,10 +48,10 @@ namespace MotelRoom.Controllers
         }
         public IActionResult Index()
         {
-            var userId = _userManager.GetUserId(HttpContext.User);
-            var user = _userManager.FindByIdAsync(userId).Result;
-            var listuserRoles =  _userManager.GetRolesAsync(user).Result;
-            var role = listuserRoles[0];
+            //var userId = _userManager.GetUserId(HttpContext.User);
+            //var user = _userManager.FindByIdAsync(userId).Result;
+            //var listuserRoles =  _userManager.GetRolesAsync(user).Result;
+            //var role = listuserRoles[0];
             var objListRoom = new RoomInfoModel();
             objListRoom.GetListRoomSummaryInfo();
             foreach (var item in objListRoom.listRoomSummary)
@@ -59,21 +59,19 @@ namespace MotelRoom.Controllers
                 string imageBase64Data = Convert.ToBase64String(item.image);
                 item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
             }
-            //var userRoles = await _userManager.GetRolesAsync(user);
-            //var role = userRoles[0];
-            if (role == "Admin")
-            {
-                return RedirectToAction("AdminScreen", "Home");
-            }
-            else if (role == "Owner")
-            {
-                return RedirectToAction("HostScreen", "Home");
-            }
-            else
-            {
-                return View(objListRoom);
-            }
-            //return View(objListRoom);
+            //if (role == "Admin")
+            //{
+            //    return RedirectToAction("AdminScreen", "Home");
+            //}
+            //else if (role == "Owner")
+            //{
+            //    return RedirectToAction("HostScreen", "Home");
+            //}
+            //else
+            //{
+            //    return View(objListRoom);
+            //}
+            return View(objListRoom);
         }
 
         public IActionResult RoomInfo(int idRoom)
@@ -125,12 +123,12 @@ namespace MotelRoom.Controllers
         {
             return View();
         }
-        [Authorize(Roles ="Owner")]
+        //[Authorize(Roles ="Owner")]
         public IActionResult HostScreen()
         {
             return View();
         }
-        [Authorize(Roles = "Owner")]
+        //[Authorize(Roles = "Owner")]
         public IActionResult PostNews()
         {
             var addressModel = new AddressModel();
@@ -138,7 +136,7 @@ namespace MotelRoom.Controllers
             return View(addressModel);
         }
         [HttpPost]
-         [Authorize(Roles = "Owner")]
+         //[Authorize(Roles = "Owner")]
         public PostNews PostPostNews([FromBody] PostNews obj)
         {
             PostNewsModel pn = new PostNewsModel();
@@ -187,12 +185,12 @@ namespace MotelRoom.Controllers
             }
             return View();
         }
-         [Authorize(Roles = "Owner")]   
+         //[Authorize(Roles = "Owner")]   
         public IActionResult PendingMotel()
         {
             return View();
         }
-        [Authorize(Roles = "Owner")]
+        //[Authorize(Roles = "Owner")]
         public IActionResult CheckedMotel()
         {
             return View();
@@ -230,22 +228,22 @@ namespace MotelRoom.Controllers
         //    objSearchRoom.SearchListRoomSummary(obj);
         //    return obj;
         //}
-        [Authorize(Roles ="Admin")]
+        //[Authorize(Roles ="Admin")]
         public IActionResult AdminScreen()
         {
             return View();
         }
-           [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult AdminCheckedMotel()
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult AdminPendingMotel()
         {
             return View();
         }   
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult AdminRejectedMotel()
         {
             return View();
