@@ -16,7 +16,7 @@
                 @*TODO: chuyển sang dạng select với dữ liệu sql province, district, ward, street*@
                 <div class="form-row">
                     <div class="form-group col">
-                        <label for="province">Tỉnh/Thành phố</label>
+                        <label for="province">Tỉnh/Thành</label>
                         <select id="province" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listProvince,"idProvince","name"))">
                             <option value="1">Select One</option>
                         </select>
@@ -28,11 +28,14 @@
                         </select>
                     </div>
                     <div class="form-group col">
-                        <label for="ward">Xã/Phường/Thị Trấn</label>
+                        <label for="ward">Xã/Phường</label>
                         <select id="ward" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listWard,"idWard","name"))">
                             <option value="1">Select One</option>
                         </select>
                     </div>
+                </div>
+
+                <div class="form-a row">
                     <div class="form-group col">
                         <label for="street">Đường</label>
                         <select id="street" class="form-control" asp-for="ID" asp-items="@(new SelectList(Model.listStreet,"idStreet","name"))">
@@ -44,6 +47,7 @@
                         <input type="text" value="10" class="form-control" id="homeNo" placeholder="Địa chỉ">
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label for="publicPlaceAround">Gần địa điểm công cộng</label>
                     <input type="text" value="Đại học quốc gia" class="form-control" id="publicPlaceAround" placeholder="Gần trường học/bệnh viện/...">
@@ -64,8 +68,11 @@
                     </div>
                     <div class="form-group col">
                         <label for="area">Diện tích (m2)</label>
-                        <input type="number" class="form-control" id="area" name="area" value="25" />
+                        <input type="text" class="form-control" id="area" name="area" value="25" />
                     </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group col">
                         <label for="price">Giá phòng (đồng)</label>
                         <input type="text" class="form-control" id="price" name="area" min="1" value="2500000" />
@@ -84,21 +91,21 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="bathroom">Phòng tắm</label>
-                        <select class="form-control" id="bathroom">
+                        <select class="form-control" id="bathroom" required>
                             <option selected>Khép kín</option>
                             <option>Chung chủ</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="heater">Nóng lạnh</label>
-                        <select class="form-control" id="heater">
+                        <select class="form-control" id="heater" required>
                             <option selected>Có</option>
                             <option>Không</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="kitchen">Phòng bếp</label>
-                        <select class="form-control" id="kitchen">
+                        <select class="form-control" id="kitchen" required>
                             <option selected>Khu bếp riêng</option>
                             <option>Khu bếp chung</option>
                             <option>Không nấu ăn</option>
@@ -106,32 +113,34 @@
                     </div>
                     <div class="form-group col">
                         <label for="airCondition">Điều hòa</label>
-                        <select class="form-control" id="airCondition">
+                        <select class="form-control" id="airCondition" required>
                             <option selected>Có</option>
                             <option>Không</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="balcony">Ban công</label>
-                        <select class="form-control" id="balcony">
+                        <select class="form-control" id="balcony" required>
                             <option selected>Có</option>
                             <option>Không</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col">
                         <label for="">Điện nước</label>
-                        <select class="form-control" id="">
+                        <select class="form-control" id="" required>
                             <option selected>Giá dân</option>
                             <option>Giá thuê</option>
                         </select>
                     </div>
                     <div class="form-group col">
-                        <label for="electricityPrice">Giá điện (kW/h)</label>
-                        <input type="text" value="3000" class="form-control" id="electricityPrice" placeholder="Giá điện" />
+                        <label for="electricityPrice">Giá điện</label>
+                        <input type="text" value="3000" class="form-control" id="electricityPrice" placeholder="Giá điện theo (kW/h)" />
                     </div>
                     <div class="form-group col">
-                        <label for="waterPrice">Giá nước (m3)</label>
-                        <input type="text" value="2000" class="form-control" id="waterPrice" placeholder="Giá nước" />
+                        <label for="waterPrice">Giá nước</label>
+                        <input type="text" value="2000" class="form-control" id="waterPrice" placeholder="Giá nước theo (m3)" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -157,11 +166,11 @@
                     </div>
                 </div>
                 <div class="time-post form-row mb-3">
-                    <div class="col-5">
-                        <label for="timeDisplay">Thời gian hiển thị (tính từ thời điểm được duyệt bài)</label>
+                    <div class="col">
+                        <label for="timeDisplay">Thời gian hiển thị</label>
                         <input type="number" id="timeDisplay" class="form-control" name="quantity" min="1" max="11" value="1">
                     </div>
-                    <div class="col-2">
+                    <div class="col">
                         <label for="unitTime">Đơn vị</label>
                         <select class="form-control" id="unitTime">
                             <option selected>Tuần</option>
