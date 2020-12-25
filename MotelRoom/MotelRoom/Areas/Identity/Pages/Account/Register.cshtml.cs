@@ -51,46 +51,46 @@ namespace MotelRoom.Areas.Identity.Pages.Account
         {
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Role")]
+            [Display(Name = "Bạn có phòng trọ muốn đăng?")]
             public string Role { get; set; }
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Fisrt Name")]
+            [Display(Name = "Tên")]
             public string FirstName { get; set; }
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "UserName")]
+            [Display(Name = "Tài khoản")]
             public string UserName { get; set; }
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Last Name")]
+            [Display(Name = "Họ")]
             public string LastName { get; set; }
             //[Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Mật khẩu phải chứa ít nhất 6 ký tự")]
             [Display(Name = "Email")]
             public string Email { get; set; }
             //[Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Address")]
+            [Display(Name = "Địa chỉ")]
             public string Address { get; set; }
             //[Required]
             [DataType(DataType.Text)]
-            [Display(Name = "PersonNo")]
+            [Display(Name = "Số CMTND/CCCD")]
             public string PersonNo { get; set; }
             //[Required]
             [DataType(DataType.Text)]
-            [Display(Name = "PhoneNumber")]
+            [Display(Name = "Số điện thoại")]
             public string PhoneNumber { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Mật khẩu phải chứa ít nhất 6 ký tự", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Mật khẩu")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Xác nhận mật khẩu")]
+            [Compare("Password", ErrorMessage = "Xác nhận mật khẩu sai")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -151,6 +151,16 @@ namespace MotelRoom.Areas.Identity.Pages.Account
                     {
                         // Không cần xác thực - đăng nhập luôn
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                        if(Input.Role == "Customer"){
+                            return RedirectToAction("ClientScreen", "Home");
+                        }
+                        else if (Input.Role == "Owner"){
+                            return RedirectToAction("HostScreen", "Home");
+                        }
+                        else if(Input.Role == "Admin")
+                        {
+                            return RedirectToAction("AdminScreen", "Home");
+                        }
                         return LocalRedirect(returnUrl);
                     }
                 }

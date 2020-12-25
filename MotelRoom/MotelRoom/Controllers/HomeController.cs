@@ -48,8 +48,10 @@ namespace MotelRoom.Controllers
         }
         public IActionResult Index()
         {
-            //var userId = _userManager.GetUserId(HttpContext.User);
-            //var user =  await _userManager.FindByIdAsync(userId);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var user = _userManager.FindByIdAsync(userId).Result;
+            var listuserRoles =  _userManager.GetRolesAsync(user).Result;
+            var role = listuserRoles[0];
             var objListRoom = new RoomInfoModel();
             objListRoom.GetListRoomSummaryInfo();
             foreach (var item in objListRoom.listRoomSummary)
@@ -59,19 +61,19 @@ namespace MotelRoom.Controllers
             }
             //var userRoles = await _userManager.GetRolesAsync(user);
             //var role = userRoles[0];
-            //if (role == "Admin")
-            //{
-            //    return RedirectToAction("AdminScreen", "Home");
-            //}
-            //else if (role == "Owner")
-            //{
-            //    return RedirectToAction("HostScreen", "Home");
-            //}
-            //else
-            //{
-            //    return View(objListRoom);
-            //}
-            return View(objListRoom);
+            if (role == "Admin")
+            {
+                return RedirectToAction("AdminScreen", "Home");
+            }
+            else if (role == "Owner")
+            {
+                return RedirectToAction("HostScreen", "Home");
+            }
+            else
+            {
+                return View(objListRoom);
+            }
+            //return View(objListRoom);
         }
 
         public IActionResult RoomInfo(int idRoom)
