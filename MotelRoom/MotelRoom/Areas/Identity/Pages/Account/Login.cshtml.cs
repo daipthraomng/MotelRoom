@@ -19,15 +19,18 @@ namespace MotelRoom.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<AppUser> signInManager, 
             ILogger<LoginModel> logger,
+              RoleManager<IdentityRole> roleManager,
             UserManager<AppUser> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _logger = logger;
         }
 
@@ -67,8 +70,8 @@ namespace MotelRoom.Areas.Identity.Pages.Account
 
             returnUrl = returnUrl ?? Url.Content("~/");
 
-            // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            // Xóa cookie bên ngoài hiện có để đảm bảo quá trình đăng nhập sạch sẽ
+             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -79,7 +82,12 @@ namespace MotelRoom.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             // Đã đăng nhập nên chuyển hướng về Index
-            if (_signInManager.IsSignedIn(User)) return Redirect("Index");
+            if (_signInManager.IsSignedIn(User))
+            {
+                //return Redirect("Index");
+                return RedirectToAction("AdminScreen", "Home");
+            }
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -88,15 +96,33 @@ namespace MotelRoom.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    var user = await _userManager.FindByNameAsync(Input.UserName);
+                    var userRoles = await _userManager.GetRolesAsync(user);
+                    var role = userRoles[0];
+                    if(role == "Admin")
+                    {
+                        return RedirectToAction("AdminScreen", "Home");
+                    }
+                    else if (role == "Owner")
+                    {
+                        return RedirectToAction("HostScreen", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("ClientScreen", "Home");
+                    }
+                    //return LocalRedirect(returnUrl); 
+                    //return RedirectToAction("AdminScreen", "Home");
                 }
                 if (result.RequiresTwoFactor)
                 {
+                    // Nếu cấu hình đăng nhập hai yếu tố thì chuyển hướng đến LoginWith2fa
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
+                    // Chuyển hướng đến trang Lockout - hiện thị thông báo
                     return RedirectToPage("./Lockout");
                 }
                 else
