@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using MotelRoom.Context;
 using MotelRoom.IService;
 using MotelRoom.Service;
+using MotelRoom.Hubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,8 @@ namespace MotelRoom
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            // Add signalr library for chat
+            services.AddSignalR();
             services.AddRazorPages();
             // Đoạn này tạm thời để comment để ko bắt nhập tài khoản mà vẫn vô được trang
             // Để truy cập login thì qua link: http://localhost:<number>/identity/account/login
@@ -72,6 +75,7 @@ namespace MotelRoom
                     name: "default",
                     pattern: "{controller=Home}/{action=ClientScreen}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chathub");
             });
             ConnectionString = Configuration["ConnectionStrings:MySqlConnection"];
         }

@@ -61,6 +61,7 @@
                 .form-container .btn:hover, .open-button:hover {
                     opacity: 1;
                 }
+
         @@media screen and (max-width: 900px) {
             .open-button {
                 width: 170px
@@ -81,33 +82,35 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="container border-top" style="overflow-y:scroll; height: 270px">
-            @for (int i = 0; i < 4; i++)
-            {
-                <div class="border-bottom">
-                    <div class="msg-header">
-                        <span><strong>Do Quang Anh</strong></span>
-                        <span class="text-muted"><small>12-12-2020</small></span>
-                    </div>
-                    <p class="msg-content" style="font-size:15px;">
-                        This is message
-                    </p>
+        <div class="container border-top" style="overflow-y:scroll; height: 270px" id="messagesList">
+            @*@for (int i = 0; i < 4; i++)
+        {
+            <div class="border-bottom">
+                <div class="msg-header">
+                    <span><strong>Do Quang Anh</strong></span>
+                    <span class="text-muted"><small>12-12-2020</small></span>
                 </div>
-            }
+                <p class="msg-content" style="font-size:15px;">
+                    This is message
+                </p>
+            </div>
+        }*@
         </div>
 
         <div class="d-md-inline-flex">
-            <textarea placeholder="Type message.." name="msg" class="form-control"></textarea>
-            <button type="submit" class="btn">Send</button>
+            <textarea placeholder="Type message.." name="msg" class="form-control" id="messageInput"></textarea>
+            <button type="submit" class="btn" id="sendButton">Send</button>
         </div>
     </form>
 </div>
 <script>
-        function openForm() {
-            document.getElementById("myForm").style.display = "block";
-        }
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
 
-        function closeForm() {
-            document.getElementById("myForm").style.display = "none";
-        }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
 </script>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
