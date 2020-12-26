@@ -169,10 +169,10 @@
                     <div class="col">
                         <label for="unitTimeId">Đơn vị</label>
                         <select class="form-control" id="unitTimeId">
-                            <option value="5000" selected>Ngày</option>
-                            <option value="30000">Tuần</option>
-                            <option value="100000">Tháng</option>
-                            <option value="500000">Năm</option>
+                            <option value="1" selected>Ngày</option>
+                            <option value="2">Tuần</option>
+                            <option value="3">Tháng</option>
+                            <option value="4">Năm</option>
                         </select>
                     </div>
                     <div class="col">
@@ -212,7 +212,22 @@
         timeDisplayChange() {
             var timeDisplay = $('#timeDisplay').val();
             var unitTimeId = $('#unitTimeId').val();
-            var pricePost = timeDisplay * unitTimeId;
+            var priceUOT = 1;
+            switch (unitTimeId) {
+                case 1:
+                    priceUOT = 5000;
+                    break;
+                case 2:
+                    priceUOT = 30000;
+                    break
+                case 3:
+                    priceUOT = 100000;
+                    break;
+                case 4:
+                    priceUOT = 500000;
+                    break;
+            }
+            var pricePost = timeDisplay * priceUOT ;
             document.getElementById("pricePost").value = pricePost;
         }
         provinceChange() {
