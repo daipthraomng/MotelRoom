@@ -9,6 +9,7 @@ namespace MotelRoom.Entity
     public class PostNews
     {
         // all property are string to get data from input
+        public string title { get; set; }
         public string idProvince { get; set; }
         public string idDistrict { get; set; }
         public string idWard { get; set; }
@@ -30,9 +31,7 @@ namespace MotelRoom.Entity
         public string waterPrice { get; set; }
         public string otherUtility { get; set; }
         public string description { get; set; }
-        public string nameBoss { get; set; }
-        public string phoneBoss { get; set; }
         public string timeDisplay { get; set; }
-        public string unitTime { get; set; }
+        public string unitTimeId { get; set; }
     }
 }

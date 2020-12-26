@@ -137,10 +137,11 @@ namespace MotelRoom.Controllers
         }
         [HttpPost]
          //[Authorize(Roles = "Owner")]
-        public PostNews PostPostNews([FromBody] PostNews obj)
+        public PostNews PostNews([FromBody] PostNews obj)
         {
             PostNewsModel pn = new PostNewsModel();
-            pn.PostPostNews(obj);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            pn.PostPostNews(obj, userId);
             return obj;
         }
         [HttpGet]

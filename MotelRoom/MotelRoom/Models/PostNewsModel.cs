@@ -55,7 +55,7 @@ namespace MotelRoom.Models
             }
         }
 
-        public void PostPostNews(PostNews objPostNews)
+        public void PostPostNews(PostNews objPostNews, string userId)
            
         {
             var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
@@ -70,8 +70,13 @@ namespace MotelRoom.Models
 
                 try
                 {
-                    objCmd.Parameters.Add("@idRoom", SqlDbType.Int, 0, "idRoom");
+                    SqlParameter idRoom = new SqlParameter();
+                    idRoom.ParameterName = "@idRoom";
+                    idRoom.DbType = DbType.Int32;
+                    idRoom.Direction = ParameterDirection.Output;
+                    objCmd.Parameters.Add(idRoom);
                     objCmd.Parameters["@idRoom"].Direction = ParameterDirection.Output;
+                    objCmd.Parameters.AddWithValue("@title", SqlDbType.NVarChar).Value = objPostNews.title; // add
                     objCmd.Parameters.AddWithValue("@price", SqlDbType.Int).Value = Int32.Parse(objPostNews.price);
                     objCmd.Parameters.AddWithValue("@area", SqlDbType.Int).Value = Int32.Parse(objPostNews.area);
                     objCmd.Parameters.AddWithValue("@typeRoom", SqlDbType.NVarChar).Value = objPostNews.typeRoom;
@@ -91,10 +96,9 @@ namespace MotelRoom.Models
                     objCmd.Parameters.AddWithValue("@waterPrice", SqlDbType.Int).Value = Int32.Parse(objPostNews.waterPrice);
                     objCmd.Parameters.AddWithValue("@otherUtility", SqlDbType.NVarChar).Value = objPostNews.otherUtility;
                     objCmd.Parameters.AddWithValue("@description", SqlDbType.NVarChar).Value = objPostNews.description;
-                    objCmd.Parameters.AddWithValue("@nameBoss", SqlDbType.NVarChar).Value = objPostNews.nameBoss;
-                    objCmd.Parameters.AddWithValue("@phoneBoss", SqlDbType.VarChar).Value = objPostNews.phoneBoss;
                     objCmd.Parameters.AddWithValue("@timeDisplay", SqlDbType.Int).Value = Int32.Parse(objPostNews.timeDisplay);
-                    objCmd.Parameters.AddWithValue("@unitTime", SqlDbType.NVarChar).Value = objPostNews.unitTime;
+                    objCmd.Parameters.AddWithValue("@unitTimeId", SqlDbType.Int).Value = Int32.Parse(objPostNews.unitTimeId);// add
+                    objCmd.Parameters.AddWithValue("@userId", SqlDbType.NVarChar).Value = userId;
                     // Open connection
                     objConnect.Open();
                     objCmd.ExecuteNonQuery();

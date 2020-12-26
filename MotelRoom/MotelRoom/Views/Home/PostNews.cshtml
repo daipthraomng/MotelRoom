@@ -1,7 +1,7 @@
 ﻿@model AddressModel;
 @{
     //ViewData["Title"] = "Post Motel Information";
-    //Layout = "_Layout1";
+    Layout = "_Layout1";
 }
 @*<h1>@ViewData["Title"]</h1>*@
 
@@ -12,6 +12,12 @@
     <div class="card-body">
         <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="HostScreen">
             <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group col">
+                        Tiêu đề
+                        <input type="text" value="Phòng trọ rẻ đẹp nhất Hà Nội" class="form-control" id="title" placeholder="Tiêu đề">
+                    </div>
+                </div>
                 <p>Địa chỉ</p>
                 @*TODO: chuyển sang dạng select với dữ liệu sql province, district, ward, street*@
                 <div class="form-row">
@@ -68,14 +74,14 @@
                     </div>
                     <div class="form-group col">
                         <label for="area">Diện tích (m2)</label>
-                        <input type="text" class="form-control" id="area" name="area" value="25" />
+                        <input type="text" class="form-control" id="area" value="25" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="price">Giá phòng (đồng)</label>
-                        <input type="text" class="form-control" id="price" name="area" min="1" value="2500000" />
+                        <input type="text" class="form-control" id="price" min="1" value="2500000" />
                     </div>
                     <div class="form-group col">
                         <label for="time-pay">Trả theo</label>
@@ -155,35 +161,29 @@
                     <label for="description">Thông tin bổ sung</label>
                     <input type="text" value="Không thông tin bổ sung" class="form-control" id="description" placeholder="" />
                 </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="nameBoss">Họ và tên</label>
-                        <input type="text" value="Trọng Đại" id="nameBoss" class="form-control" placeholder="Họ và tên">
-                    </div>
-                    <div class="form-group col">
-                        <label for="phoneBoss">Số điện thoại</label>
-                        <input type="text" value="0123254534" id="phoneBoss" class="form-control" placeholder="Số điện thoại">
-                    </div>
-                </div>
                 <div class="time-post form-row mb-3">
                     <div class="col">
                         <label for="timeDisplay">Thời gian hiển thị</label>
                         <input type="number" id="timeDisplay" class="form-control" name="quantity" min="1" max="11" value="1">
                     </div>
                     <div class="col">
-                        <label for="unitTime">Đơn vị</label>
-                        <select class="form-control" id="unitTime">
-                            <option selected>Tuần</option>
-                            <option>Tháng</option>
-                            <option>Năm</option>
+                        <label for="unitTimeId">Đơn vị</label>
+                        <select class="form-control" id="unitTimeId">
+                            <option value="5000" selected>Ngày</option>
+                            <option value="30000">Tuần</option>
+                            <option value="100000">Tháng</option>
+                            <option value="500000">Năm</option>
                         </select>
+                    </div>
+                    <div class="col">
+                        <label for="pricePost">Giá tiền đăng bài (đồng)</label>
+                        <input disabled type="text" id="pricePost" value="5000">
                     </div>
                 </div>
 
                 <div class="info-submit">
                     <button id="btnPostNews" type="submit" class="btn btn-primary">Đăng bài</button>
                 </div>
-
             </div>
         </form>
     </div>
@@ -206,6 +206,14 @@
             $('#btnPostNews').click(this.btnPostNewsOnClick.bind(this));
             $('#province').change(this.provinceChange.bind(this));
             $('#district').change(this.districtChange.bind(this));
+            $('#timeDisplay').change(this.timeDisplayChange.bind(this));
+            $('#unitTimeId').change(this.timeDisplayChange.bind(this));
+        }
+        timeDisplayChange() {
+            var timeDisplay = $('#timeDisplay').val();
+            var unitTimeId = $('#unitTimeId').val();
+            var pricePost = timeDisplay * unitTimeId;
+            document.getElementById("pricePost").value = pricePost;
         }
         provinceChange() {
             var url = '/' + "Home/GetDistrictList";
@@ -244,6 +252,7 @@
         }
         btnPostNewsOnClick() {
             var objPostNews = {}
+            objPostNews.title = $('#title').val();
             objPostNews.idProvince = $('#province').val();
             objPostNews.idDistrict = $('#district').val();
             objPostNews.idWard = $('#ward').val();
@@ -266,19 +275,19 @@
             objPostNews.nameBoss = $('#nameBoss').val();
             objPostNews.phoneBoss = $('#phoneBoss').val();
             objPostNews.timeDisplay = $('#timeDisplay').val();
-            objPostNews.unitTime = $('#unitTime').val();
+            objPostNews.unitTimeId = $('#unitTimeId').val();
             var content = JSON.stringify(objPostNews); // chuyen doi tuong sang json
-            debugger;
+            //debugger;
             $.ajax({
-                url: "Home/PostPostNews",
+                url: "/Home/PostNews",
                 method: "POST",
                 data: content,
                 contentType: "application/json",
                 dataType: "json"
             }).done(function (res) {
-                debugger;
+                //debugger;
             }).fail(function (res) {
-                debugger;
+                //debugger;
             })
         }
     }
