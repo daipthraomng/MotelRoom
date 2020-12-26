@@ -214,20 +214,21 @@
             var unitTimeId = $('#unitTimeId').val();
             var priceUOT = 1;
             switch (unitTimeId) {
-                case 1:
+                case "1":
                     priceUOT = 5000;
                     break;
-                case 2:
+                case "2":
                     priceUOT = 30000;
                     break
-                case 3:
+                case "3":
                     priceUOT = 100000;
                     break;
-                case 4:
+                case "4":
                     priceUOT = 500000;
                     break;
             }
-            var pricePost = timeDisplay * priceUOT ;
+            var pricePost = timeDisplay * priceUOT;
+            debugger;
             document.getElementById("pricePost").value = pricePost;
         }
         provinceChange() {

@@ -32,10 +32,8 @@ namespace MotelRoom.Models
         public int waterPrice { get; set; }
         public string? otherUtility { get; set; }
         public string? description { get; set; }
-        public string? nameBoss { get; set; }
-        public string? phoneBoss { get; set; }
         public int timeDisplay { get; set; }
-        public string unitTime { get; set; }
+        public int unitTimeId { get; set; }
         public string? statusRent { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
