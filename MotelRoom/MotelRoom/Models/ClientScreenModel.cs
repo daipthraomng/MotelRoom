@@ -10,6 +10,7 @@ namespace MotelRoom.Models
 {
     public class ClientScreenModel : BaseModel
     {
+        public RoomSummaryInfo objRoomSummary { get; set; }
         public List<RoomSummaryInfo> listRoomSummary { get; set; }
         public AddressModel objAddress { get; set; }
 
@@ -17,7 +18,9 @@ namespace MotelRoom.Models
         {
             this.listRoomSummary = new List<RoomSummaryInfo>();
             this.objAddress = new AddressModel();
+            this.objRoomSummary = new RoomSummaryInfo();
         }
+
         public void GetListRoomSummaryInfo()
         {
             var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
@@ -73,23 +76,22 @@ namespace MotelRoom.Models
                 try
                 {
                     objCmd.Parameters.AddWithValue("@publicPlaceAround", SqlDbType.NVarChar).Value = objSearchRoom.publicPlaceAround;
-                    // idprovince
-                    if (objSearchRoom.idProvince == "")
+                    if (objSearchRoom.idProvince == "" | objSearchRoom.idProvince == null)
                         objCmd.Parameters.AddWithValue("@idProvince", SqlDbType.Int).Value =  null;
                     else
                         objCmd.Parameters.AddWithValue("@idProvince", SqlDbType.Int).Value =  Int32.Parse(objSearchRoom.idProvince);
                     // iddistrict
-                    if (objSearchRoom.idDistrict == "")
+                    if (objSearchRoom.idDistrict == "" | objSearchRoom.idDistrict == null)
                         objCmd.Parameters.AddWithValue("@idDistrict", SqlDbType.Int).Value =  null;
                     else
                         objCmd.Parameters.AddWithValue("@idDistrict", SqlDbType.Int).Value = Int32.Parse(objSearchRoom.idDistrict);
                     // idWard
-                    if (objSearchRoom.idWard == "")
+                    if (objSearchRoom.idWard == "" | objSearchRoom.idWard == null)
                         objCmd.Parameters.AddWithValue("@idWard", SqlDbType.Int).Value =  null;
                     else
                         objCmd.Parameters.AddWithValue("@idWard", SqlDbType.Int).Value = Int32.Parse(objSearchRoom.idWard);
                     // idStreet
-                    if (objSearchRoom.idStreet == "")
+                    if (objSearchRoom.idStreet == "" | objSearchRoom.idStreet == null)
                         objCmd.Parameters.AddWithValue("@idStreet", SqlDbType.Int).Value =  null;
                     else
                         objCmd.Parameters.AddWithValue("@idStreet", SqlDbType.Int).Value = Int32.Parse(objSearchRoom.idStreet); 

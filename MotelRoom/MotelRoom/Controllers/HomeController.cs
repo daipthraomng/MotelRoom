@@ -216,18 +216,48 @@ namespace MotelRoom.Controllers
             return View(objListRoom);
         }
         [HttpPost]
-        public JsonResult SearchClientScreen([FromBody] SearchRoom obj)
+        public IActionResult ClientScreen([FromForm] IFormFile files)
         {
-            var listRoom = new ClientScreenModel();
-            listRoom.SearchListRoomSummary(obj);
-            listRoom.objAddress.listProvince = _context.Provinces.ToList();
-            foreach (var item in listRoom.listRoomSummary)
+            var objListRoom = new ClientScreenModel();
+            var objSearch = new SearchRoom();
+            objSearch.publicPlaceAround = HttpContext.Request.Form["publicPlaceAround"];
+            objSearch.idProvince = HttpContext.Request.Form["idProvince"];
+            objSearch.idDistrict = HttpContext.Request.Form["idDistrict"];
+            objSearch.idStreet = HttpContext.Request.Form["idStreet"];
+            objSearch.idWard = HttpContext.Request.Form["idWard"];
+            objSearch.priceMin = HttpContext.Request.Form["priceMin"];
+            objSearch.priceMax = HttpContext.Request.Form["priceMax"];
+            objSearch.typeRoom = HttpContext.Request.Form["typeRoom"];
+            var area = HttpContext.Request.Form["area"][0].Split(',');
+            objSearch.areaMin = area[0];
+            objSearch.areaMax = area[1];
+            objSearch.bathroom = HttpContext.Request.Form["bathroom"];
+            objSearch.heater = HttpContext.Request.Form["heater"];
+            objSearch.kitchen = HttpContext.Request.Form["kitchen"];
+            objSearch.airCondition = HttpContext.Request.Form["airCondition"];
+            objSearch.balcony = HttpContext.Request.Form["balcony"];
+            objListRoom.SearchListRoomSummary(objSearch);
+            objListRoom.objAddress.listProvince = _context.Provinces.ToList();
+            foreach (var item in objListRoom.listRoomSummary)
             {
                 string imageBase64Data = Convert.ToBase64String(item.image);
                 item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
             }
-            return new JsonResult(listRoom);
+            return View(objListRoom);
         }
+        //[HttpPost]
+        //public IActionResult SearchClientScreen([FromBody] SearchRoom obj)
+        //{
+        //    var listRoom = new ClientScreenModel();
+        //    listRoom.SearchListRoomSummary(obj);
+        //    listRoom.objAddress.listProvince = _context.Provinces.ToList();
+        //    foreach (var item in listRoom.listRoomSummary)
+        //    {
+        //        string imageBase64Data = Convert.ToBase64String(item.image);
+        //        item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        //    }
+        //    return View(listRoom);
+        //}
         //[Authorize(Roles ="Admin")]
         public IActionResult AdminScreen()
         {

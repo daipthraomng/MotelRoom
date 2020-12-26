@@ -21,6 +21,7 @@ namespace MotelRoom.Context
         public DbSet<Street> Streets { get; set; }
         public DbSet<Ward> Wards { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Message> Messages { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Province>().ToTable("Province");
@@ -28,6 +29,7 @@ namespace MotelRoom.Context
             modelBuilder.Entity<Street>().ToTable("Street");
             modelBuilder.Entity<Ward>().ToTable("Ward");
             modelBuilder.Entity<Room>().ToTable("Room");
+            modelBuilder.Entity<Message>().ToTable("Message");
         }
     }
 }

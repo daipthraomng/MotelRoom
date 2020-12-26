@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Client Screen";
-    Layout = "_Layout2";
+    Layout = "_LayoutClientHome";
 }
 @model ClientScreenModel;
 
@@ -52,94 +52,76 @@
     }
 </script>
 
-@*<form class="container-fluid row">*@
-<input class="form-control" id="publicPlaceAround" type="text" value="" placeholder="Khu vực (gần trường đại học, bệnh viện,...)">
-<div class="form-row">
-    <select id="province" class="form-control col" asp-for="@Model.objAddress.ID" asp-items="@(new SelectList(Model.objAddress.listProvince,"idProvince","name"))">
-        <option value="1">Tỉnh/Thành phố</option>
-    </select>
-    <select id="district" class="form-control col" asp-for="@Model.objAddress.ID" asp-items="@(new SelectList(Model.objAddress.listDistrict,"idDistrict","name"))">
-        <option value="">Huyện/Quận</option>
-    </select>
-    <select id="ward" class="form-control col" asp-for="@Model.objAddress.ID" asp-items="@(new SelectList(Model.objAddress.listWard,"idWard","name"))">
-        <option value="">Xã/Phường/Thị Trấn</option>
-    </select>
-    <select id="street" class="form-control col" asp-for="@Model.objAddress.ID" asp-items="@(new SelectList(Model.objAddress.listStreet,"idStreet","name"))">
-        <option value="">Đường</option>
-    </select>
-</div>
-<div class="form-row">
-    <label for="priceMin">Giá thấp nhất</label>
-    <input class="form-control col" type="number" id="priceMin" name="priceMin" value="0">
-    <label for="priceMax">Giá cao nhất</label>
-    <input class="form-control col" type="number" id="priceMax" name="priceMax" value="10000000">
-</div>
-<div class="form-row">
-    <select class="form-control col" id="typeRoom">
-        <option selected value="">Loại phòng</option>
-        <option value="Phòng trọ">Phòng trọ</option>
-        <option value="Chung cư mini">Chung cư mini</option>
-        <option value="Nhà nguyên căn">Nhà nguyên căn</option>
-        <option value="Chung cư nguyên căn">Chung cư nguyên căn</option>
-    </select>
-    <select class="form-control col" id="area">
-        <option selected value='0,30'>Diện tích</option>
-        <option value='0,10'>Nhỏ hơn 10m2</option>
-        <option value='10,20'>10-20m2</option>
-        <option value='20,30'>20-30m2</option>
-        <option value='30,200'>Lớn hơn 30m2</option>
-    </select>
-    <select class="form-control col" id="bathroom">
-        <option selected value="">Phòng tắm</option>
-        <option value="Khép kín">Khép kín</option>
-        <option value="Chung chủ">Chung chủ</option>
-    </select>
-    <select class="form-control col" id="heater">
-        <option selected value="">Nóng lạnh</option>
-        <option value="yes">Có</option>
-        <option value="no">Không</option>
-    </select>
-    <select class="form-control col" id="kitchen">
-        <option selected value="">Phòng bếp</option>
-        <option value="Khu bếp riêng">Khu bếp riêng</option>
-        <option value="Khu bếp chung">Khu bếp chung</option>
-        <option value="Không nấu ăn">Không nấu ăn</option>
-    </select>
-    <select class="form-control col" id="airCondition">
-        <option selected value="">Điều hòa</option>
-        <option value="yes">Có</option>
-        <option value="no">Không</option>
-    </select>
-    <select class="form-control col" id="balcony">
-        <option selected value="">Ban công</option>
-        <option value="yes">Có</option>
-        <option value="no">Không</option>
-    </select>
-</div>
-@*<div class="col">
-        <div class="selectBox" onclick="showCheckboxes()">
-            <select>
-                <option>Mở rộng</option>
-            </select>
-            <div class="overSelect"></div>
-        </div>
-        <div id="checkboxes" style="position:fixed; z-index:10; background:white">
-            <label for="ac">
-                <input type="checkbox" id="ac" />Điều hòa
-            </label>
-            <label for="heater">
-                <input type="checkbox" id="heater" />Nóng lạnh
-            </label>
-            <label for="balcony">
-                <input type="checkbox" id="balcony" />Ban công
-            </label>
-        </div>
-    </div>*@
-<button id="btnSearch" class="btn btn-primary">Tìm kiếm</button>
-@*</form>*@
+@using (Html.BeginForm("ClientScreen", "Home"))
+{
+    <input class="form-control" name="publicPlaceAround" id="publicPlaceAround" type="text" value="" placeholder="Khu vực (gần trường đại học, bệnh viện,...)">
+    <div class="form-row">
+        <select id="province" name="province" class="form-control col" asp-for="@Model.objAddress.ID" asp-items="@(new SelectList(Model.objAddress.listProvince,"idProvince","name"))">
+            <option value="1">Tỉnh/Thành phố</option>
+        </select>
+        <select id="district" name="district" class="form-control col" asp-for="@Model.objAddress.ID" asp-items="@(new SelectList(Model.objAddress.listDistrict,"idDistrict","name"))">
+            <option value="">Huyện/Quận</option>
+        </select>
+        <select id="ward" name="ward" class="form-control col" asp-for="@Model.objAddress.ID" asp-items="@(new SelectList(Model.objAddress.listWard,"idWard","name"))">
+            <option value="">Xã/Phường/Thị Trấn</option>
+        </select>
+        <select name="street" id="street" class="form-control col" asp-for="@Model.objAddress.ID" asp-items="@(new SelectList(Model.objAddress.listStreet,"idStreet","name"))">
+            <option value="">Đường</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="priceMin">Giá thấp nhất</label>
+        <input class="form-control col" type="number" id="priceMin" name="priceMin" value="0">
+        <label for="priceMax">Giá cao nhất</label>
+        <input class="form-control col" type="number" id="priceMax" name="priceMax" value="10000000">
+    </div>
+    <div class="form-row">
+        <select class="form-control col" name="typeRoom" id="typeRoom">
+            <option selected value="">Loại phòng</option>
+            <option value="Phòng trọ">Phòng trọ</option>
+            <option value="Chung cư mini">Chung cư mini</option>
+            <option value="Nhà nguyên căn">Nhà nguyên căn</option>
+            <option value="Chung cư nguyên căn">Chung cư nguyên căn</option>
+        </select>
+        <select class="form-control col" name="area" id="area">
+            <option selected value='0,30'>Diện tích</option>
+            <option value='0,10'>Nhỏ hơn 10m2</option>
+            <option value='10,20'>10-20m2</option>
+            <option value='20,30'>20-30m2</option>
+            <option value='30,200'>Lớn hơn 30m2</option>
+        </select>
+        <select class="form-control col" name="bathroom" id="bathroom">
+            <option selected value="">Phòng tắm</option>
+            <option value="Khép kín">Khép kín</option>
+            <option value="Chung chủ">Chung chủ</option>
+        </select>
+        <select class="form-control col" name="heater" id="heater">
+            <option selected value="">Nóng lạnh</option>
+            <option value="yes">Có</option>
+            <option value="no">Không</option>
+        </select>
+        <select class="form-control col" name="kitchen" id="kitchen">
+            <option selected value="">Phòng bếp</option>
+            <option value="Khu bếp riêng">Khu bếp riêng</option>
+            <option value="Khu bếp chung">Khu bếp chung</option>
+            <option value="Không nấu ăn">Không nấu ăn</option>
+        </select>
+        <select class="form-control col" name="airCondition" id="airCondition">
+            <option selected value="">Điều hòa</option>
+            <option value="yes">Có</option>
+            <option value="no">Không</option>
+        </select>
+        <select class="form-control col" name="balcony" id="balcony">
+            <option selected value="">Ban công</option>
+            <option value="yes">Có</option>
+            <option value="no">Không</option>
+        </select>
+    </div>
+    <button type="submit" id="btnSearch" class="btn btn-primary">Tìm kiếm</button>
+}
 
 <div class="container">
-    <h3>Cho thuê nhà trọ, phòng trọ tại Việt Nam</h3>
+    <h3>Cho thuê nhà trọ, phòng trọ tại Việt Nam CliENTSCREEN</h3>
     @foreach (var item in Model.listRoomSummary)
     {
         <div class="card m-2">
@@ -164,6 +146,7 @@
     }
 </div>
 
+<div id="divResult"></div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -178,7 +161,7 @@
         }
 
         initEvents() {
-            $('#btnSearch').click(this.btnSearchOnClick.bind(this));
+            //$('#btnSearch').click(this.btnSearchOnClick.bind(this));
             $('#province').change(this.provinceChange.bind(this));
             $('#district').change(this.districtChange.bind(this));
         }
@@ -238,14 +221,15 @@
             var content = JSON.stringify(objSearchRoom); // chuyen doi tuong sang json
             //debugger;
             $.ajax({
-                url: "/Home/ClientScreen",
+                url: "/Home/SearchClientScreen",
                 method: "POST",
                 data: content,
                 contentType: "application/json",
                 dataType: "json"
-            }).done(function (res) {
+            }).done(function (data) {
+                window.location.href = '@Url.Action("SearchClientScreen", "Home")';
                 //debugger;
-            }).fail(function (res) {
+            }).fail(function (data) {
                 //debugger;
             })
         }
