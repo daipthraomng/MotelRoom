@@ -221,10 +221,10 @@ namespace MotelRoom.Controllers
             var objListRoom = new ClientScreenModel();
             var objSearch = new SearchRoom();
             objSearch.publicPlaceAround = HttpContext.Request.Form["publicPlaceAround"];
-            objSearch.idProvince = HttpContext.Request.Form["idProvince"];
-            objSearch.idDistrict = HttpContext.Request.Form["idDistrict"];
-            objSearch.idStreet = HttpContext.Request.Form["idStreet"];
-            objSearch.idWard = HttpContext.Request.Form["idWard"];
+            objSearch.idProvince = HttpContext.Request.Form["province"];
+            objSearch.idDistrict = HttpContext.Request.Form["district"];
+            objSearch.idStreet = HttpContext.Request.Form["street"];
+            objSearch.idWard = HttpContext.Request.Form["ward"];
             objSearch.priceMin = HttpContext.Request.Form["priceMin"];
             objSearch.priceMax = HttpContext.Request.Form["priceMax"];
             objSearch.typeRoom = HttpContext.Request.Form["typeRoom"];
