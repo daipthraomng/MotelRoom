@@ -261,7 +261,28 @@ namespace MotelRoom.Controllers
         //[Authorize(Roles ="Admin")]
         public IActionResult AdminScreen()
         {
-            return View();
+            var admin = new AdminModel();
+            admin.GetListOwnerChecked();
+            admin.GetListOwnerNotChecked();
+            admin.GetListPostChecked();
+            admin.GetListPostNotChecked();
+            admin.GetListPostDenied();
+            foreach (var item in admin.listPostChecked)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            foreach (var item in admin.listPostNotChecked)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            foreach (var item in admin.listPostDenied)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            return View(admin);
         }
         //[Authorize(Roles = "Admin")]
         public IActionResult AdminCheckedMotel()

@@ -2,26 +2,29 @@
     ViewData["Title"] = "Screen For Admin";
     Layout = "_Layout3";
 }
+@model AdminModel;
 <h3>Màn hình của admin</h3>
 <div class="row">
     <div class="col-sm-6">
         <div class="card">
             <div class="card-header">
-                <h5>Danh sách chủ trọ đăng ký</h5>
+                <h5>Danh sách chủ trọ chưa phê duyệt</h5>
             </div>
             <div class="card-body" style="height:200px; overflow-y:scroll">
-                @for (int i = 0; i < 10; i++)
+                @foreach(var obj in Model.listOwnerNotChecked)
                 {
-                    <div class="border-bottom mb-2">
-                        <div style="cursor:pointer" data-toggle="modal" data-target="#pendingHost">
-                            HostName <span style="margin-left:10px"><small class="text-muted">Cầu Giấy, Hà Nội</small></span>
-                        </div>
-                        <div class="contact-infor">
-                            <span class="text-muted">0328965801</span>
-                            <span style="cursor:pointer; margin-left:10px; color:gray" class="fas fa-envelope" onclick="openForm()"></span>
-                        </div>
-
+                <div class="border-bottom mb-2">
+                    <div style="cursor:pointer" data-toggle="modal" data-target="#pendingHost">
+                        @obj.FullName <span style="margin-left:10px"><small class="text-muted">@obj.Address</small></span>
                     </div>
+                    <div style="cursor:pointer" data-toggle="modal" data-target="#pendingHost">
+                        @obj.Email <span style="margin-left:10px"><small class="text-muted">@obj.PersonNo</small></span>
+                    </div>
+                    <div class="contact-infor">
+                        <span class="text-muted">@obj.PhoneNumber</span>
+                        <span style="cursor:pointer; margin-left:10px; color:gray" class="fas fa-envelope" onclick="openForm()"></span>
+                    </div>
+                </div>
                 }
             </div>
         </div>
@@ -32,17 +35,19 @@
                 <h5>Danh sách chủ trọ đã được phê duyệt</h5>
             </div>
             <div class="card-body" style="height:200px; overflow-y:scroll">
-                @for (int i = 0; i < 4; i++)
+                @foreach (var obj in Model.listOwnerChecked)
                 {
                     <div class="border-bottom mb-2">
-                        <div style="cursor:pointer" data-toggle="modal" data-target="#checkedHost">
-                            HostName <span style="margin-left:10px"><small class="text-muted">Cầu Giấy, Hà Nội</small></span>
+                        <div style="cursor:pointer" data-toggle="modal" data-target="#pendingHost">
+                            @obj.FullName <span style="margin-left:10px"><small class="text-muted">@obj.Address</small></span>
+                        </div>
+                        <div style="cursor:pointer" data-toggle="modal" data-target="#pendingHost">
+                            @obj.Email <span style="margin-left:10px"><small class="text-muted">@obj.PersonNo</small></span>
                         </div>
                         <div class="contact-infor">
-                            <span class="text-muted">0328965801</span>
+                            <span class="text-muted">@obj.PhoneNumber</span>
                             <span style="cursor:pointer; margin-left:10px; color:gray" class="fas fa-envelope" onclick="openForm()"></span>
                         </div>
-
                     </div>
                 }
             </div>
@@ -52,41 +57,86 @@
 
 <h4 class="mt-3">Các bài đăng đang chờ duyệt</h4>
 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 scrollable" style="overflow-x:auto">
-    @for (int i = 0; i < 5; i++)
+    @*@for (int i = 0; i < 5; i++)
+        {
+            <div class="col-md-4">
+                <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
+                    @{
+                        await Html.RenderPartialAsync("_HorizontalCard");
+                    }
+                </a>
+            </div>
+        }*@
+    @foreach (var item in Model.listPostNotChecked)
     {
-        <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
-                @{
-                    await Html.RenderPartialAsync("_HorizontalCard");
-                }
+        <div class="card m-2">
+            <a class="card-block stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="RoomInfo" asp-route-idRoom="@item.idRoom">
+                <div class="row">
+                    <div class="product-image"><img src="@item.srcImage" style="height:110px; width:110px" /></div>
+                    <div class="col">
+                        <div class="product-title">
+                            <strong>@item.title</strong>
+                        </div>
+                        <div class="d-flex">
+                            <div class="mr-3 product-price font-weight-bold">@item.price đồng/tháng</div>
+                            <div class="mr-3 product-area">@item.area m2</div>
+                            <div class="product-location">@item.streetName,@item.wardName,@item.districtName,@item.provinceName</div>
+                        </div>
+                        <div class="product-content text-muted">@item.description</div>
+                        <div class="product-update-time text-muted">@item.numberDayPosted</div>
+                    </div>
+                </div>
             </a>
         </div>
     }
 </div>
 <h4 class="mt-3">Các bài đăng đã được duyệt</h4>
 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
-    @for (int i = 0; i < 5; i++)
+    @foreach (var item in Model.listPostChecked)
     {
-        <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminCheckedMotel">
-                @{
-                    await Html.RenderPartialAsync("_HorizontalCard");
-                }
+        <div class="card m-2">
+            <a class="card-block stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="RoomInfo" asp-route-idRoom="@item.idRoom">
+                <div class="row">
+                    <div class="product-image"><img src="@item.srcImage" style="height:110px; width:110px" /></div>
+                    <div class="col">
+                        <div class="product-title">
+                            <strong>@item.title</strong>
+                        </div>
+                        <div class="d-flex">
+                            <div class="mr-3 product-price font-weight-bold">@item.price đồng/tháng</div>
+                            <div class="mr-3 product-area">@item.area m2</div>
+                            <div class="product-location">@item.streetName,@item.wardName,@item.districtName,@item.provinceName</div>
+                        </div>
+                        <div class="product-content text-muted">@item.description</div>
+                        <div class="product-update-time text-muted">@item.numberDayPosted</div>
+                    </div>
+                </div>
             </a>
         </div>
     }
 </div>
 
-<h4 class="mt-3">Các bài đăng không được duyệt</h4>
+<h4 class="mt-3">Các bài đăng bị từ chối</h4>
 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
-
-    @for (int i = 0; i < 5; i++)
+    @foreach (var item in Model.listPostDenied)
     {
-        <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminRejectedMotel">
-                @{
-                    await Html.RenderPartialAsync("_HorizontalCard");
-                }
+        <div class="card m-2">
+            <a class="card-block stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="RoomInfo" asp-route-idRoom="@item.idRoom">
+                <div class="row">
+                    <div class="product-image"><img src="@item.srcImage" style="height:110px; width:110px" /></div>
+                    <div class="col">
+                        <div class="product-title">
+                            <strong>@item.title</strong>
+                        </div>
+                        <div class="d-flex">
+                            <div class="mr-3 product-price font-weight-bold">@item.price đồng/tháng</div>
+                            <div class="mr-3 product-area">@item.area m2</div>
+                            <div class="product-location">@item.streetName,@item.wardName,@item.districtName,@item.provinceName</div>
+                        </div>
+                        <div class="product-content text-muted">@item.description</div>
+                        <div class="product-update-time text-muted">@item.numberDayPosted</div>
+                    </div>
+                </div>
             </a>
         </div>
     }
