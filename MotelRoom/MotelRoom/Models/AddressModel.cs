@@ -16,6 +16,10 @@ namespace MotelRoom.Models
         public List<District> listDistrict { get; set; }
         public List<Ward> listWard { get; set; }
         public List<Street> listStreet { get; set; }
+        public string province { get; set; }
+        public string district { get; set; }
+        public string ward { get; set; }
+        public string street { get; set; }
 
         public AddressModel()
         {
@@ -24,6 +28,10 @@ namespace MotelRoom.Models
             this.listDistrict = new List<District>();
             this.listWard = new List<Ward>();
             this.listStreet = new List<Street>();
+            this.province = "consPro";
+            this.district = "consdistrict";
+            this.ward = "consward";
+            this.street = "consstreet";
         }
         public void GetListProvince()
         {

@@ -25,6 +25,7 @@ namespace MotelRoom.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        public List<Message> listMessage { get; set; }
         private readonly UserManager<AppUser> _userManager;
         public static int idRoom = 5;
         private readonly ILogger<HomeController> _logger;
@@ -36,12 +37,9 @@ namespace MotelRoom.Controllers
         {
             _userManager = userManager;
             _logger = logger;
-            listMotels = new List<Motel>()
-            {
-               new Motel() { MotelID = 101, MotelAvatarImg = "James", MotelTitle = "PHÒNG SẠCH, MỚI, YÊN TĨNH PHÙ HỢP VỚI EDITOR, DIGITAL MARKETING", MotelPrice = "111USD", MotelLocation = "HoTungMau", MotelContent = "PhuHopOffice", MotelUpdateTime = "1-1-2020" },
-               new Motel() { MotelID = 102, MotelAvatarImg = "James", MotelTitle = "Vip2", MotelPrice = "222USD", MotelLocation = "XuanThuy", MotelContent = "PhuHopOffice", MotelUpdateTime = "1-1-2020" },
-               new Motel() { MotelID = 103, MotelAvatarImg = "James", MotelTitle = "Vip3", MotelPrice = "222USD", MotelLocation = "CauGiay", MotelContent = "PhuHopOffice", MotelUpdateTime = "1-1-2020" }
-            };
+            listMessage = new List<Message>();
+            listMotels = new List<Motel>();
+            this.ViewData["_ChatBoxPartial"] = this.listMessage;
 
             _imageRoomService = imageRoomService;
             _context = context;
@@ -82,6 +80,14 @@ namespace MotelRoom.Controllers
             var listRoom = _context.Rooms.ToList();
             roomInfoModel.objRoom = listRoom.Where(x => x.idRoom == idRoom).ToList()[0];
             roomInfoModel.listImageRoom = _context.ImageRooms.ToList().Where(x => x.idRoom == idRoom).ToList();
+            var idProvince = roomInfoModel.objRoom.idProvince;
+            roomInfoModel.address.province = _context.Provinces.Where(x => x.idProvince == idProvince).ToList()[0].name;
+            var idDistrict = roomInfoModel.objRoom.idDistrict;
+            roomInfoModel.address.district = _context.Districts.Where(x => x.idDistrict == idDistrict).ToList()[0].name;
+            var idWard = roomInfoModel.objRoom.idWard;
+            roomInfoModel.address.ward = _context.Wards.Where(x => x.idWard == idWard).ToList()[0].name;
+            var idStreet = roomInfoModel.objRoom.idStreet;
+            roomInfoModel.address.street = _context.Streets.Where(x => x.idStreet == idStreet).ToList()[0].name;
             return View(roomInfoModel);
         }
         public IActionResult ImageRoom()
@@ -210,25 +216,18 @@ namespace MotelRoom.Controllers
             return View(objListRoom);
         }
         [HttpPost]
-        public IActionResult ClientScreen([FromBody] SearchRoom obj)
+        public JsonResult SearchClientScreen([FromBody] SearchRoom obj)
         {
-            var objListRoom = new ClientScreenModel();
-            objListRoom.SearchListRoomSummary(obj);
-            objListRoom.objAddress.listProvince = _context.Provinces.ToList();
-            foreach (var item in objListRoom.listRoomSummary)
+            var listRoom = new ClientScreenModel();
+            listRoom.SearchListRoomSummary(obj);
+            listRoom.objAddress.listProvince = _context.Provinces.ToList();
+            foreach (var item in listRoom.listRoomSummary)
             {
                 string imageBase64Data = Convert.ToBase64String(item.image);
                 item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
             }
-            return View(objListRoom);
+            return new JsonResult(listRoom);
         }
-        //[HttpGet]
-        //public JsonResult ClientScreen([FromBody] SearchRoom obj)
-        //{
-        //    ClientScreenModel objSearchRoom = new ClientScreenModel();
-        //    objSearchRoom.SearchListRoomSummary(obj);
-        //    return obj;
-        //}
         //[Authorize(Roles ="Admin")]
         public IActionResult AdminScreen()
         {
