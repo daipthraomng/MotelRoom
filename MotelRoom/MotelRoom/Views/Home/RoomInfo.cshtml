@@ -70,6 +70,7 @@
             x.style.color = "black";
         } else {
             x.style.color = "red";
+            alert("Thêm vào danh sách yêu thích thành công");
         }
     }
 </script>
@@ -101,7 +102,7 @@
 <div class="card-body">
     @*@Model.address.province/ district/ward/street*@
     <h4><b>PHÒNG MK HOME RẺ, SẠCH ĐẸP, AN NINH NGAY CHỢ, CÔNG VIÊN, KHU TRUNG TÂM. GIÁ 3,3TR/TH</b></h4>
-    <div class="text-muted">159/9 Đường Bạch Đằng, Phường 2, Tân Bình, Hồ Chí Minh</div>
+    <div class="text-muted">@Model.address.street, @Model.address.ward, @Model.address.district, @Model.address.province</div>
 </div>
 
 <div class="card-body m-2 border-top">

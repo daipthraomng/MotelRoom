@@ -245,6 +245,11 @@ namespace MotelRoom.Controllers
             }
             return View(objListRoom);
         }
+
+        public IActionResult ClientFavouriteMotel()
+        {
+            return View();
+        }
         //[HttpPost]
         //public IActionResult SearchClientScreen([FromBody] SearchRoom obj)
         //{
