@@ -53,15 +53,15 @@ namespace MotelRoom.Areas.Identity.Pages.Account
             [DataType(DataType.Text)]
             [Display(Name = "Bạn có phòng trọ muốn đăng?")]
             public string Role { get; set; }
-            [Required]
+            [Required(ErrorMessage = "Tên không được để trống")]
             [DataType(DataType.Text)]
             [Display(Name = "Tên")]
             public string FirstName { get; set; }
-            [Required]
+            [Required(ErrorMessage = "Tài khoản không được để trống")]
             [DataType(DataType.Text)]
             [Display(Name = "Tài khoản")]
             public string UserName { get; set; }
-            [Required]
+            [Required(ErrorMessage = "Họ không được để trống")]
             [DataType(DataType.Text)]
             [Display(Name = "Họ")]
             public string LastName { get; set; }
@@ -82,12 +82,13 @@ namespace MotelRoom.Areas.Identity.Pages.Account
             [Display(Name = "Số điện thoại")]
             public string PhoneNumber { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Mật khẩu không được để trống")]
             [StringLength(100, ErrorMessage = "Mật khẩu phải chứa ít nhất 6 ký tự", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Mật khẩu")]
             public string Password { get; set; }
 
+            [Required(ErrorMessage = "Mật khẩu không được để trống")]
             [DataType(DataType.Password)]
             [Display(Name = "Xác nhận mật khẩu")]
             [Compare("Password", ErrorMessage = "Xác nhận mật khẩu sai")]

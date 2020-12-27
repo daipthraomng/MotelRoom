@@ -36,7 +36,7 @@ namespace MotelRoom.Models
 
                 try
                 {
-
+                    
                     // Open connection
                     objConnect.Open();
                     //Get data from database

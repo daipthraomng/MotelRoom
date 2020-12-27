@@ -46,18 +46,16 @@ namespace MotelRoom.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            //[Required (ErrorMessage = "Không để trống")]
-            //[EmailAddress]
-            //public string Email { get; set; }
-            [Required(ErrorMessage = "Không để trống")]
+            [Display(Name = "Tài khoản")]
+            [Required(ErrorMessage = "Tài khoản không được để trống")]
             [DataType(DataType.Text)]
             public string UserName { get; set; }
-
-            [Required(ErrorMessage = "Không để trống")]
+            [Display(Name = "Mật khẩu")]
+            [Required(ErrorMessage = "Mật khẩu không được để trống")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Nhớ mật khẩu")]
             public bool RememberMe { get; set; }
         }
 
@@ -126,7 +124,7 @@ namespace MotelRoom.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Đăng nhập thất bại, tài khoản hoặc mật khẩu không đúng");
                     return Page();
                 }
             }
