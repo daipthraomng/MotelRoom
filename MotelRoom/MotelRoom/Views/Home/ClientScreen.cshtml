@@ -21,8 +21,7 @@
                 <div class="row">
                     <div class="col-md-12 mb-2">
                         <div class="form-group">
-                            <label for="Type">Khu vực</label>
-                            <input type="text" class="form-control" placeholder="Khu vực (gần trường đại học, bệnh viện,...)" name="publicPlaceAround" id="publicPlaceAround">
+                            <input class="form-control" name="publicPlaceAround" id="publicPlaceAround" type="text" value="" placeholder="Khu vực (gần trường đại học, bệnh viện,...)">
                         </div>
                     </div>
                     <div class="col-md-3 mb-2">
@@ -101,35 +100,26 @@
                     </div>
                     <div class="col-md-6 mb-2">
                         <div class="form-group">
-                            <select class="form-control col" name="kitchen" id="kitchen">
-                                <option value="Khu bếp riêng">Khu bếp riêng</option>
-                                <option value="Khu bếp chung">Khu bếp chung</option>
-                                <option value="Không nấu ăn">Không nấu ăn</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <div class="form-group">
-                            <select class="form-control col" name="bathroom" id="bathroom">
-                                <option selected value="">Phòng tắm</option>
-                                <option value="Khép kín">Khép kín</option>
-                                <option value="Chung chủ">Chung chủ</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <div class="form-group">
-                            <select class="form-control col" name="airCondition" id="airCondition">
-                                <option selected value="">Điều hòa</option>
+                            <select class="form-control col" name="heater" id="heater">
+                                <option selected value="">Nóng lạnh</option>
                                 <option value="yes">Có</option>
                                 <option value="no">Không</option>
                             </select>
                         </div>
                     </div>
+
+                    <div class="col-md-6 mb-2">
+                        <select class="form-control col" name="kitchen" id="kitchen">
+                            <option selected value="">Phòng bếp</option>
+                            <option value="Khu bếp riêng">Khu bếp riêng</option>
+                            <option value="Khu bếp chung">Khu bếp chung</option>
+                            <option value="Không nấu ăn">Không nấu ăn</option>
+                        </select>
+                    </div>
                     <div class="col-md-6 mb-2">
                         <div class="form-group">
-                            <select class="form-control col" name="heater" id="heater">
-                                <option selected value="">Nóng lạnh</option>
+                            <select class="form-control col" name="airCondition" id="airCondition">
+                                <option selected value="">Điều hòa</option>
                                 <option value="yes">Có</option>
                                 <option value="no">Không</option>
                             </select>
@@ -145,7 +135,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-b" id="btnSearch">Tìm kiếm</button>
+                        <button type="submit" id="btnSearch" class="btn btn-b">Tìm kiếm</button>
                     </div>
                 </div>
             </form>
