@@ -28,13 +28,13 @@
                         @foreach (var obj in Model.listOwnerNotChecked)
                         {
                             <tr>
-                                <td  scope="row">@obj.UserName</td>
-                                <td  scope="row">@obj.FullName</td>
-                                <td  scope="row">@obj.PhoneNumber</td>
-                                <td  scope="row">@obj.PersonNo</td>
-                                <td  scope="row">@obj.Address</td>
-                                <td  scope="row">@obj.Email</td>
-                                <td  scope="row">
+                                <td scope="row">@obj.UserName</td>
+                                <td scope="row">@obj.FullName</td>
+                                <td scope="row">@obj.PhoneNumber</td>
+                                <td scope="row">@obj.PersonNo</td>
+                                <td scope="row">@obj.Address</td>
+                                <td scope="row">@obj.Email</td>
+                                <td scope="row">
                                     <button style="cursor:pointer" class="btn btn-success" id="acceptOwner" onclick='acceptOwner("@obj.UserId")'>Duyệt</button>
                                     <button style="cursor:pointer" class="btn btn-danger" id="deleteOwner" onclick='deleteOwner("@obj.UserId")'>Xóa</button>
                                 </td>
@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 <div class="row">
     <div class="col-sm-12">
@@ -70,21 +70,21 @@
                     <tbody>
                         @foreach (var obj in Model.listOwnerChecked)
                         {
-                        <tr>
-                            <td scope="row">@obj.UserName</td>
-                            <td scope="row">@obj.FullName</td>
-                            <td scope="row">@obj.PhoneNumber</td>
-                            <td scope="row">@obj.PersonNo</td>
-                            <td scope="row">@obj.Address</td>
-                            <td scope="row">@obj.Email</td>
-                            <td scope="row">
-                                <button style="cursor:pointer" class="btn btn-danger" id="deleteOwner" onclick='deleteOwner("@obj.UserId")'>Xóa</button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td scope="row">@obj.UserName</td>
+                                <td scope="row">@obj.FullName</td>
+                                <td scope="row">@obj.PhoneNumber</td>
+                                <td scope="row">@obj.PersonNo</td>
+                                <td scope="row">@obj.Address</td>
+                                <td scope="row">@obj.Email</td>
+                                <td scope="row">
+                                    <button style="cursor:pointer" class="btn btn-danger" id="deleteOwner" onclick='deleteOwner("@obj.UserId")'>Xóa</button>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
-                
+
             </div>
         </div>
     </div>
@@ -93,26 +93,26 @@
 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 scrollable" style="overflow-x:auto">
     @foreach (var item in Model.listPostNotChecked)
     {
-    <div class="col-md-4">
-        <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
-            @{
-                await Html.RenderPartialAsync("_HorizontalCard", item);
-            }
-        </a>
-    </div>
+        <div class="col-md-4">
+            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
+                @{
+                    await Html.RenderPartialAsync("_HorizontalCard", item);
+                }
+            </a>
+        </div>
     }
 </div>
 <h4 class="mt-3">Các bài đăng đã được duyệt</h4>
 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
     @foreach (var item in Model.listPostChecked)
     {
-    <div class="col-md-4">
-        <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
-            @{
-                await Html.RenderPartialAsync("_HorizontalCard", item);
-            }
-        </a>
-    </div>
+        <div class="col-md-4">
+            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
+                @{
+                    await Html.RenderPartialAsync("_HorizontalCard", item);
+                }
+            </a>
+        </div>
     }
 </div>
 
@@ -120,13 +120,13 @@
 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
     @foreach (var item in Model.listPostDenied)
     {
-    <div class="col-md-4">
-        <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
-            @{
-                await Html.RenderPartialAsync("_HorizontalCard", item);
-            }
-        </a>
-    </div>
+        <div class="col-md-4">
+            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
+                @{
+                    await Html.RenderPartialAsync("_HorizontalCard", item);
+                }
+            </a>
+        </div>
     }
 </div>
 
@@ -137,56 +137,57 @@
     <div>Truy cập nhiều nhất vào: 12/12/2020</div>
 </p>
 
+@{ await Html.RenderPartialAsync("_ChatBoxPartial"); }
+
 
 <!-- Xem thong tin cac host dang duoc duyet va da duoc duyet-->
-
 @*<div class="modal fade" id="pendingHost" tabindex="-1" role="dialog" aria-labelledby="pendingHostLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pendingHostLabel">Thông tin</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group"> <label for="name">Tên</label> <input disabled type="text" class="form-control" id="name" placeholder="Do Quang Anh" readonly> </div>
-                <div class="form-group"> <label for="cmnd">CMND</label> <input disabled type="text" class="form-control" id="cmnd" placeholder="0123" readonly> </div>
-                <div class="form-group"> <label for="address">Địa chỉ</label> <input disabled type="text" class="form-control" id="address" placeholder="Ha Noi" readonly> </div>
-                <div class="form-group"> <label for="phone">Điện thoại</label> <input disabled type="number" class="form-control" id="phone" placeholder="123" readonly> </div>
-                <div class="form-group"> <label for="email">Email</label> <input disabled type="email" class="form-control" id="email" placeholder="anhdq@gmail.com" readonly> </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Phê duyệt</button>
-                <button type="button" class="btn btn-primary">Xóa</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pendingHostLabel">Thông tin</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"> <label for="name">Tên</label> <input disabled type="text" class="form-control" id="name" placeholder="Do Quang Anh" readonly> </div>
+                    <div class="form-group"> <label for="cmnd">CMND</label> <input disabled type="text" class="form-control" id="cmnd" placeholder="0123" readonly> </div>
+                    <div class="form-group"> <label for="address">Địa chỉ</label> <input disabled type="text" class="form-control" id="address" placeholder="Ha Noi" readonly> </div>
+                    <div class="form-group"> <label for="phone">Điện thoại</label> <input disabled type="number" class="form-control" id="phone" placeholder="123" readonly> </div>
+                    <div class="form-group"> <label for="email">Email</label> <input disabled type="email" class="form-control" id="email" placeholder="anhdq@gmail.com" readonly> </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Phê duyệt</button>
+                    <button type="button" class="btn btn-primary">Xóa</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 
 @*<div class="modal fade" id="checkedHost" tabindex="-1" role="dialog" aria-labelledby="checkedHostLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="checkedHostLabel">Thông tin</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group"> <label for="name">Tên</label> <input type="text" class="form-control" id="name" placeholder="Do Quang Anh" readonly> </div>
-                <div class="form-group"> <label for="cmnd">CMND</label> <input type="text" class="form-control" id="cmnd" placeholder="0123" readonly> </div>
-                <div class="form-group"> <label for="address">Địa chỉ</label> <input type="text" class="form-control" id="address" placeholder="Ha Noi" readonly> </div>
-                <div class="form-group"> <label for="phone">Điện thoại</label> <input type="number" class="form-control" id="phone" placeholder="123" readonly> </div>
-                <div class="form-group"> <label for="email">Email</label> <input type="email" class="form-control" id="email" placeholder="anhdq@gmail.com" readonly> </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkedHostLabel">Thông tin</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"> <label for="name">Tên</label> <input type="text" class="form-control" id="name" placeholder="Do Quang Anh" readonly> </div>
+                    <div class="form-group"> <label for="cmnd">CMND</label> <input type="text" class="form-control" id="cmnd" placeholder="0123" readonly> </div>
+                    <div class="form-group"> <label for="address">Địa chỉ</label> <input type="text" class="form-control" id="address" placeholder="Ha Noi" readonly> </div>
+                    <div class="form-group"> <label for="phone">Điện thoại</label> <input type="number" class="form-control" id="phone" placeholder="123" readonly> </div>
+                    <div class="form-group"> <label for="email">Email</label> <input type="email" class="form-control" id="email" placeholder="anhdq@gmail.com" readonly> </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 
 <script>
     function deleteOwner(idOwnerDelete) {
