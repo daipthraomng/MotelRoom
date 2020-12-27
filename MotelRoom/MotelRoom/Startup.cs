@@ -73,7 +73,7 @@ namespace MotelRoom
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=ClientScreen}/{id?}");
+                    pattern: "{controller=Home}/{action=AdminScreen}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/chathub");
             });

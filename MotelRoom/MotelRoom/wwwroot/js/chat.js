@@ -35,6 +35,7 @@ connection.start().then(function () {
     return console.error(err.toString());
 });
 
+
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var message = document.getElementById("messageInput").value;
     connection.invoke("SendMessage", "Do Quang Anh", message).catch(function (err) {
