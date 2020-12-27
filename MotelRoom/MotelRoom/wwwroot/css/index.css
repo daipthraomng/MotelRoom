@@ -1,0 +1,15 @@
+﻿@@media screen and (min-width: 800px) {
+    .product-image img {
+        height: 130px;
+        width: 100%;
+        object-fit: fill;
+    }
+}
+
+@@media screen and (max-width: 799px) {
+    .product-image img {
+        height: 200px;
+        width: 100%;
+        object-fit: fill;
+    }
+}

@@ -1,34 +1,49 @@
-﻿<head>
+﻿@using MotelRoom.Entity;
+@model RoomSummaryInfo;
+<head>
     <style>
+        .motel-item-image {
+            height:200px;
+            width: 100%;
+            object-fit:fill;
+        }
+
+        .motel-item-title {
+            max-width: 100%;
+            max-height:25px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
         @@media screen and (max-width: 900px) {
             .motel-item-info {
                 display: none;
             }
         }
+
         @@media screen and (max-width: 800px) {
             .motel-item {
-                min-width:200px;
+                min-width: 200px;
+            }
+            .motel-item-image {
+                max-height:150px;
             }
         }
-
     </style>
 </head>
 <article class="motel-item border rounded">
-    <img src="~/css/post-single-1.jpg" alt="img" class="mw-100">
+    <img class="motel-item-image" src="@Model.srcImage" alt="img">
     <div class="motel-item-content m-2">
         <div class="motel-item-about">
-            <strong>Nhà trọ gần DHQGHN</strong>
-            <div class="motel-item-address">Cầu Giấy, Hà Nội</div>
+            <div class="motel-item-title"><strong>@Model.title</strong></div>
+            <div class="motel-item-address">@Model.districtName, @Model.provinceName</div>
             <p class="motel-item-info row">
-                <span class="col">Nhà tắm khép kín</span>
-                <span class="col">Khu bếp riêng</span>
-                <span class="col">Có ban công</span>
+                <span class="col">@Model.description</span>
             </p>
         </div>
         <div class="motel-item-detial border-top">
             <span class="price text-muted">
-                $35000
+                @Model.price đồng/tháng
             </span>
         </div>
     </div>

@@ -9,9 +9,23 @@
     {
         <div class="col-md-4">
             <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="PendingMotel">
-                @{
-                    await Html.RenderPartialAsync("_HorizontalCard");
-                }
+                <article class="motel-item border rounded">
+                    <img class="motel-item-image" src="~/css/post-single-1.jpg" alt="img">
+                    <div class="motel-item-content m-2">
+                        <div class="motel-item-about">
+                            <div class="motel-item-title"><strong>abc</strong></div>
+                            <div class="motel-item-address">abc</div>
+                            <p class="motel-item-info row">
+                                <span class="col">abc</span>
+                            </p>
+                        </div>
+                        <div class="motel-item-detial border-top">
+                            <span class="price text-muted">
+                                abc đồng/tháng
+                            </span>
+                        </div>
+                    </div>
+                </article>
             </a>
         </div>
     }
@@ -22,9 +36,23 @@
     {
         <div class="col-md-4">
             <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="CheckedMotel">
-                @{
-                    await Html.RenderPartialAsync("_HorizontalCard");
-                }
+                <article class="motel-item border rounded">
+                    <img class="motel-item-image" src="~/css/post-single-1.jpg" alt="img">
+                    <div class="motel-item-content m-2">
+                        <div class="motel-item-about">
+                            <div class="motel-item-title"><strong>abc</strong></div>
+                            <div class="motel-item-address">abc</div>
+                            <p class="motel-item-info row">
+                                <span class="col">abc</span>
+                            </p>
+                        </div>
+                        <div class="motel-item-detial border-top">
+                            <span class="price text-muted">
+                                abc đồng/tháng
+                            </span>
+                        </div>
+                    </div>
+                </article>
             </a>
         </div>
     }
