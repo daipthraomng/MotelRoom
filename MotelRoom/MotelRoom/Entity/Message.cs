@@ -12,7 +12,11 @@ namespace MotelRoom.Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idMessage { get; set; }
-        public string name { get; set; }
+        public string idUser { get; set; }
+        public string username { get; set; }
         public string contentMessage { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        public DateTime timeSent { get; set; }
     }
 }

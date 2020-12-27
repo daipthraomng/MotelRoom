@@ -132,7 +132,27 @@ namespace MotelRoom.Controllers
         //[Authorize(Roles ="Owner")]
         public IActionResult HostScreen()
         {
-            return View();
+            var objHost = new HostScreenModel();
+            objHost.listMessage = _context.Messages.OrderBy(s => s.timeSent).ToList();
+            return View(objHost);
+        }
+        [HttpGet]
+        public JsonResult SendMessage(string contentMessage)
+        {
+            var objMessage = new Message();
+            objMessage.contentMessage = contentMessage;
+            objMessage.idUser = _userManager.GetUserId(HttpContext.User);
+            objMessage.username = _userManager.GetUserName(HttpContext.User);
+            objMessage.timeSent = DateTime.Now;
+            _context.Messages.Add(objMessage);
+            _context.SaveChangesAsync();
+            return Json(new string(objMessage.username));
+        }
+        [HttpGet]
+        public JsonResult GetUserName()
+        {
+            var username = _userManager.GetUserName(HttpContext.User);
+            return Json(new string(username));
         }
         //[Authorize(Roles = "Owner")]
         public IActionResult PostNews()

@@ -1,4 +1,5 @@
-﻿<head>
+﻿@model HostScreenModel;
+<head>
     <style>
         .open-button {
             background-color: #555;
@@ -83,22 +84,22 @@
             </button>
         </div>
         <div class="container border-top" style="overflow-y:scroll; height: 270px" id="messagesList">
-            @*@for (int i = 0; i < 4; i++)
-        {
-            <div class="border-bottom">
-                <div class="msg-header">
-                      <strong>Do Quang Anh</strong>
+            @foreach(var item in Model.listMessage)
+            {
+                <div class="border-bottom">
+                    <div class="msg-header">
+                          <strong>@item.username</strong>
+                    </div>
+                    <p class="msg-content" style="font-size:15px;">
+                        @item.contentMessage
+                    </p>
                 </div>
-                <p class="msg-content" style="font-size:15px;">
-                    This is message
-                </p>
-            </div>
-        }*@
+            }
         </div>
 
         <div class="d-md-inline-flex">
-            <textarea placeholder="Type message.." name="msg" class="form-control" id="messageInput"></textarea>
-            <button type="submit" class="btn" id="sendButton">Send</button>
+            <textarea placeholder="Nhập tin nhắn" name="msg" class="form-control" id="messageInput"></textarea>
+            <button type="submit" class="btn" id="sendButton" onclick="sendMessage()">Gửi</button>
         </div>
     </form>
 </div>
@@ -110,6 +111,17 @@
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
     }
+    function sendMessage() {
+        var contentMes = document.getElementById("messageInput").value;
+        var url = '/' + "Home/SendMessage";
+        //debugger;
+        $.getJSON(url, { contentMessage: contentMes }, function (data) {
+            console.log(data);
+            //debugger;
+        });
+    }
 </script>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/chat.js"></script>
+<script src="~/js/chat.js">
+
+</script>

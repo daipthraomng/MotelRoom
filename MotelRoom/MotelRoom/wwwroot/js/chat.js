@@ -35,11 +35,18 @@ connection.start().then(function () {
     return console.error(err.toString());
 });
 
-
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", "Do Quang Anh", message).catch(function (err) {
-        return console.error(err.toString());
+    var url = '/' + "Home/GetUserName";
+    var user = "";
+    debugger;
+    $.getJSON(url, {}, function (username) {
+        user = username;
+        connection.invoke("SendMessage", user, message).catch(function (err) {
+            debugger;
+            return console.error(err.toString());
+        });
+        debugger;
     });
     event.preventDefault();
 });
