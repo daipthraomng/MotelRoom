@@ -24,6 +24,10 @@ namespace MotelRoom.Models
             this.listPostNotChecked = new List<RoomSummaryInfo>();
             this.listPostDenied = new List<RoomSummaryInfo>();
         }
+        public void AcceptPost(int idRoom)
+        {
+
+        }
         public void GetListOwnerChecked()
         {
             var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
@@ -192,6 +196,66 @@ namespace MotelRoom.Models
                     {
                         this.listPostDenied = BaseModel.ConvertDataTable<RoomSummaryInfo>(ds.Tables[0]);
                     }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error get post news");
+                }
+                finally
+                {
+                    objConnect.Close();
+
+                }
+            }
+        }
+        public void DeleteOwner(string idOwner)
+        {
+            var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
+            using (var objConnect = connect)
+            {
+                var objCmd = new SqlCommand
+                {
+                    Connection = objConnect,
+                    CommandText = "sp_DeleteOwner", // name stored procedure
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                try
+                {
+                    objCmd.Parameters.AddWithValue("@userId", SqlDbType.NVarChar).Value = idOwner;
+                    // Open connection
+                    objConnect.Open();
+                    objCmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error get post news");
+                }
+                finally
+                {
+                    objConnect.Close();
+
+                }
+            }
+        }
+        public void AcceptOwner(string idOwner)
+        {
+            var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
+            using (var objConnect = connect)
+            {
+                var objCmd = new SqlCommand
+                {
+                    Connection = objConnect,
+                    CommandText = "sp_AcceptOwner", // name stored procedure
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                try
+                {
+                    objCmd.Parameters.AddWithValue("@userId", SqlDbType.NVarChar).Value = idOwner;
+                    // Open connection
+                    objConnect.Open();
+                    objCmd.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
