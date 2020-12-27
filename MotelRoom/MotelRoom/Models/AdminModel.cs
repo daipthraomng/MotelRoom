@@ -15,6 +15,7 @@ namespace MotelRoom.Models
         public List<RoomSummaryInfo> listPostChecked { get; set; }
         public List<RoomSummaryInfo> listPostNotChecked { get; set; }
         public List<RoomSummaryInfo> listPostDenied { get; set; }
+        public HostScreenModel objHost { get; set; }
 
         public AdminModel()
         {
@@ -23,6 +24,7 @@ namespace MotelRoom.Models
             this.listPostChecked = new List<RoomSummaryInfo>();
             this.listPostNotChecked = new List<RoomSummaryInfo>();
             this.listPostDenied = new List<RoomSummaryInfo>();
+            this.objHost = new HostScreenModel();
         }
         public void AcceptPost(int idRoom)
         {

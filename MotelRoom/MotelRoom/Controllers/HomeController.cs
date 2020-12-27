@@ -292,6 +292,7 @@ namespace MotelRoom.Controllers
             admin.GetListPostChecked();
             admin.GetListPostNotChecked();
             admin.GetListPostDenied();
+            admin.objHost.listMessage = _context.Messages.OrderBy(s => s.timeSent).ToList();
             foreach (var item in admin.listPostChecked)
             {
                 string imageBase64Data = Convert.ToBase64String(item.image);
@@ -308,6 +309,22 @@ namespace MotelRoom.Controllers
                 item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
             }
             return View(admin);
+        }
+        [HttpGet]
+        public JsonResult DeleteUser(string idOwner)
+        {
+            var admin = new AdminModel();
+            admin.DeleteOwner(idOwner);
+            return Json(new string("success"));
+
+        }
+        [HttpGet]
+        public JsonResult AcceptUser(string idOwner)
+        {
+            var admin = new AdminModel();
+            admin.AcceptOwner(idOwner);
+            return Json(new string("success"));
+
         }
         //[Authorize(Roles = "Admin")]
         public IActionResult AdminCheckedMotel()
