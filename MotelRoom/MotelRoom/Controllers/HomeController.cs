@@ -222,7 +222,20 @@ namespace MotelRoom.Controllers
         {
             return View();
         }
-
+        
+        public IActionResult ClientFavouriteMotel()
+        {
+            var objListRoom = new InterestModel();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            objListRoom.GetInterestRoomById(userId);
+            //objListRoom.objAddress.listProvince = _context.Provinces.ToList();
+            foreach (var item in objListRoom.listRoomSummary)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            return View(objListRoom);
+        }
         public IActionResult ClientScreen()
         {
             var objListRoom = new ClientScreenModel();
@@ -266,24 +279,20 @@ namespace MotelRoom.Controllers
             return View(objListRoom);
         }
 
-        public IActionResult ClientFavouriteMotel()
+        [HttpPost]
+        public IActionResult SearchClientScreen([FromBody] SearchRoom obj)
         {
-            return View();
+            var listRoom = new ClientScreenModel();
+            listRoom.SearchListRoomSummary(obj);
+            listRoom.objAddress.listProvince = _context.Provinces.ToList();
+            foreach (var item in listRoom.listRoomSummary)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            return View(listRoom);
         }
-        //[HttpPost]
-        //public IActionResult SearchClientScreen([FromBody] SearchRoom obj)
-        //{
-        //    var listRoom = new ClientScreenModel();
-        //    listRoom.SearchListRoomSummary(obj);
-        //    listRoom.objAddress.listProvince = _context.Provinces.ToList();
-        //    foreach (var item in listRoom.listRoomSummary)
-        //    {
-        //        string imageBase64Data = Convert.ToBase64String(item.image);
-        //        item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
-        //    }
-        //    return View(listRoom);
-        //}
-        //[Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminScreen()
         {
             var admin = new AdminModel();
@@ -325,6 +334,14 @@ namespace MotelRoom.Controllers
             admin.AcceptOwner(idOwner);
             return Json(new string("success"));
 
+        }
+        [HttpPost]
+        public InterestModel PostInterest([FromBody] int Roomid)
+        {
+            InterestModel obj = new InterestModel();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            obj.PostInterestRoom(Roomid, userId);
+            return obj;
         }
         //[Authorize(Roles = "Admin")]
         public IActionResult AdminCheckedMotel()

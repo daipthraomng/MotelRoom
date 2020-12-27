@@ -12,9 +12,44 @@ namespace MotelRoom.Models
     public class InterestModel : BaseModel
     {
         Interest objInterest = new Interest();
-        public string GetInterestRoomById()
+        public List<RoomSummaryInfo> listRoomSummary { get; set; }
+        public void GetInterestRoomById(string userId)
         {
-            return "";
+            var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
+
+            using (var objConnect = connect)
+            {
+                var objCmd = new SqlCommand
+                {
+                    Connection = objConnect,
+                    CommandText = "sp_GetRoomInterest", // name stored procedure
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                try
+                {
+                    objCmd.Parameters.AddWithValue("@id", SqlDbType.NVarChar).Value = userId;
+                    // Open connection
+                    objConnect.Open();
+                    //Get data from database
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    da.SelectCommand = objCmd;
+                    da.Fill(ds); // fill dataset by adapter
+                    if (ds.Tables.Count > 0)
+                    {
+                        this.listRoomSummary = BaseModel.ConvertDataTable<RoomSummaryInfo>(ds.Tables[0]);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    objConnect.Close();
+                }
+            }
         }
         public void PostInterestRoom(int roomId, string userId)
         {

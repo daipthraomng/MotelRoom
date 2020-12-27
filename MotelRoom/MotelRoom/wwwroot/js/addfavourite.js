@@ -13,11 +13,8 @@
         contentType: "application/json",
         dataType: "json"
     }).done(function (res) {
-        debugger;
         alert("Thêm vào danh sách yêu thích thành công");
     }).fail(function (res) {
-        debugger;
-        alert("Thêm vào danh sách yêu thích thành công");
+
     })
-    alert("Thêm vào danh sách yêu thích thành công");
 }
