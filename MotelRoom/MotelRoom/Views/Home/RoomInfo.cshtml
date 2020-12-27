@@ -44,28 +44,29 @@
             #rating > input:checked ~ label:hover ~ label {
                 color: #FFED85;
             }
+
         @@media screen and (min-width: 601px) {
             .carousel-item {
-                max-height:450px;
+                max-height: 450px;
             }
         }
+
         @@media screen and (max-width: 600px) {
             .carousel-item {
                 max-height: 300px;
             }
         }
+
         .image-carousel {
             max-width: 100%;
             height: auto;
-
         }
-
     </style>
 </head>
 
 
 <script src="~/js/addfavourite.js"></script>
-@{ 
+@{
     bool first = true;
 }
 
@@ -107,21 +108,21 @@
     </p>
 </div>
 
-<div class="card-body m-2">
-    <span style="font-size: 17px"><b>Trạng thái: </b>Chưa được thuê</span>
-</div>
+@* Phòng trọ hiện lên luôn còn phòng nên ko cần dòng này *@
+@*<div class="card-body m-2">
+        <span style="font-size: 17px"><b>Trạng thái: </b>Chưa được thuê</span>
+    </div>*@
 
 <div class="card m-2">
-    <div class="card-header"><h5>Thông tin mô tả</h5></div>
+    <div class="card-header"><h5>@Model.objRoom.description</h5></div>
     <div class="card-body">
-        <p>Thông tin bổ sung: Phòng ở an ninh, sạch thơm, đầy ánh sáng, thông thoáng gió tốt cho sức khỏe, lau dọn phòng miễn phí. Trợ giá, hỗ trợ giảm phí</p>
-        <p>Kiểu phòng: Phòng trọ</p>
-        <p>Phòng tắm: Khép kín</p>
-        <p>Nóng lạnh: Có</p>
-        <p>Điều hòa: Có</p>
-        <p>Ban công: Có</p>
-        <p>Điện nước: Giá thuê (Giá điện: 4000D, giá nước: 30000D)</p>
-        <p>Họ và tên chủ nhà: Đỗ Quang Anh - <span>SDT: 123</span></p>
+        <p>Kiểu phòng: @Model.objRoom.typeRoom</p>
+        <p>Phòng tắm: @Model.objRoom.bathroom</p>
+        <p>Nóng lạnh: @Model.objRoom.heater</p>
+        <p>Điều hòa: @Model.objRoom.airCondition</p>
+        <p>Ban công: @Model.objRoom.balcony</p>
+        <p>Giá điện: @Model.objRoom.electricityPrice, giá nước: @Model.objRoom.waterPrice</p>
+        @*<p>name - <span>phone</span></p>*@
 
     </div>
 </div>

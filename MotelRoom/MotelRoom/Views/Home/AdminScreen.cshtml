@@ -94,7 +94,7 @@
     @foreach (var item in Model.listPostNotChecked)
     {
         <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
+            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel" asp-route-idRoom="@item.idRoom">
                 @{
                     await Html.RenderPartialAsync("_HorizontalCard", item);
                 }
@@ -107,7 +107,7 @@
     @foreach (var item in Model.listPostChecked)
     {
         <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminCheckedMotel">
+            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminCheckedMotel" asp-route-idRoom="@item.idRoom">
                 @{
                     await Html.RenderPartialAsync("_HorizontalCard", item);
                 }
@@ -121,7 +121,7 @@
     @foreach (var item in Model.listPostDenied)
     {
         <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminRejectedMotel">
+            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminRejectedMotel" asp-route-idRoom="@item.idRoom">
                 @{
                     await Html.RenderPartialAsync("_HorizontalCard", item);
                 }
