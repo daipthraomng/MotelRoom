@@ -39,14 +39,14 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     var message = document.getElementById("messageInput").value;
     var url = '/' + "Home/GetUserName";
     var user = "";
-    debugger;
+    //debugger;
     $.getJSON(url, {}, function (username) {
         user = username;
         connection.invoke("SendMessage", user, message).catch(function (err) {
             debugger;
             return console.error(err.toString());
         });
-        debugger;
+        //debugger;
     });
     event.preventDefault();
 });
