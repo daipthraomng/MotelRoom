@@ -133,8 +133,77 @@ namespace MotelRoom.Controllers
         public IActionResult HostScreen()
         {
             var objHost = new HostScreenModel();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            objHost.listPostChecked = new List<RoomSummaryInfo>();
+            objHost.listPostNotChecked = new List<RoomSummaryInfo>();
+            objHost.listPostDenied = new List<RoomSummaryInfo>();
+            objHost.GetListPostCheckedOwner(userId);
+            objHost.GetListPostNotCheckedOwner(userId);
+            objHost.GetListPostDeniedOwner(userId);
             objHost.listMessage = _context.Messages.OrderBy(s => s.timeSent).ToList();
+            foreach (var item in objHost.listPostChecked)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            foreach (var item in objHost.listPostNotChecked)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            foreach (var item in objHost.listPostDenied)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
             return View(objHost);
+        }
+        [HttpPost]
+        public IActionResult HostScreen(HostScreenModel objHostScreen)
+        {
+            var objHost = new HostScreenModel();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            objHost.listPostChecked = new List<RoomSummaryInfo>();
+            objHost.listPostNotChecked = new List<RoomSummaryInfo>();
+            objHost.listPostDenied = new List<RoomSummaryInfo>();
+            objHost.GetListPostCheckedOwner(userId);
+            objHost.GetListPostNotCheckedOwner(userId);
+            objHost.GetListPostDeniedOwner(userId);
+            objHost.listMessage = _context.Messages.OrderBy(s => s.timeSent).ToList();
+            foreach (var item in objHost.listPostChecked)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            foreach (var item in objHost.listPostNotChecked)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            foreach (var item in objHost.listPostDenied)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            return View(objHost);
+        }
+        [HttpPost]
+        public async Task<IActionResult> HostScreen(List<IFormFile> files)
+        {
+            var size = files.Sum(f => f.Length);
+            var filePaths = new List<String>();
+            foreach (var formFile in files)
+            {
+                ImageRoom img = new ImageRoom();
+                using (var ms = new MemoryStream())
+                {
+                    await formFile.CopyToAsync(ms);
+                    img.image = ms.ToArray();
+                    img.idRoom = HomeController.idRoom;
+                    img = _imageRoomService.Save(img);
+                }
+            }
+            return View();
         }
         [HttpGet]
         public JsonResult SendMessage(string contentMessage)
@@ -193,25 +262,7 @@ namespace MotelRoom.Controllers
             var selectedStreets = streets.Where(x => x.idDistrict == idDistrict).ToList();
             return Json(new SelectList(selectedStreets, "idStreet", "name"));
         }
-        [HttpPost]
-        public async Task<IActionResult> HostScreen(List<IFormFile> files)
-        {
-            var size = files.Sum(f => f.Length);
-            var filePaths = new List<String>();
-            foreach (var formFile in files)
-            {
-                ImageRoom img = new ImageRoom();
-                using (var ms = new MemoryStream())
-                {
-                    await formFile.CopyToAsync(ms);
-                    img.image = ms.ToArray();
-                    img.idRoom = HomeController.idRoom;
-                    img = _imageRoomService.Save(img);
-                }
-
-            }
-            return View();
-        }
+        
          //[Authorize(Roles = "Owner")]   
         public IActionResult PendingMotel()
         {
@@ -222,20 +273,7 @@ namespace MotelRoom.Controllers
         {
             return View();
         }
-        
-        public IActionResult ClientFavouriteMotel()
-        {
-            var objListRoom = new InterestModel();
-            var userId = _userManager.GetUserId(HttpContext.User);
-            objListRoom.GetInterestRoomById(userId);
-            //objListRoom.objAddress.listProvince = _context.Provinces.ToList();
-            foreach (var item in objListRoom.listRoomSummary)
-            {
-                string imageBase64Data = Convert.ToBase64String(item.image);
-                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
-            }
-            return View(objListRoom);
-        }
+
         public IActionResult ClientScreen()
         {
             var objListRoom = new ClientScreenModel();
@@ -279,20 +317,24 @@ namespace MotelRoom.Controllers
             return View(objListRoom);
         }
 
-        [HttpPost]
-        public IActionResult SearchClientScreen([FromBody] SearchRoom obj)
+        public IActionResult ClientFavouriteMotel()
         {
-            var listRoom = new ClientScreenModel();
-            listRoom.SearchListRoomSummary(obj);
-            listRoom.objAddress.listProvince = _context.Provinces.ToList();
-            foreach (var item in listRoom.listRoomSummary)
-            {
-                string imageBase64Data = Convert.ToBase64String(item.image);
-                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
-            }
-            return View(listRoom);
+            return View();
         }
-        //[Authorize(Roles = "Admin")]
+        //[HttpPost]
+        //public IActionResult SearchClientScreen([FromBody] SearchRoom obj)
+        //{
+        //    var listRoom = new ClientScreenModel();
+        //    listRoom.SearchListRoomSummary(obj);
+        //    listRoom.objAddress.listProvince = _context.Provinces.ToList();
+        //    foreach (var item in listRoom.listRoomSummary)
+        //    {
+        //        string imageBase64Data = Convert.ToBase64String(item.image);
+        //        item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        //    }
+        //    return View(listRoom);
+        //}
+        //[Authorize(Roles ="Admin")]
         public IActionResult AdminScreen()
         {
             var admin = new AdminModel();
@@ -334,14 +376,6 @@ namespace MotelRoom.Controllers
             admin.AcceptOwner(idOwner);
             return Json(new string("success"));
 
-        }
-        [HttpPost]
-        public InterestModel PostInterest([FromBody] int Roomid)
-        {
-            InterestModel obj = new InterestModel();
-            var userId = _userManager.GetUserId(HttpContext.User);
-            obj.PostInterestRoom(Roomid, userId);
-            return obj;
         }
         //[Authorize(Roles = "Admin")]
         public IActionResult AdminCheckedMotel(int idRoom)
@@ -400,7 +434,27 @@ namespace MotelRoom.Controllers
             roomInfoModel.address.street = _context.Streets.Where(x => x.idStreet == idStreet).ToList()[0].name;
             return View(roomInfoModel);
         }
-
+        [HttpGet]
+        public JsonResult AcceptPost(string idRoom)
+        {
+            var admin = new AdminModel();
+            admin.AcceptPost(Int32.Parse(idRoom));
+            return Json(new string("success"));
+        }
+        [HttpGet]
+        public JsonResult DenyPost(string idRoom)
+        {
+            var admin = new AdminModel();
+            admin.DenyPost(Int32.Parse(idRoom));
+            return Json(new string("success"));
+        }
+        [HttpGet]
+        public JsonResult AddTimeEnd(string endTime, int idRoom)
+        {
+            var admin = new AdminModel();
+            admin.AddEndTime(endTime, idRoom);
+            return Json(new string("success"));
+        }
         public IActionResult Detail(int ID)
         {
             var motelDetails = listMotels.FirstOrDefault(std => std.MotelID == ID);

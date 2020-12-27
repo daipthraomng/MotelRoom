@@ -132,56 +132,6 @@
 
 @{ await Html.RenderPartialAsync("_ChatBoxPartial", Model.objHost); }
 
-
-<!-- Xem thong tin cac host dang duoc duyet va da duoc duyet-->
-@*<div class="modal fade" id="pendingHost" tabindex="-1" role="dialog" aria-labelledby="pendingHostLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pendingHostLabel">Thông tin</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group"> <label for="name">Tên</label> <input disabled type="text" class="form-control" id="name" placeholder="Do Quang Anh" readonly> </div>
-                    <div class="form-group"> <label for="cmnd">CMND</label> <input disabled type="text" class="form-control" id="cmnd" placeholder="0123" readonly> </div>
-                    <div class="form-group"> <label for="address">Địa chỉ</label> <input disabled type="text" class="form-control" id="address" placeholder="Ha Noi" readonly> </div>
-                    <div class="form-group"> <label for="phone">Điện thoại</label> <input disabled type="number" class="form-control" id="phone" placeholder="123" readonly> </div>
-                    <div class="form-group"> <label for="email">Email</label> <input disabled type="email" class="form-control" id="email" placeholder="anhdq@gmail.com" readonly> </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Phê duyệt</button>
-                    <button type="button" class="btn btn-primary">Xóa</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-@*<div class="modal fade" id="checkedHost" tabindex="-1" role="dialog" aria-labelledby="checkedHostLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="checkedHostLabel">Thông tin</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group"> <label for="name">Tên</label> <input type="text" class="form-control" id="name" placeholder="Do Quang Anh" readonly> </div>
-                    <div class="form-group"> <label for="cmnd">CMND</label> <input type="text" class="form-control" id="cmnd" placeholder="0123" readonly> </div>
-                    <div class="form-group"> <label for="address">Địa chỉ</label> <input type="text" class="form-control" id="address" placeholder="Ha Noi" readonly> </div>
-                    <div class="form-group"> <label for="phone">Điện thoại</label> <input type="number" class="form-control" id="phone" placeholder="123" readonly> </div>
-                    <div class="form-group"> <label for="email">Email</label> <input type="email" class="form-control" id="email" placeholder="anhdq@gmail.com" readonly> </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
 <script>
     function deleteOwner(idOwnerDelete) {
         var url = '/' + "Home/DeleteUser";

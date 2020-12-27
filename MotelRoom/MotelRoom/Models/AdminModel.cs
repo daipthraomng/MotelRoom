@@ -26,10 +26,6 @@ namespace MotelRoom.Models
             this.listPostDenied = new List<RoomSummaryInfo>();
             this.objHost = new HostScreenModel();
         }
-        public void AcceptPost(int idRoom)
-        {
-
-        }
         public void GetListOwnerChecked()
         {
             var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
@@ -255,6 +251,97 @@ namespace MotelRoom.Models
                 try
                 {
                     objCmd.Parameters.AddWithValue("@userId", SqlDbType.NVarChar).Value = idOwner;
+                    // Open connection
+                    objConnect.Open();
+                    objCmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error get post news");
+                }
+                finally
+                {
+                    objConnect.Close();
+
+                }
+            }
+        }
+        public void AcceptPost(int idRoom)
+        {
+            var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
+            using (var objConnect = connect)
+            {
+                var objCmd = new SqlCommand
+                {
+                    Connection = objConnect,
+                    CommandText = "sp_AcceptPost", // name stored procedure
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                try
+                {
+                    objCmd.Parameters.AddWithValue("@idRoom", SqlDbType.Int).Value = idRoom;
+                    // Open connection
+                    objConnect.Open();
+                    objCmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error get post news");
+                }
+                finally
+                {
+                    objConnect.Close();
+
+                }
+            }
+        }
+        public void DenyPost(int idRoom)
+        {
+            var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
+            using (var objConnect = connect)
+            {
+                var objCmd = new SqlCommand
+                {
+                    Connection = objConnect,
+                    CommandText = "sp_DenyPost", // name stored procedure
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                try
+                {
+                    objCmd.Parameters.AddWithValue("@idRoom", SqlDbType.Int).Value = idRoom;
+                    // Open connection
+                    objConnect.Open();
+                    objCmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error get post news");
+                }
+                finally
+                {
+                    objConnect.Close();
+
+                }
+            }
+        }
+        public void AddEndTime(string endTime, int idRoom)
+        {
+            var connect = new DataProvider().GetSqlConnectionProvider(); // get connect
+            using (var objConnect = connect)
+            {
+                var objCmd = new SqlCommand
+                {
+                    Connection = objConnect,
+                    CommandText = "sp_AddEndTime", // name stored procedure
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                try
+                {
+                    objCmd.Parameters.AddWithValue("@endTime", SqlDbType.DateTime).Value = endTime;
+                    objCmd.Parameters.AddWithValue("@idRoom", SqlDbType.Int).Value = idRoom;
                     // Open connection
                     objConnect.Open();
                     objCmd.ExecuteNonQuery();

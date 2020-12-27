@@ -2,6 +2,7 @@
     ViewData["Title"] = "Screen For Admin";
     Layout = "_LayoutAdmin";
 }
+@model RoomInfoModel;
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -13,18 +14,17 @@
 <h4>Màn hình cho nhà trọ đã được kiểm duyệt</h4>
 <div class="card-body">
     <h5>Trạng thái</h5>
-    <select disabled>
-        <option checked>Đã được thuê</option>
-        <option>Chưa được thuê</option>
-    </select>
+    <input type="text" class="form-control" value="@Model.objRoom.statusRent" readonly>
+</div>
+<div class="card-body">
+    <h5>Ngày hết hạn</h5>
+    <input type="text" class="form-control" readonly value="@Model.objRoom.timeEndPost">
 </div>
 <div class="card-body">
     <h5>Gia hạn thời gian hiển thị</h5>
-    <form>
-        <label for="extend-day">Gia hạn đến ngày:</label>
-        <input type="date" id="extend-day">
-        <button type="submit" class="btn-success">Gia hạn</button>
-    </form>
+    <label for="extend-day">Gia hạn đến ngày:</label>
+    <input type="date" id="endTime">
+    <button type="submit" class="btn-success" id="btnTimeEnd" onclick="AddTimeEnd()">Gia hạn</button>
 </div>
 
 <div class="card">
@@ -152,32 +152,18 @@
     </div>
 </div>
 
-<div class="card" style="margin-top: 15px">
-    <div class="card-header">
-        <h5>
-            Đánh giá
-            <span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-            </span>
 
-        </h5>
-    </div>
-    <div class="card-body" style="overflow-y:scroll; max-height: 400px">
-        @for (int i = 0; i < 5; i++)
-        {
-            <div class="card m-2">
-                <div class="card-header">
-                    <h6>Do Quang Anh says: </h6>
-                </div>
-                <div class="card-body">
-                    This is so goood!!
-                </div>
-            </div>
-
-        }
-    </div>
-</div>
+<script>
+    function AddTimeEnd() {
+        var endTime = document.getElementById("endTime").value;
+        var idRoom = @Model.objRoom.idRoom;
+        var url = '/' + "Home/AddTimeEnd";
+        debugger;
+        $.getJSON(url, { endTime: endTime, idRoom: idRoom }, function (data) {
+            console.log(data);
+            alert("Gia hạn thành công");
+            location.reload();
+            debugger;
+        });
+    }
+</script>
