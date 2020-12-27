@@ -2,15 +2,8 @@
     ViewData["Title"] = "Screen For Admin";
     Layout = "_LayoutAdmin";
 }
-@model RoomInfoModel;
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .checked {
-            color: orange;
-        }
-    </style>
-</head>
+@model RoomInfoModel; 
+
 <h4>Màn hình cho nhà trọ đã được kiểm duyệt</h4>
 <div class="card-body">
     <h5>Trạng thái</h5>
@@ -74,12 +67,12 @@
             </div>
             <div class="form-row">
                 <div class="form-group col">
-                    <label for="electic-water">Giá điện (đồng)</label>
-                    <input type="text" class="form-control" id="electic-water" value="@Model.objRoom.electricityPrice" readonly />
+                    <label for="electic-water">Giá điện</label>
+                    <input type="text" class="form-control" id="electic-water" value="@Model.objRoom.electricityPrice (đồng)" readonly />
                 </div>
                 <div class="form-group col">
-                    <label for="electic-water">Giá nước (đồng)</label>
-                    <input type="text" class="form-control" id="electic-water" value="@Model.objRoom.waterPrice" readonly />
+                    <label for="electic-water">Giá nước</label>
+                    <input type="text" class="form-control" id="electic-water" value="@Model.objRoom.waterPrice (đồng)" readonly />
                 </div>
             </div>
             <div class="form-group">
@@ -139,15 +132,15 @@
             </div>
 
             @*<div class="form-row">
-            <div class="form-group col">
-                <label for="host-name">Họ và tên chủ nhà</label>
-                <input type="text" id="host-name" class="form-control" value="Do Quang Anh" readonly>
-            </div>
-            <div class="form-group col">
-                <label for="host-name">Số điện thoại</label>
-                <input type="text" id="host-name" class="form-control" value="123" readonly>
-            </div>
-        </div>*@
+                    <div class="form-group col">
+                        <label for="host-name">Họ và tên chủ nhà</label>
+                        <input type="text" id="host-name" class="form-control" value="Do Quang Anh" readonly>
+                    </div>
+                    <div class="form-group col">
+                        <label for="host-name">Số điện thoại</label>
+                        <input type="text" id="host-name" class="form-control" value="123" readonly>
+                    </div>
+                </div>*@
         </form>
     </div>
 </div>

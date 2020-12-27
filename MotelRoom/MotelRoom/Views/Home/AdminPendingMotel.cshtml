@@ -3,6 +3,8 @@
     Layout = "_LayoutAdmin";
 }
 @model RoomInfoModel;
+
+
 <h4>Màn hình cho nhà trọ đang chờ kiểm duyệt</h4>
 <button class="btn-success" onclick="AcceptPost()">Phê duyệt</button>
 <button class="btn-danger" onclick="DenyPost()">Từ chối</button>
@@ -24,12 +26,12 @@
                     <input type="text" class="form-control" readonly value="@Model.objRoom.roomNo" />
                 </div>
                 <div class="form-group col">
-                    <label for="price">Giá phòng (đồng)</label>
-                    <input type="text" class="form-control" readonly value="@Model.objRoom.price" />
+                    <label for="price">Giá phòng</label>
+                    <input type="text" class="form-control" readonly value="@Model.objRoom.price (đồng)" />
                 </div>
                 <div class="form-group col">
-                    <label for="area">Diện tích (m2)</label>
-                    <input type="text" class="form-control" readonly value="@Model.objRoom.area" />
+                    <label for="area">Diện tích</label>
+                    <input type="text" class="form-control" readonly value="@Model.objRoom.area  (m2)" />
                 </div>
             </div>
 
@@ -53,12 +55,12 @@
             </div>
             <div class="form-row">
                 <div class="form-group col">
-                    <label for="electic-water">Giá điện (đồng)</label>
-                    <input type="text" class="form-control" id="electic-water" value="@Model.objRoom.electricityPrice" readonly />
+                    <label for="electic-water">Giá điện</label>
+                    <input type="text" class="form-control" id="electic-water" value="@Model.objRoom.electricityPrice (đồng)" readonly />
                 </div>
                 <div class="form-group col">
-                    <label for="electic-water">Giá nước (đồng)</label>
-                    <input type="text" class="form-control" id="electic-water" value="@Model.objRoom.waterPrice" readonly />
+                    <label for="electic-water">Giá nước</label>
+                    <input type="text" class="form-control" id="electic-water" value="@Model.objRoom.waterPrice (đồng)" readonly />
                 </div>
             </div>
             <div class="form-group">
@@ -118,15 +120,15 @@
             </div>
 
             @*<div class="form-row">
-            <div class="form-group col">
-                <label for="host-name">Họ và tên chủ nhà</label>
-                <input type="text" id="host-name" class="form-control" value="Do Quang Anh" readonly>
-            </div>
-            <div class="form-group col">
-                <label for="host-name">Số điện thoại</label>
-                <input type="text" id="host-name" class="form-control" value="123" readonly>
-            </div>
-        </div>*@
+                    <div class="form-group col">
+                        <label for="host-name">Họ và tên chủ nhà</label>
+                        <input type="text" id="host-name" class="form-control" value="Do Quang Anh" readonly>
+                    </div>
+                    <div class="form-group col">
+                        <label for="host-name">Số điện thoại</label>
+                        <input type="text" id="host-name" class="form-control" value="123" readonly>
+                    </div>
+                </div>*@
         </form>
     </div>
 </div>
