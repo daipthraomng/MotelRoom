@@ -3,66 +3,9 @@
     Layout = "_LayoutClientHome";
 }
 @model RoomInfoModel;
-<head>
-    <!-- Font Awesome Icon Library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .checked {
-            color: orange;
-        }
-
-        .fa-star {
-            font-size: 15px;
-        }
-        /*ẩn input radio - vì chúng ta đã có label là GUI*/
-        #rating > input {
-            display: none;
-        }
-        /*1 ngôi sao*/
-        #rating > label:before {
-            margin: 1px;
-            font-size: 15px;
-            font-family: FontAwesome;
-            display: inline-block;
-            content: "\f005";
-        }
-        /*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
-        #rating > label {
-            color: #ddd;
-            float: right;
-        }
-        /*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
-        #rating > input:checked ~ label,
-        #rating:not(:checked) > label:hover,
-        #rating:not(:checked) > label:hover ~ label {
-            color: #FFD700;
-        }
-            /* Hover vào các sao phía trước ngôi sao đã chọn*/
-            #rating > input:checked + label:hover,
-            #rating > input:checked ~ label:hover,
-            #rating > label:hover ~ input:checked ~ label,
-            #rating > input:checked ~ label:hover ~ label {
-                color: #FFED85;
-            }
-
-        @@media screen and (min-width: 601px) {
-            .carousel-item {
-                max-height: 450px;
-            }
-        }
-
-        @@media screen and (max-width: 600px) {
-            .carousel-item {
-                max-height: 300px;
-            }
-        }
-
-        .image-carousel {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-</head>
+@section Styles {
+    <link href="@Url.Content("~/Styles/roominfo.css")" rel="stylesheet" type="text/css" />
+}
 
 
 <script src="~/js/addfavourite.js"></script>
@@ -93,7 +36,7 @@
 
 <div class="card-body">
     @*@Model.address.province/ district/ward/street*@
-    <h4><b>PHÒNG MK HOME RẺ, SẠCH ĐẸP, AN NINH NGAY CHỢ, CÔNG VIÊN, KHU TRUNG TÂM. GIÁ 3,3TR/TH</b></h4>
+    <h4><b>@Model.objRoom.title</b></h4>
     <div class="text-muted">@Model.address.street, @Model.address.ward, @Model.address.district, @Model.address.province</div>
 </div>
 
@@ -108,22 +51,19 @@
     </p>
 </div>
 
-@* Phòng trọ hiện lên luôn còn phòng nên ko cần dòng này *@
-@*<div class="card-body m-2">
-        <span style="font-size: 17px"><b>Trạng thái: </b>Chưa được thuê</span>
-    </div>*@
+<div class="card-body m-2"></div>
 
 <div class="card m-2">
-    <div class="card-header"><h5>@Model.objRoom.description</h5></div>
+    <div class="card-header"><h5>Thông tin</h5></div>
     <div class="card-body">
+        <p> Thông tin mô tả: @Model.objRoom.description </p>
         <p>Kiểu phòng: @Model.objRoom.typeRoom</p>
         <p>Phòng tắm: @Model.objRoom.bathroom</p>
         <p>Nóng lạnh: @Model.objRoom.heater</p>
         <p>Điều hòa: @Model.objRoom.airCondition</p>
         <p>Ban công: @Model.objRoom.balcony</p>
-        <p>Giá điện: @Model.objRoom.electricityPrice, giá nước: @Model.objRoom.waterPrice</p>
+        <p>Giá điện: @Model.objRoom.electricityPrice đồng/kWh, giá nước: @Model.objRoom.waterPrice đồng/m3</p>
         @*<p>name - <span>phone</span></p>*@
-
     </div>
 </div>
 
@@ -133,7 +73,6 @@
             Đánh giá (6 đánh giá)
         </h5>
         <div class="float-right">
-            <span style="margin-right:10px; cursor:pointer" data-toggle="modal" data-target="#report">Report nhà trọ</span>
             <span style="cursor:pointer" data-toggle="modal" data-target="#review">Viết đánh giá của bạn</span>
         </div>
     </div>
@@ -161,14 +100,6 @@
         }
     </div>
 </div>
-
-<div class="card-body">
-    <h5>Thống kê trạng thái</h5>
-    <p>Số lượt xem: 1800</p>
-    <p>Số lượt ưa thích: 29</p>
-    <p>Truy cập nhiều nhất vào: 12/12/2020</p>
-</div>
-
 
 <!-- Danh gia va report nha tro -->
 <div class="modal fade" id="review" tabindex="-1" role="dialog" aria-labelledby="reviewLabel" aria-hidden="true">
@@ -207,7 +138,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
+@*<div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -228,4 +159,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@

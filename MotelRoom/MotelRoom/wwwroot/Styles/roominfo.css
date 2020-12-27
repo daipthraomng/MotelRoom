@@ -1,0 +1,54 @@
+﻿.checked {
+    color: orange;
+}
+
+.fa-star {
+    font-size: 15px;
+}
+/*ẩn input radio - vì chúng ta đã có label là GUI*/
+#rating > input {
+    display: none;
+}
+/*1 ngôi sao*/
+#rating > label:before {
+    margin: 1px;
+    font-size: 15px;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+/*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
+#rating > label {
+    color: #ddd;
+    float: right;
+}
+/*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+#rating > input:checked ~ label,
+#rating:not(:checked) > label:hover,
+#rating:not(:checked) > label:hover ~ label {
+    color: #FFD700;
+}
+    /* Hover vào các sao phía trước ngôi sao đã chọn*/
+    #rating > input:checked + label:hover,
+    #rating > input:checked ~ label:hover,
+    #rating > label:hover ~ input:checked ~ label,
+    #rating > input:checked ~ label:hover ~ label {
+        color: #FFED85;
+    }
+
+@media screen and (min-width: 601px) {
+    .carousel-item {
+        max-height: 450px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .carousel-item {
+        max-height: 300px;
+    }
+}
+
+.image-carousel {
+    max-width: 100%;
+    height: auto;
+}

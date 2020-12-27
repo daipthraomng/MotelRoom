@@ -292,7 +292,7 @@ namespace MotelRoom.Controllers
             }
             return View(listRoom);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult AdminScreen()
         {
             var admin = new AdminModel();
