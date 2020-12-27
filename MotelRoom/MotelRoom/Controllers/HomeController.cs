@@ -158,9 +158,51 @@ namespace MotelRoom.Controllers
             }
             return View(objHost);
         }
+        //[HttpPost]
+        //public IActionResult HostScreen(HostScreenModel objHostScreen)
+        //{
+        //    var objHost = new HostScreenModel();
+        //    var userId = _userManager.GetUserId(HttpContext.User);
+        //    objHost.listPostChecked = new List<RoomSummaryInfo>();
+        //    objHost.listPostNotChecked = new List<RoomSummaryInfo>();
+        //    objHost.listPostDenied = new List<RoomSummaryInfo>();
+        //    objHost.GetListPostCheckedOwner(userId);
+        //    objHost.GetListPostNotCheckedOwner(userId);
+        //    objHost.GetListPostDeniedOwner(userId);
+        //    objHost.listMessage = _context.Messages.OrderBy(s => s.timeSent).ToList();
+        //    foreach (var item in objHost.listPostChecked)
+        //    {
+        //        string imageBase64Data = Convert.ToBase64String(item.image);
+        //        item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        //    }
+        //    foreach (var item in objHost.listPostNotChecked)
+        //    {
+        //        string imageBase64Data = Convert.ToBase64String(item.image);
+        //        item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        //    }
+        //    foreach (var item in objHost.listPostDenied)
+        //    {
+        //        string imageBase64Data = Convert.ToBase64String(item.image);
+        //        item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        //    }
+        //    return View(objHost);
+        //}
         [HttpPost]
-        public IActionResult HostScreen(HostScreenModel objHostScreen)
+        public async Task<IActionResult> HostScreen(List<IFormFile> files)
         {
+            var size = files.Sum(f => f.Length);
+            var filePaths = new List<String>();
+            foreach (var formFile in files)
+            {
+                ImageRoom img = new ImageRoom();
+                using (var ms = new MemoryStream())
+                {
+                    await formFile.CopyToAsync(ms);
+                    img.image = ms.ToArray();
+                    img.idRoom = HomeController.idRoom;
+                    img = _imageRoomService.Save(img);
+                }
+            }
             var objHost = new HostScreenModel();
             var userId = _userManager.GetUserId(HttpContext.User);
             objHost.listPostChecked = new List<RoomSummaryInfo>();
@@ -186,24 +228,6 @@ namespace MotelRoom.Controllers
                 item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
             }
             return View(objHost);
-        }
-        [HttpPost]
-        public async Task<IActionResult> HostScreen(List<IFormFile> files)
-        {
-            var size = files.Sum(f => f.Length);
-            var filePaths = new List<String>();
-            foreach (var formFile in files)
-            {
-                ImageRoom img = new ImageRoom();
-                using (var ms = new MemoryStream())
-                {
-                    await formFile.CopyToAsync(ms);
-                    img.image = ms.ToArray();
-                    img.idRoom = HomeController.idRoom;
-                    img = _imageRoomService.Save(img);
-                }
-            }
-            return View();
         }
         [HttpGet]
         public JsonResult SendMessage(string contentMessage)

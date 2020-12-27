@@ -100,6 +100,7 @@ class PostNewsJS {
         objPostNews.timeDisplay = $('#timeDisplay').val();
         objPostNews.unitTimeId = $('#unitTimeId').val();
         var content = JSON.stringify(objPostNews); // chuyen doi tuong sang json
+        alert("Đăng bài thành công");
         //debugger;
         $.ajax({
             url: "/Home/PostNews",
@@ -108,10 +109,10 @@ class PostNewsJS {
             contentType: "application/json",
             dataType: "json"
         }).done(function (res) {
+            alert("Đăng bài thành công");
             //debugger;
         }).fail(function (res) {
             //debugger;
-        })
-        alert("Đăng bài thành công");
+        })   
     }
 }
