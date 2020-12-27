@@ -13,6 +13,7 @@
     <!-- Bootstrap CSS File -->
     <link href="~/Template/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+    @RenderSection("Styles", false)
     <!-- Libraries CSS Files -->
     <link href="~/Template/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Template/lib/animate/animate.min.css" rel="stylesheet">
@@ -25,28 +26,6 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"> @*to use awesome icon*@
 
-    <style>
-        /* width */
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-        }
-
-            /* Handle on hover */
-            ::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            }
-    </style>
 </head>
 <body>
     <div class="click-closed"></div>

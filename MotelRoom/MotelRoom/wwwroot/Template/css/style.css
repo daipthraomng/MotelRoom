@@ -1,16 +1,19 @@
-/*
-  Theme Name: EstateAgency
-  Theme URL: https://bootstrapmade.com/real-estate-agency-bootstrap-template/
-  Author: BootstrapMade.com
-  License: https://bootstrapmade.com/license/
-*/
-
 /*======================================
 //--//-->   STYLES GENERALES
 ======================================*/
 html {
     position: relative;
     min-height: 100%;
+}
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
@@ -2021,6 +2024,7 @@ footer .credits {
   }
 }
 
+/*Scroll section*/
 @media (max-width: 575px) {
   .box-collapse .title-box-d {
     left: 35px;
@@ -2030,3 +2034,24 @@ footer .credits {
     font-size: 1.3rem;
   }
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }

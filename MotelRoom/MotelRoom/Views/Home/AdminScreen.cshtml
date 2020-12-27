@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Screen For Admin";
-    Layout = "_Layout3";
+    Layout = "_LayoutAdmin";
 }
 @model AdminModel;
 <h3>Màn hình của admin</h3>
@@ -107,7 +107,7 @@
     @foreach (var item in Model.listPostChecked)
     {
         <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
+            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminCheckedMotel">
                 @{
                     await Html.RenderPartialAsync("_HorizontalCard", item);
                 }
@@ -121,7 +121,7 @@
     @foreach (var item in Model.listPostDenied)
     {
         <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel">
+            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminRejectedMotel">
                 @{
                     await Html.RenderPartialAsync("_HorizontalCard", item);
                 }
