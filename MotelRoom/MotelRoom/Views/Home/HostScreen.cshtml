@@ -5,57 +5,59 @@
 @model HostScreenModel;
 <h3>Màn hình của chủ trọ</h3>
 <h4 class="mt-3">Các bài đăng đang chờ duyệt</h4>
-<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
-    @for (int i = 0; i < 5; i++)
-    {
-        <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="PendingMotel">
-                <article class="motel-item border rounded">
-                    <img class="motel-item-image" src="~/css/post-single-1.jpg" alt="img">
-                    <div class="motel-item-content m-2">
-                        <div class="motel-item-about">
-                            <div class="motel-item-title"><strong>abc</strong></div>
-                            <div class="motel-item-address">abc</div>
-                            <p class="motel-item-info row">
-                                <span class="col">abc</span>
-                            </p>
-                        </div>
-                        <div class="motel-item-detial border-top">
-                            <span class="price text-muted">
-                                abc đồng/tháng
-                            </span>
-                        </div>
-                    </div>
-                </article>
-            </a>
-        </div>
+<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 scrollable" style="overflow-x:auto">
+    @{
+        if (Model.listPostNotChecked != null)
+        {
+            foreach (var item in Model.listPostNotChecked)
+            {
+                <div class="col-md-4">
+                    <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel" asp-route-idRoom="@item.idRoom">
+                        @{
+                            await Html.RenderPartialAsync("_HorizontalCard", item);
+                        }
+                    </a>
+                </div>
+            }
+        }
     }
 </div>
-<h4 class="mt-4">Các bài đăng đã được duyệt</h4>
+<h4 class="mt-3">Các bài đăng đã được duyệt</h4>
 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
-    @for (int i = 0; i < 5; i++)
-    {
-        <div class="col-md-4">
-            <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="CheckedMotel">
-                <article class="motel-item border rounded">
-                    <img class="motel-item-image" src="~/css/post-single-1.jpg" alt="img">
-                    <div class="motel-item-content m-2">
-                        <div class="motel-item-about">
-                            <div class="motel-item-title"><strong>abc</strong></div>
-                            <div class="motel-item-address">abc</div>
-                            <p class="motel-item-info row">
-                                <span class="col">abc</span>
-                            </p>
-                        </div>
-                        <div class="motel-item-detial border-top">
-                            <span class="price text-muted">
-                                abc đồng/tháng
-                            </span>
-                        </div>
-                    </div>
-                </article>
-            </a>
-        </div>
+    @{
+        if (Model.listPostChecked != null)
+        {
+            foreach (var item in Model.listPostChecked)
+            {
+                <div class="col-md-4">
+                    <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminCheckedMotel" asp-route-idRoom="@item.idRoom">
+                        @{
+                            await Html.RenderPartialAsync("_HorizontalCard", item);
+                        }
+                    </a>
+                </div>
+            }
+        }
+
+    }
+</div>
+
+<h4 class="mt-3">Các bài đăng bị từ chối</h4>
+<div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4" style="overflow-x:auto">
+    @{
+        if (Model.listPostDenied != null)
+        {
+            foreach (var item in Model.listPostDenied)
+            {
+                <div class="col-md-4">
+                    <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminRejectedMotel" asp-route-idRoom="@item.idRoom">
+                        @{
+                            await Html.RenderPartialAsync("_HorizontalCard", item);
+                        }
+                    </a>
+                </div>
+            }
+        }
     }
 </div>
 
