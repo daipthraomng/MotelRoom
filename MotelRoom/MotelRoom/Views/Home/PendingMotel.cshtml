@@ -12,7 +12,7 @@
                 <div class="form-row">
                     <div class="form-group col">
                         Tiêu đề
-                        <input type="text" value="@Model.objRoom.title" class="form-control" id="title" placeholder="Tiêu đề">
+                        <input type="text" value="@Model.objRoom.title" class="form-control" id="title" placeholder="Tiêu đề" readonly>
                     </div>
                 </div>
                 <p>Địa chỉ</p>
@@ -20,19 +20,19 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="province">Tỉnh/Thành</label>
-                        <select id="province" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listProvince,"idProvince","name"))">
+                        <select id="province" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listProvince,"idProvince","name"))" readonly>
                             <option value="@Model.objRoom.idProvince">@Model.address.province</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="district">Huyện/Quận</label>
-                        <select id="district" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listDistrict,"idDistrict","name"))">
+                        <select id="district" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listDistrict,"idDistrict","name"))" readonly>
                             <option value="@Model.objRoom.idDistrict">@Model.address.district</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="ward">Xã/Phường</label>
-                        <select id="ward" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listWard,"idWard","name"))">
+                        <select id="ward" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listWard,"idWard","name"))" readonly>
                             <option value="@Model.objRoom.idWard">@Model.address.ward</option>
                         </select>
                     </div>
@@ -40,24 +40,24 @@
                 <div class="form-a row">
                     <div class="form-group col">
                         <label for="street">Đường</label>
-                        <select id="street" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listStreet,"idStreet","name"))">
+                        <select id="street" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listStreet,"idStreet","name"))" readonly>
                             <option value="@Model.objRoom.idStreet">@Model.address.street</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="homeNo">Số nhà</label>
-                        <input type="text" value="@Model.objRoom.homeNo" class="form-control" id="homeNo">
+                        <input type="text" value="@Model.objRoom.homeNo" class="form-control" id="homeNo" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="publicPlaceAround">Gần địa điểm công cộng</label>
-                    <input type="text" value="@Model.objRoom.publicPlaceAround" class="form-control" id="publicPlaceAround" placeholder="Gần trường học/bệnh viện/...">
+                    <input type="text" value="@Model.objRoom.publicPlaceAround" class="form-control" id="publicPlaceAround" placeholder="Gần trường học/bệnh viện/..." readonly>
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="typeRoom">Kiểu phòng</label>
-                        <select class="form-control" id="typeRoom">
+                        <select class="form-control" id="typeRoom" readonly>
                             <option selected>@Model.objRoom.typeRoom</option>
                             <option>Phòng trọ</option>
                             <option>Chung cư mini</option>
@@ -67,18 +67,18 @@
                     </div>
                     <div class="form-group col">
                         <label for="roomNo">Số lượng</label>
-                        <input type="number" class="form-control" id="roomNo" name="roomNo" min="1" value="@Model.objRoom.roomNo">
+                        <input type="number" class="form-control" id="roomNo" name="roomNo" min="1" value="@Model.objRoom.roomNo" readonly>
                     </div>
                     <div class="form-group col">
                         <label for="area">Diện tích (m2)</label>
-                        <input type="text" class="form-control" id="area" value="@Model.objRoom.area" />
+                        <input type="text" class="form-control" id="area" value="@Model.objRoom.area" readonly/>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="price">Giá phòng (đồng)</label>
-                        <input type="text" class="form-control" id="price" min="1" value="@Model.objRoom.price" />
+                        <input type="text" class="form-control" id="price" min="1" value="@Model.objRoom.price" readonly/>
                     </div>
 
                 </div>
@@ -86,7 +86,7 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="bathroom">Phòng tắm</label>
-                        <select class="form-control" id="bathroom" required>
+                        <select class="form-control" id="bathroom" required readonly>
                             <option selected>@Model.objRoom.bathroom</option>
                             <option>Khép kín</option>
                             <option>Chung chủ</option>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="form-group col">
                         <label for="heater">Nóng lạnh</label>
-                        <select class="form-control" id="heater" required>
+                        <select class="form-control" id="heater" required readonly>
                             <option selected>@Model.objRoom.heater</option>
                             <option>Có</option>
                             <option>Không</option>
@@ -102,7 +102,7 @@
                     </div>
                     <div class="form-group col">
                         <label for="kitchen">Phòng bếp</label>
-                        <select class="form-control" id="kitchen" required>
+                        <select class="form-control" id="kitchen" required readonly>
                             <option selected>@Model.objRoom.kitchen</option>
                             <option>Khu bếp riêng</option>
                             <option>Khu bếp chung</option>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="form-group col">
                         <label for="airCondition">Điều hòa</label>
-                        <select class="form-control" id="airCondition" required>
+                        <select class="form-control" id="airCondition" required readonly>
                             <option selected>@Model.objRoom.airCondition</option>
                             <option>Có</option>
                             <option>Không</option>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="form-group col">
                         <label for="balcony">Ban công</label>
-                        <select class="form-control" id="balcony" required>
+                        <select class="form-control" id="balcony" required readonly>
                             <option selected>@Model.objRoom.balcony</option>
                             <option>Có</option>
                             <option>Không</option>
@@ -129,11 +129,11 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="electricityPrice">Giá điện</label>
-                        <input type="text" value="@Model.objRoom.electricityPrice" class="form-control" id="electricityPrice" placeholder="Giá điện theo (kW/h)" />
+                        <input type="text" value="@Model.objRoom.electricityPrice" class="form-control" id="electricityPrice" placeholder="Giá điện theo (kW/h)" readonly/>
                     </div>
                     <div class="form-group col">
                         <label for="waterPrice">Giá nước</label>
-                        <input type="text" value="@Model.objRoom.waterPrice" class="form-control" id="waterPrice" placeholder="Giá nước theo (m3)" />
+                        <input type="text" value="@Model.objRoom.waterPrice" class="form-control" id="waterPrice" placeholder="Giá nước theo (m3)" readonly/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -146,16 +146,16 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Thông tin bổ sung</label>
-                    <input type="text" value="@Model.objRoom.description" class="form-control" id="description" placeholder="" />
+                    <input type="text" value="@Model.objRoom.description" class="form-control" id="description" placeholder="" readonly/>
                 </div>
                 <div class="time-post form-row mb-3">
                     <div class="col-5">
                         <label for="timeDisplay">Thời gian hiển thị</label>
-                        <input type="number" id="timeDisplay" class="form-control" name="quantity" min="1" max="11" value="@Model.objRoom.timeDisplay">
+                        <input type="number" id="timeDisplay" class="form-control" name="quantity" min="1" max="11" value="@Model.objRoom.timeDisplay" readonly>
                     </div>
                     <div class="col-2">
                         <label for="unitTimeId">Đơn vị</label>
-                        <select class="form-control" id="unitTimeId">
+                        <select class="form-control" id="unitTimeId" readonly>
                             @{
                                 var unitTime = "";
                                 switch (Model.objRoom.unitTimeId)
@@ -204,7 +204,7 @@
                             }
                             var pricePost = timeDisplay * priceUOT;
                         }
-                        <input class="form-control" disabled type="text" id="pricePost" value="@pricePost">
+                        <input class="form-control" disabled type="text" id="pricePost" value="@pricePost" readonly>
                     </div>
                 </div>
             </div>
