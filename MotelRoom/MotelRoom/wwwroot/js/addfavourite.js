@@ -15,6 +15,6 @@
     }).done(function (res) {
         alert("Thêm vào danh sách yêu thích thành công");
     }).fail(function (res) {
-
+        alert("Thêm vào danh sách yêu thích thất bại");
     })
 }
