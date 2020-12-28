@@ -1,16 +1,14 @@
-﻿$(document).ready(function () {
-    var obj = new PostNewsJS();
-
-
+﻿
+$(document).ready(function () {
+    var obj = new EditPostJS();
 })
 
-class PostNewsJS {
+class EditPostJS {
     constructor() {
         this.initEvents();
     }
 
     initEvents() {
-        $('#btnPostNews').click(this.btnPostNewsOnClick.bind(this));
         $('#province').change(this.provinceChange.bind(this));
         $('#district').change(this.districtChange.bind(this));
         $('#timeDisplay').change(this.timeDisplayChange.bind(this));
@@ -73,45 +71,56 @@ class PostNewsJS {
             $('#street').html(items);
         });
     }
-    btnPostNewsOnClick() {
-        var objPostNews = {}
-        objPostNews.title = $('#title').val();
-        objPostNews.idProvince = $('#province').val();
-        objPostNews.idDistrict = $('#district').val();
-        objPostNews.idWard = $('#ward').val();
-        objPostNews.idStreet = $('#street').val();
-        objPostNews.homeNo = $('#homeNo').val();
-        objPostNews.publicPlaceAround = $('#publicPlaceAround').val();
-        objPostNews.typeRoom = $('#typeRoom').val();
-        objPostNews.roomNo = $('#roomNo').val();
-        objPostNews.price = $('#price').val();
-        objPostNews.area = $('#area').val();
-        objPostNews.bathroom = $('#bathroom').val();
-        objPostNews.heater = $('#heater').val();
-        objPostNews.kitchen = $('#kitchen').val();
-        objPostNews.airCondition = $('#airCondition').val();
-        objPostNews.balcony = $('#balcony').val();
-        objPostNews.electricityPrice = $('#electricityPrice').val();
-        objPostNews.waterPrice = $('#waterPrice').val();
-        objPostNews.otherUtility = $('#otherUtility').val();
-        objPostNews.description = $('#description').val();
-        objPostNews.nameBoss = $('#nameBoss').val();
-        objPostNews.phoneBoss = $('#phoneBoss').val();
-        objPostNews.timeDisplay = $('#timeDisplay').val();
-        objPostNews.unitTimeId = $('#unitTimeId').val();
-        var content = JSON.stringify(objPostNews); // chuyen doi tuong sang json
+    
+}
+function btnEditOnClick(idRoom) {
+    var objPostNews = {}
+    objPostNews.idRoom = idRoom;
+    objPostNews.title = $('#title').val();
+    objPostNews.idProvince = $('#province').val();
+    objPostNews.idDistrict = $('#district').val();
+    objPostNews.idWard = $('#ward').val();
+    objPostNews.idStreet = $('#street').val();
+    objPostNews.homeNo = $('#homeNo').val();
+    objPostNews.publicPlaceAround = $('#publicPlaceAround').val();
+    objPostNews.typeRoom = $('#typeRoom').val();
+    objPostNews.roomNo = $('#roomNo').val();
+    objPostNews.price = $('#price').val();
+    objPostNews.area = $('#area').val();
+    objPostNews.bathroom = $('#bathroom').val();
+    objPostNews.heater = $('#heater').val();
+    objPostNews.kitchen = $('#kitchen').val();
+    objPostNews.airCondition = $('#airCondition').val();
+    objPostNews.balcony = $('#balcony').val();
+    objPostNews.electricityPrice = $('#electricityPrice').val();
+    objPostNews.waterPrice = $('#waterPrice').val();
+    objPostNews.otherUtility = $('#otherUtility').val();
+    objPostNews.description = $('#description').val();
+    objPostNews.nameBoss = $('#nameBoss').val();
+    objPostNews.phoneBoss = $('#phoneBoss').val();
+    objPostNews.timeDisplay = $('#timeDisplay').val();
+    objPostNews.unitTimeId = $('#unitTimeId').val();
+    var content = JSON.stringify(objPostNews); // chuyen doi tuong sang json
+    //debugger;
+    $.ajax({
+        url: "/Home/PendingMotel",
+        method: "POST",
+        data: content,
+        contentType: "application/json",
+        dataType: "json"
+    }).done(function (res) {
         alert("Đăng bài thành công");
         //debugger;
-        $.ajax({
-            url: "/Home/PostNews",
-            method: "POST",
-            data: content,
-            contentType: "application/json",
-            dataType: "json"
-        }).done(function (res) {
-            //debugger;
-        }).fail(function (res) {
-            //debugger;
-        })   
-    }
+    }).fail(function (res) {
+        //debugger;
+    })
+}
+function btnCancelOnClick(idRoom) {
+    var url = '/' + "Home/CancelPost";
+    //debugger;
+    $.getJSON(url, { idRoom: idRoom }, function (data) {
+        console.log(data);
+        alert("Hủy bài viết thành công");
+        //debugger;
+    });
 }

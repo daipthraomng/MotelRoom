@@ -289,14 +289,64 @@ namespace MotelRoom.Controllers
         }
         
          //[Authorize(Roles = "Owner")]   
-        public IActionResult PendingMotel()
+        public IActionResult PendingMotel(int idRoom)
+        {
+            var roomInfoModel = new RoomInfoModel();
+            roomInfoModel.address.listProvince = _context.Provinces.ToList();
+            //roomInfoModel.GetRoomInfo(idRoom);
+            var listRoom = _context.Rooms.ToList();
+            roomInfoModel.objRoom = listRoom.Where(x => x.idRoom == idRoom).ToList()[0];
+            roomInfoModel.listImageRoom = _context.ImageRooms.ToList().Where(x => x.idRoom == idRoom).ToList();
+            var idProvince = roomInfoModel.objRoom.idProvince;
+            roomInfoModel.address.province = _context.Provinces.Where(x => x.idProvince == idProvince).ToList()[0].name;
+            var idDistrict = roomInfoModel.objRoom.idDistrict;
+            roomInfoModel.address.district = _context.Districts.Where(x => x.idDistrict == idDistrict).ToList()[0].name;
+            var idWard = roomInfoModel.objRoom.idWard;
+            roomInfoModel.address.ward = _context.Wards.Where(x => x.idWard == idWard).ToList()[0].name;
+            var idStreet = roomInfoModel.objRoom.idStreet;
+            roomInfoModel.address.street = _context.Streets.Where(x => x.idStreet == idStreet).ToList()[0].name;
+           
+            return View(roomInfoModel);
+        }
+        [HttpPost]
+        //[Authorize(Roles = "Owner")]
+        public EditPostModel PendingMotel([FromBody] EditPost obj)
+        {
+            EditPostModel pn = new EditPostModel();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            pn.EditPost(obj, userId);
+            return pn;
+        }
+        [HttpGet]
+        public JsonResult CancelPost(string idRoom)
+        {
+            EditPostModel pn = new EditPostModel();
+            pn.CancelPost(idRoom);
+            return Json(new string("success"));
+
+        }
+        //[Authorize(Roles = "Owner")]
+        public IActionResult CheckedMotel(int idRoom)
         {
             return View();
         }
-        //[Authorize(Roles = "Owner")]
-        public IActionResult CheckedMotel()
+        public IActionResult RejectedMotel(int idRoom)
         {
-            return View();
+            var roomInfoModel = new RoomInfoModel();
+
+            //roomInfoModel.GetRoomInfo(idRoom);
+            var listRoom = _context.Rooms.ToList();
+            roomInfoModel.objRoom = listRoom.Where(x => x.idRoom == idRoom).ToList()[0];
+            roomInfoModel.listImageRoom = _context.ImageRooms.ToList().Where(x => x.idRoom == idRoom).ToList();
+            var idProvince = roomInfoModel.objRoom.idProvince;
+            roomInfoModel.address.province = _context.Provinces.Where(x => x.idProvince == idProvince).ToList()[0].name;
+            var idDistrict = roomInfoModel.objRoom.idDistrict;
+            roomInfoModel.address.district = _context.Districts.Where(x => x.idDistrict == idDistrict).ToList()[0].name;
+            var idWard = roomInfoModel.objRoom.idWard;
+            roomInfoModel.address.ward = _context.Wards.Where(x => x.idWard == idWard).ToList()[0].name;
+            var idStreet = roomInfoModel.objRoom.idStreet;
+            roomInfoModel.address.street = _context.Streets.Where(x => x.idStreet == idStreet).ToList()[0].name;
+            return View(roomInfoModel);
         }
         public IActionResult ClientFavouriteMotel()
         {

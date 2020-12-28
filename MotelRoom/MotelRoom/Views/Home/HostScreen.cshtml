@@ -50,7 +50,7 @@
             foreach (var item in Model.listPostDenied)
             {
                 <div class="col-md-4">
-                    <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminRejectedMotel" asp-route-idRoom="@item.idRoom">
+                    <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="RejectedMotel" asp-route-idRoom="@item.idRoom">
                         @{
                             await Html.RenderPartialAsync("_HorizontalCard", item);
                         }
