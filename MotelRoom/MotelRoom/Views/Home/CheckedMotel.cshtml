@@ -2,6 +2,7 @@
     ViewData["Title"] = "Checked Motel Screen";
     Layout = "_LayoutHost";
 }
+@model RoomInfoModel;
 <h4>Màn hình cho nhà trọ đã được kiểm duyệt</h4>
 <div class="card-body">
     <h5>Trạng thái</h5>
@@ -11,99 +12,234 @@
     </select>
 </div>
 
+<h4>Thông tin nhà trọ đang chờ kiểm duyệt</h4>
 <div class="card">
     <div class="card-header"><h5>Thông tin</h5></div>
     <div class="card-body">
-        <form>
-            <div class="form-group"> <label for="address">Địa chỉ</label> <input type="text" class="form-control" id="address" value="10 Duong Quang Ham" readonly></div>
-            <div class="form-group"> <label for="addition">Thông tin bổ sung</label> <input type="text" class="form-control" id="addition" value="Gần DHQGHN/GTVT" readonly></div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label for="motel-type">Kiểu phòng</label>
-                    <select class="form-control" id="motel-type" disabled>
-                        <option selected>Phòng trọ</option>
-                        <option>Chung cư mini</option>
-                        <option>Nhà nguyên căn</option>
-                        <option>Chung cư nguyên căn</option>
-                    </select>
+        <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="HostScreen">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group col">
+                        Tiêu đề
+                        <input type="text" value="@Model.objRoom.title" class="form-control" id="title" placeholder="Tiêu đề">
+                    </div>
                 </div>
-                <div class="form-group col">
-                    <label for="quantity">Số lượng</label>
-                    <input class="form-control" id="quantity" value="10" readonly />
+                <p>Địa chỉ</p>
+                @*TODO: chuyển sang dạng select với dữ liệu sql province, district, ward, street*@
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="province">Tỉnh/Thành</label>
+                        <select id="province" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listProvince,"idProvince","name"))">
+                            <option value="@Model.objRoom.idProvince">@Model.address.province</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="district">Huyện/Quận</label>
+                        <select id="district" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listDistrict,"idDistrict","name"))">
+                            <option value="@Model.objRoom.idDistrict">@Model.address.district</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="ward">Xã/Phường</label>
+                        <select id="ward" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listWard,"idWard","name"))">
+                            <option value="@Model.objRoom.idWard">@Model.address.ward</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col">
-                    <label for="price">Giá phòng</label>
-                    <input class="form-control" id="price" value="100 USD" readonly />
+                <div class="form-a row">
+                    <div class="form-group col">
+                        <label for="street">Đường</label>
+                        <select id="street" class="form-control" asp-for="@Model.address.ID" asp-items="@(new SelectList(Model.address.listStreet,"idStreet","name"))">
+                            <option value="@Model.objRoom.idStreet">@Model.address.street</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="homeNo">Số nhà</label>
+                        <input type="text" value="@Model.objRoom.homeNo" class="form-control" id="homeNo">
+                    </div>
                 </div>
-                <div class="form-group col">
-                    <label for="area">Diện tích</label>
-                    <input class="form-control" id="area" value="20m2" readonly />
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col">
-                    <label for="bathroom">Phòng tắm</label>
-                    <select class="form-control" id="bathroom" disabled>
-                        <option selected>Khép kín</option>
-                        <option>Chung chủ</option>
-                    </select>
+                <div class="form-group">
+                    <label for="publicPlaceAround">Gần địa điểm công cộng</label>
+                    <input type="text" value="@Model.objRoom.publicPlaceAround" class="form-control" id="publicPlaceAround" placeholder="Gần trường học/bệnh viện/...">
                 </div>
-                <div class="form-group col">
-                    <label for="heater">Nóng lạnh</label>
-                    <select class="form-control" id="heater" disabled>
-                        <option selected>Có nóng lạnh</option>
-                        <option>Không có nóng lạnh</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="typeRoom">Kiểu phòng</label>
+                        <select class="form-control" id="typeRoom">
+                            <option selected>@Model.objRoom.typeRoom</option>
+                            <option>Phòng trọ</option>
+                            <option>Chung cư mini</option>
+                            <option>Nhà nguyên căn</option>
+                            <option>Chung cư nguyên căn</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="roomNo">Số lượng</label>
+                        <input type="number" class="form-control" id="roomNo" name="roomNo" min="1" value="@Model.objRoom.roomNo">
+                    </div>
+                    <div class="form-group col">
+                        <label for="area">Diện tích (m2)</label>
+                        <input type="text" class="form-control" id="area" value="@Model.objRoom.area" />
+                    </div>
                 </div>
-                <div class="form-group col">
-                    <label for="air-conditioner">Điều hòa</label>
-                    <select class="form-control" id="air-conditioner" disabled>
-                        <option selected>Có</option>
-                        <option>Không</option>
-                    </select>
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="price">Giá phòng (đồng)</label>
+                        <input type="text" class="form-control" id="price" min="1" value="@Model.objRoom.price" />
+                    </div>
+
                 </div>
-                <div class="form-group col">
-                    <label for="balcony">Ban công</label>
-                    <select class="form-control" id="balcony" disabled>
-                        <option selected>Có</option>
-                        <option>Không</option>
-                    </select>
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="bathroom">Phòng tắm</label>
+                        <select class="form-control" id="bathroom" required>
+                            <option selected>@Model.objRoom.bathroom</option>
+                            <option>Khép kín</option>
+                            <option>Chung chủ</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="heater">Nóng lạnh</label>
+                        <select class="form-control" id="heater" required>
+                            <option selected>@Model.objRoom.heater</option>
+                            <option>Có</option>
+                            <option>Không</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="kitchen">Phòng bếp</label>
+                        <select class="form-control" id="kitchen" required>
+                            <option selected>@Model.objRoom.kitchen</option>
+                            <option>Khu bếp riêng</option>
+                            <option>Khu bếp chung</option>
+                            <option>Không nấu ăn</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="airCondition">Điều hòa</label>
+                        <select class="form-control" id="airCondition" required>
+                            <option selected>@Model.objRoom.airCondition</option>
+                            <option>Có</option>
+                            <option>Không</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="balcony">Ban công</label>
+                        <select class="form-control" id="balcony" required>
+                            <option selected>@Model.objRoom.balcony</option>
+                            <option>Có</option>
+                            <option>Không</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="electricityPrice">Giá điện</label>
+                        <input type="text" value="@Model.objRoom.electricityPrice" class="form-control" id="electricityPrice" placeholder="Giá điện theo (kW/h)" />
+                    </div>
+                    <div class="form-group col">
+                        <label for="waterPrice">Giá nước</label>
+                        <input type="text" value="@Model.objRoom.waterPrice" class="form-control" id="waterPrice" placeholder="Giá nước theo (m3)" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="otherUtility">Tiện ích khác</label>
+                    <input type="text" value="@Model.objRoom.otherUtility" class="form-control" id="otherUtility" placeholder="Tủ lạnh/Máy giặt/Giường tủ" />
+                </div>
+                <div class="form-group">
+                    <label for="image">Chọn ít nhất 3 ảnh: </label>
+                    <input type="file" id="image" name="files" multiple>
+                </div>
+                <div class="form-group">
+                    <label for="description">Thông tin bổ sung</label>
+                    <input type="text" value="@Model.objRoom.description" class="form-control" id="description" placeholder="" />
+                </div>
+                <div class="time-post form-row mb-3">
+                    <div class="col-5">
+                        <label for="timeDisplay">Thời gian hiển thị</label>
+                        <input type="number" id="timeDisplay" class="form-control" name="quantity" min="1" max="11" value="@Model.objRoom.timeDisplay">
+                    </div>
+                    <div class="col-2">
+                        <label for="unitTimeId">Đơn vị</label>
+                        <select class="form-control" id="unitTimeId">
+                            @{
+                                var unitTime = "";
+                                switch (Model.objRoom.unitTimeId)
+                                {
+                                    case 1:
+                                        unitTime = "Ngày";
+                                        break;
+                                    case 2:
+                                        unitTime = "Tuần";
+                                        break;
+                                    case 3:
+                                        unitTime = "Tháng";
+                                        break;
+                                    case 4:
+                                        unitTime = "Năm";
+                                        break;
+                                }
+                            }
+                            <option value="@Model.objRoom.unitTimeId" selected>@unitTime</option>
+                            <option value="1">Ngày</option>
+                            <option value="2">Tuần</option>
+                            <option value="3">Tháng</option>
+                            <option value="4">Năm</option>
+                        </select>
+                    </div>
+                    <div class="col-5">
+                        <label for="pricePost">Giá tiền bài đăng</label>
+                        @{
+                            var timeDisplay = Model.objRoom.timeDisplay;
+                            var unitTimeId = Model.objRoom.unitTimeId;
+                            var priceUOT = 1;
+                            switch (unitTimeId)
+                            {
+                                case 1:
+                                    priceUOT = 5000;
+                                    break;
+                                case 2:
+                                    priceUOT = 30000;
+                                    break;
+                                case 3:
+                                    priceUOT = 100000;
+                                    break;
+                                case 4:
+                                    priceUOT = 500000;
+                                    break;
+                            }
+                            var pricePost = timeDisplay * priceUOT;
+                        }
+                        <input class="form-control" disabled type="text" id="pricePost" value="@pricePost">
+                    </div>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label for="electic-water">Điện nước</label>
-                    <select class="form-control" id="electic-water" disabled>
-                        <option>Giá dân</option>
-                        <option selected>Giá thuê</option>
-                    </select>
+            <div id="image" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    @{
+                        bool first = true;
+                        foreach (var item in Model.listImageRoom)
+                        {
+                            string imageBase64Data = Convert.ToBase64String(item.image);
+                            var srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+                            <div class="carousel-item @if (first == true){<text>active</text> ; first = false;}">
+                                <img class="image-carousel d-block w-100 img-fluid" src="@srcImage" alt="slide">
+                            </div>
+                        }
+                    }
+
                 </div>
-                <div class="form-group col">
-                    <label for="electic-water">Giá điện</label>
-                    <input type="text" class="form-control" id="electic-water" value="4000D" readonly />
-                </div>
-                <div class="form-group col">
-                    <label for="electic-water">Giá nước</label>
-                    <input type="text" class="form-control" id="electic-water" value="30000D" readonly />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="utilities">Tiện ích khác</label>
-                <input type="text" class="form-control" id="utilities" value="Tủ lạnh" readonly />
-            </div>
-            <div class="form-group">
-                <p>Ảnh thực tế:  </p>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label for="host-name">Họ và tên chủ nhà</label>
-                    <input type="text" id="host-name" class="form-control" value="Do Quang Anh" readonly>
-                </div>
-                <div class="form-group col">
-                    <label for="host-name">Số điện thoại</label>
-                    <input type="text" id="host-name" class="form-control" value="123" readonly>
-                </div>
+                <a class="carousel-control-prev" href="#image" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#image" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </form>
     </div>
@@ -119,3 +255,5 @@
     </form>
 
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/.js"></script>

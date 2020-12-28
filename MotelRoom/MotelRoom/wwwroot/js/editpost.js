@@ -33,7 +33,7 @@ class EditPostJS {
                 break;
         }
         var pricePost = timeDisplay * priceUOT;
-        debugger;
+        //debugger;
         document.getElementById("pricePost").value = pricePost;
     }
     provinceChange() {
