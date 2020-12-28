@@ -11,6 +11,7 @@ namespace MotelRoom.Models
     public class HostScreenModel:BaseModel
     {
         public List<Message> listMessage { get; set; }
+        public List<NotificationOwner> listNotificationOwner { get; set; }
         public List<RoomSummaryInfo> listPostChecked { get; set; }
         public List<RoomSummaryInfo> listPostNotChecked { get; set; }
         public List<RoomSummaryInfo> listPostDenied { get; set; }

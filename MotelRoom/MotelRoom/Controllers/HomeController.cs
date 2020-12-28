@@ -134,6 +134,7 @@ namespace MotelRoom.Controllers
         {
             var objHost = new HostScreenModel();
             var userId = _userManager.GetUserId(HttpContext.User);
+            var username = _userManager.GetUserName(HttpContext.User);
             objHost.listPostChecked = new List<RoomSummaryInfo>();
             objHost.listPostNotChecked = new List<RoomSummaryInfo>();
             objHost.listPostDenied = new List<RoomSummaryInfo>();
@@ -141,6 +142,7 @@ namespace MotelRoom.Controllers
             objHost.GetListPostNotCheckedOwner(userId);
             objHost.GetListPostDeniedOwner(userId);
             objHost.listMessage = _context.Messages.OrderBy(s => s.timeSent).ToList();
+            objHost.listNotificationOwner = _context.NotificationOwners.Where(s=>s.username == username).OrderByDescending(s => s.timeSent).ToList();
             foreach (var item in objHost.listPostChecked)
             {
                 string imageBase64Data = Convert.ToBase64String(item.image);
@@ -240,6 +242,18 @@ namespace MotelRoom.Controllers
             _context.Messages.Add(objMessage);
             _context.SaveChangesAsync();
             return Json(new string(objMessage.username));
+        }
+        [HttpGet]
+        public JsonResult SendNotificationToAdmin(string contentMessage)
+        {
+            var obj = new NotificationAdmin();
+            obj.contentNotification = contentMessage;
+            obj.idUser = _userManager.GetUserId(HttpContext.User);
+            obj.username = _userManager.GetUserName(HttpContext.User);
+            obj.timeSent = DateTime.Now;
+            _context.NotificationAdmins.Add(obj);
+            _context.SaveChangesAsync();
+            return Json(new string(obj.username));
         }
         [HttpGet]
         public JsonResult GetUserName()
@@ -343,6 +357,14 @@ namespace MotelRoom.Controllers
             var idStreet = roomInfoModel.objRoom.idStreet;
             roomInfoModel.address.street = _context.Streets.Where(x => x.idStreet == idStreet).ToList()[0].name;
             return View(roomInfoModel);
+        }
+        [HttpGet]
+        public JsonResult UpdateStatusRent(string statusRent, string idRoom)
+        {
+            UpdateStatusRentModel pn = new UpdateStatusRentModel();
+            pn.UpdateStatusRent(statusRent, idRoom);
+            return Json(new string("success"));
+
         }
         public IActionResult RejectedMotel(int idRoom)
         {
@@ -449,6 +471,8 @@ namespace MotelRoom.Controllers
             admin.GetListPostNotChecked();
             admin.GetListPostDenied();
             admin.objHost.listMessage = _context.Messages.OrderBy(s => s.timeSent).ToList();
+            var username = _userManager.GetUserName(HttpContext.User);
+            admin.listNotificationAdmin = _context.NotificationAdmins.Where(s => s.username == username).OrderByDescending(s => s.timeSent).ToList();
             foreach (var item in admin.listPostChecked)
             {
                 string imageBase64Data = Convert.ToBase64String(item.image);
@@ -465,6 +489,18 @@ namespace MotelRoom.Controllers
                 item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
             }
             return View(admin);
+        }
+        [HttpGet]
+        public JsonResult SendNotificationToOwner(string contentNotification, string idOwner)
+        {
+            var obj = new NotificationOwner();
+            obj.contentNotification = contentNotification;
+            obj.idUser = idOwner;
+            obj.username = _userManager.GetUserName(HttpContext.User);
+            obj.timeSent = DateTime.Now;
+            _context.NotificationOwners.Add(obj);
+            _context.SaveChangesAsync();
+            return Json(new string(obj.username));
         }
         [HttpGet]
         public JsonResult DeleteUser(string idOwner)
@@ -518,6 +554,9 @@ namespace MotelRoom.Controllers
             roomInfoModel.address.ward = _context.Wards.Where(x => x.idWard == idWard).ToList()[0].name;
             var idStreet = roomInfoModel.objRoom.idStreet;
             roomInfoModel.address.street = _context.Streets.Where(x => x.idStreet == idStreet).ToList()[0].name;
+            roomInfoModel.GetUserName(idRoom);
+            roomInfoModel.user.userId = roomInfoModel.listOwner[0].userId;
+            roomInfoModel.user.username = roomInfoModel.listOwner[0].username;
             return View(roomInfoModel);
         }   
         //[Authorize(Roles = "Admin")]

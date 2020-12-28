@@ -6,7 +6,7 @@
 
 
 <h4>Màn hình cho nhà trọ đang chờ kiểm duyệt</h4>
-<button class="btn-success" onclick="AcceptPost(@Model.objRoom.idRoom)">Phê duyệt</button>
+<button class="btn-success" onclick="AcceptPost(@Model.objRoom.idRoom, '@Model.user.userId', 'Bài đăng @Model.objRoom.title đã được phê duyệt')">Phê duyệt</button>
 <button class="btn-danger" onclick="DenyPost(@Model.objRoom.idRoom)">Từ chối</button>
 <div class="card">
     <div class="card-header"><h5>Thông tin</h5></div>

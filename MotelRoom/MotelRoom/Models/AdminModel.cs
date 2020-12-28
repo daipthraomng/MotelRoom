@@ -16,7 +16,7 @@ namespace MotelRoom.Models
         public List<RoomSummaryInfo> listPostNotChecked { get; set; }
         public List<RoomSummaryInfo> listPostDenied { get; set; }
         public HostScreenModel objHost { get; set; }
-
+        public List<NotificationAdmin> listNotificationAdmin { get; set; }
         public AdminModel()
         {
             this.listOwnerChecked = new List<Owner>();

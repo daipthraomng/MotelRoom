@@ -22,6 +22,8 @@ namespace MotelRoom.Context
         public DbSet<Ward> Wards { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<NotificationOwner> NotificationOwners { get; set; }
+        public DbSet<NotificationAdmin> NotificationAdmins { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Province>().ToTable("Province");
@@ -30,6 +32,8 @@ namespace MotelRoom.Context
             modelBuilder.Entity<Ward>().ToTable("Ward");
             modelBuilder.Entity<Room>().ToTable("Room");
             modelBuilder.Entity<Message>().ToTable("Message");
+            modelBuilder.Entity<NotificationOwner>().ToTable("NotificationOwner");
+            modelBuilder.Entity<NotificationAdmin>().ToTable("NotificationAdmin");
         }
     }
 }
