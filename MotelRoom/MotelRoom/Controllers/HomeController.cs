@@ -271,6 +271,7 @@ namespace MotelRoom.Controllers
             return Json(new SelectList(selectedDistricts, "idDistrict", "name"));
 
         }
+
         [HttpGet]
         public JsonResult GetWardList(int idDistrict)
         {
@@ -297,7 +298,27 @@ namespace MotelRoom.Controllers
         {
             return View();
         }
-
+        public IActionResult ClientFavouriteMotel()
+        {
+            var objListRoom = new InterestModel();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            objListRoom.GetInterestRoomById(userId);
+            //objListRoom.objAddress.listProvince = _context.Provinces.ToList();
+            foreach (var item in objListRoom.listRoomSummary)
+            {
+                string imageBase64Data = Convert.ToBase64String(item.image);
+                item.srcImage = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            }
+            return View(objListRoom);
+        }
+        [HttpPost]
+        public InterestModel PostInterest([FromBody] int Roomid)
+        {
+            InterestModel obj = new InterestModel();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            obj.PostInterestRoom(Roomid, userId);
+            return obj;
+        }
         public IActionResult ClientScreen()
         {
             var objListRoom = new ClientScreenModel();
@@ -341,10 +362,6 @@ namespace MotelRoom.Controllers
             return View(objListRoom);
         }
 
-        public IActionResult ClientFavouriteMotel()
-        {
-            return View();
-        }
         //[HttpPost]
         //public IActionResult SearchClientScreen([FromBody] SearchRoom obj)
         //{
