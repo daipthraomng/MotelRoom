@@ -91,25 +91,42 @@ namespace MotelRoom.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                //bool checkStatus = false;
+                if (result.Succeeded)
+                {
+                    //checkStatus = true;
+                    var user = await _userManager.FindByNameAsync(Input.UserName);
+                    var userRoles = await _userManager.GetRolesAsync(user);
+                    var role = userRoles[0];
+                    if (role == "Owner")
+                    {
+                        if(!user.StatusCheck)
+                        {
+                            //checkStatus = false;
+                            return RedirectToPage("./Login");
+                        }
+                    }
+                }
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    //var user = await _userManager.FindByNameAsync(Input.UserName);
-                    //var userRoles = await _userManager.GetRolesAsync(user);
-                    //var role = userRoles[0];
-                    //if(role == "Admin")
-                    //{
-                    //    return RedirectToAction("AdminScreen", "Home");
-                    //}
-                    //else if (role == "Owner")
-                    //{
-                    //    return RedirectToAction("HostScreen", "Home");
-                    //}
-                    //else
-                    //{
-                    //    return RedirectToAction("ClientScreen", "Home");
-                    //}
+                    var user = await _userManager.FindByNameAsync(Input.UserName);
+                    var userRoles = await _userManager.GetRolesAsync(user);
+                    var role = userRoles[0];
+                    if (role == "Admin")
+                    {
+                        return RedirectToAction("AdminScreen", "Home");
+                    }
+                    else if (role == "Owner")
+                    {
+                        return RedirectToAction("HostScreen", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("ClientScreen", "Home");
+                    }
                     //return LocalRedirect(returnUrl); 
+                    //return RedirectToAction("HostScreen", "Home");
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -120,6 +137,11 @@ namespace MotelRoom.Areas.Identity.Pages.Account
                 {
                     _logger.LogWarning("User account locked out.");
                     // Chuyển hướng đến trang Lockout - hiện thị thông báo
+                    return RedirectToPage("./Lockout");
+                }
+                if (result.IsNotAllowed)
+                {
+                    _logger.LogWarning("User account is not allowed.");
                     return RedirectToPage("./Lockout");
                 }
                 else
