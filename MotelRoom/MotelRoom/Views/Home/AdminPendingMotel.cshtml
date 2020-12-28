@@ -6,8 +6,8 @@
 
 
 <h4>Màn hình cho nhà trọ đang chờ kiểm duyệt</h4>
-<button class="btn-success" onclick="AcceptPost()">Phê duyệt</button>
-<button class="btn-danger" onclick="DenyPost()">Từ chối</button>
+<button class="btn-success" onclick="AcceptPost(@Model.objRoom.idRoom)">Phê duyệt</button>
+<button class="btn-danger" onclick="DenyPost(@Model.objRoom.idRoom)">Từ chối</button>
 <div class="card">
     <div class="card-header"><h5>Thông tin</h5></div>
     <div class="card-body">
@@ -132,25 +132,4 @@
         </form>
     </div>
 </div>
-<script>
-    function AcceptPost(idRoom) {
-        var idRoom = @Model.objRoom.idRoom;
-        var url = '/' + "Home/AcceptPost";
-        debugger;
-        $.getJSON(url, { idRoom: idRoom }, function (data) {
-            console.log(data);
-            alert("Phê duyệt thành công");
-            debugger;
-        });
-    }
-    function DenyPost(idRoom) {
-        var idRoom = @Model.objRoom.idRoom;
-        var url = '/' + "Home/DenyPost";
-        debugger;
-        $.getJSON(url, { idRoom: idRoom }, function (data) {
-            console.log(data);
-            alert("Từ chối bài viết thành công");
-            debugger;
-        });
-    }
-</script>
+<script src ="~/js/adminPending.js"></script>

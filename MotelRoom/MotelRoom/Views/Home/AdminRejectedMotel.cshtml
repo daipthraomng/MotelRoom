@@ -4,7 +4,7 @@
 }
 @model RoomInfoModel;
 <h4>Màn hình cho nhà trọ bị từ chối</h4>
-<button class="btn-danger" onclick="AcceptPost()">Khôi phục</button>
+<button class="btn-danger" onclick="AcceptPost(@Model.objRoom.idRoom)">Khôi phục</button>
 <div class="card">
     <div class="card-header"><h5>Thông tin</h5></div>
     <div class="card-body">
@@ -129,15 +129,4 @@
         </form>
     </div>
 </div>
-<script>
-    function AcceptPost(idRoom) {
-        var idRoom = @Model.objRoom.idRoom;
-        var url = '/' + "Home/AcceptPost";
-        debugger;
-        $.getJSON(url, { idRoom: idRoom }, function (data) {
-            console.log(data);
-            alert("Khôi phục thành công");
-            debugger;
-        });
-    }
-</script>
+<script src="~/js/adminRejected.js"></script>

@@ -2,7 +2,7 @@
     ViewData["Title"] = "Screen For Admin";
     Layout = "_LayoutAdmin";
 }
-@model RoomInfoModel; 
+@model RoomInfoModel;
 
 <h4>Màn hình cho nhà trọ đã được kiểm duyệt</h4>
 <div class="card-body">
@@ -17,7 +17,7 @@
     <h5>Gia hạn thời gian hiển thị</h5>
     <label for="extend-day">Gia hạn đến ngày:</label>
     <input type="date" id="endTime">
-    <button type="submit" class="btn-success" id="btnTimeEnd" onclick="AddTimeEnd()">Gia hạn</button>
+    <button type="submit" class="btn-success" id="btnTimeEnd" onclick="AddTimeEnd(@Model.objRoom.idRoom)">Gia hạn</button>
 </div>
 
 <div class="card">
@@ -146,17 +146,4 @@
 </div>
 
 
-<script>
-    function AddTimeEnd() {
-        var endTime = document.getElementById("endTime").value;
-        var idRoom = @Model.objRoom.idRoom;
-        var url = '/' + "Home/AddTimeEnd";
-        debugger;
-        $.getJSON(url, { endTime: endTime, idRoom: idRoom }, function (data) {
-            console.log(data);
-            alert("Gia hạn thành công");
-            location.reload();
-            debugger;
-        });
-    }
-</script>
+<script src="~/js/adminChecked.js"></script>

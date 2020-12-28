@@ -12,7 +12,7 @@
             foreach (var item in Model.listPostNotChecked)
             {
                 <div class="col-md-4">
-                    <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminPendingMotel" asp-route-idRoom="@item.idRoom">
+                    <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="PendingMotel" asp-route-idRoom="@item.idRoom">
                         @{
                             await Html.RenderPartialAsync("_HorizontalCard", item);
                         }
@@ -30,7 +30,7 @@
             foreach (var item in Model.listPostChecked)
             {
                 <div class="col-md-4">
-                    <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="AdminCheckedMotel" asp-route-idRoom="@item.idRoom">
+                    <a class="stretched-link text-decoration-none text-dark" asp-controller="Home" asp-action="CheckedMotel" asp-route-idRoom="@item.idRoom">
                         @{
                             await Html.RenderPartialAsync("_HorizontalCard", item);
                         }
